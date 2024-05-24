@@ -1,0 +1,31 @@
+<th:block th:fragment="header">
+	<div class="container">
+		<nav class="main-menu d-flex navbar navbar-expand-lg ">
+			<div class="offcanvas offcanvas-end" tabindex="-1"
+				id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+				<div class="offcanvas-body justify-content-center">
+					<ul class="navbar-nav menu-list list-unstyled d-flex gap-md-5 mb-0">
+						<div class="main-logo">
+							<a href="/"> <img src="/site/images/logo.png"
+								alt="logo" class="img-fluid">
+							</a>
+						</div>
+						<li class="nav-item"><a href="shop.html" class="nav-link">보호소
+								조회</a></li>
+						<li class="nav-item"><a href="/animal/list" class="nav-link">동물조회</a>
+						</li>
+						<li class="nav-item"><a href="/volunteer/list"
+							class="nav-link">봉사게시판</a></li>
+						<li class="nav-item"><a href="/member/login" class="nav-link">로그인</a>
+						</li>
+						<li class="nav-item"><a href="/member/mypage" class="nav-link">마이페이지</a>
+						</li> 
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container-fluid">
+    <hr class="m-0">
+  </div>
+</th:block>
