@@ -7,9 +7,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sds.animalapp.sns.KaKaoLogin;
+import com.sds.animalapp.sns.NaverLogin;
 
 @RestController
 public class RestMemberController {
+	
+	@Autowired
+	private NaverLogin naverLogin;
 	
 	@Autowired
 	private KaKaoLogin kakaoLogin;
@@ -20,7 +24,7 @@ public class RestMemberController {
 		ResponseEntity entity=null;
 		
 		if(sns.equals("naver")) {
-			//entity=ResponseEntity.ok(naverLogin.getGrantUrl());  //내용을 보내야 하므로, body도 구성하자 
+			entity=ResponseEntity.ok(naverLogin.getGrantUrl());  //내용을 보내야 하므로, body도 구성하자 
 		}else if(sns.equals("kakao")) {
 			entity=ResponseEntity.ok(kakaoLogin.getGrantUrl());  //내용을 보내야 하므로, body도 구성하자
 			System.out.println(entity);
