@@ -156,28 +156,28 @@ public class MemberController {
 		String body2 = responseEntity2.getBody();
 		
 		log.info("카카오가 보낸 사용자 정보는 "+body2);
-		//211111111111111111111111111111111111111111111111111111111111111111111111
+		
 		ObjectMapper objectMapperInfo = new ObjectMapper();
 		Map<String, Object> kakaoUserInfo = new HashMap<>();
 		try {
 			kakaoUserInfo = objectMapperInfo.readValue(body2, Map.class);
 		} catch (JsonMappingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		String kakaoId = String.valueOf(kakaoUserInfo.get("id"));
 		String nickname = (String) ((Map<String, Object>) kakaoUserInfo.get("properties")).get("nickname");
+		String profileImage = (String) ((Map<String, Object>) kakaoUserInfo.get("properties")).get("profile_image");
 		
 		Member member = new Member();
 		member.setUid(kakaoId);
 		member.setNickname(nickname);
 		member.setSns(snsService.selectByName("kakao")); 
 		member.setRole(roleService.selectByName("USER"));//일반 회원 가입이므로...
-		
+		log.info(profileImage);
+		member.setProfile_image_url(profileImage);
 	
 		//중복된 회원이 없다면, 가입을 시킨다...(즉 최초 한번은 가입을 회원 정보를 보관해놓자..)
 		Member dto = memberService.selectByUid(kakaoId);

@@ -10,5 +10,6 @@ public class Member {
 	private String email;
 	private Sns sns; //has a 관계로 erd 상의 부모를 보유
 	private Role role; //has a 관계로 erd 상의 부모를 보유
+	private String profile_image_url;
 	private MemberDetail memberDetail;
 }

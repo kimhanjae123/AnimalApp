@@ -3,8 +3,8 @@
 <mapper namespace="com.sds.animalapp.model.member.MemberDAO">
 	
 	<insert id="insert" parameterType="Member">
-		insert into member(uid, nickname, email, sns_idx, role_idx)
-		values(#{uid}, #{nickname}, #{email}, #{sns.sns_idx}, #{role.role_idx})
+		insert into member(uid, nickname, email, sns_idx, role_idx, profile_image_url)
+		values(#{uid}, #{nickname}, #{email}, #{sns.sns_idx}, #{role.role_idx}, #{profile_image_url})
 		
 		<!-- member_detail에 추가적인 insert 를 위해 부모 테이블인 member의 idx값을 곧바로 추출 -->
 		<selectKey keyColumn="member_idx" keyProperty="member_idx" resultType="int" order="AFTER">
@@ -28,7 +28,7 @@
 	
 	<!-- uid를 이용한 회원조회 -->
 	<select id="selectByUid" parameterType="String" resultMap="MemberMap">
-		select member_idx, uid, nickname, email, sns_idx, role_idx
+		select member_idx, uid, nickname, email, sns_idx, role_idx, profile_image_url
 		from member where uid=#{uid}
 	</select>	
 	
