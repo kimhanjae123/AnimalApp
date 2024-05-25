@@ -53,7 +53,7 @@ public class MemberController {
     @Autowired
     private NaverLogin naverLogin;
     
-    @Autowired
+    @Autowired 
     private KaKaoLogin kakaoLogin;
     
     @Autowired
