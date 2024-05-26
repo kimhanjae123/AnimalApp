@@ -13,17 +13,19 @@
                         <li class="nav-item"><a href="/shelter/list" class="nav-link">보호소 조회</a></li>
                         <li class="nav-item"><a href="/animal/list" class="nav-link">동물조회</a></li>
                         <li class="nav-item"><a href="/volunteer/list" class="nav-link">봉사게시판</a></li>
-                        <li class="nav-item"><a href="/member/login" class="nav-link">로그인</a></li>
-                        <li class="nav-item"><a href="/member/mypage" class="nav-link">마이페이지</a></li>
+                         <th:li th:if="${session.member == null}" class="nav-item"><a href="/member/login" class="nav-link">로그인</a></th:li>
+                        <th:li th:if="${session.member != null}" class="nav-item"><a href="/member/mypage" class="nav-link">마이페이지</a></th:li>
                         <th:li th:if="${session.member != null}" class="nav-item">
                             <a href="javascript:logout()" class="nav-link">로그아웃</a>
                         </th:li>
+                        <!-- 글자가 밀려 주석처리 -->
+                        
                         <th:li th:if="${session.member != null}" class="nav-item profile-container">
 						    <a href="#" class="nav-link d-flex align-items-center">
 						        <div id="briefProfile" class="profile-text me-3" th:text="${session.member.nickname + '님'}"></div>
-						        <img th:src="${session.member.profile_image_url}" class="rounded-circle img-fluid" style="max-width: 45px; height: auto;" alt="프로필 이미지">
-						    </a>
-						</th:li>
+						        <!-- <img th:src="${session.member.profile_image_url}" class="rounded-circle img-fluid" style="max-width: 45px; height: auto;" alt="프로필 이미지"> -->
+						    </a>  
+						</th:li> 
                     </ul>
 
                     

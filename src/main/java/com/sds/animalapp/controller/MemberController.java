@@ -23,6 +23,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
@@ -33,6 +34,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sds.animalapp.domain.Member;
+import com.sds.animalapp.domain.MemberDetail;
 import com.sds.animalapp.domain.Sns;
 import com.sds.animalapp.model.member.MemberService;
 import com.sds.animalapp.model.member.RoleService;
@@ -206,6 +208,8 @@ public class MemberController {
 		return mav;
 	}
 	
+	//네이버 콜백 처리
+	
     @GetMapping("/member/sns/naver/callback")
     public ModelAndView naverCallback(HttpServletRequest request, HttpSession session) {
         String code = request.getParameter("code");
@@ -296,5 +300,35 @@ public class MemberController {
         session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
 
         return new ModelAndView("redirect:/member/mypage");
+    }
+    
+    // 정보 수정 버튼 처리 
+    @PostMapping("/updateProfile")
+    @ResponseBody
+    public Map<String, Object> updateProfile(@RequestBody Map<String, String> payload, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        String name = payload.get("name");
+        String phone = payload.get("phone");
+
+        Member member = (Member) session.getAttribute("member");
+        if (member != null) {
+            member.setNickname(name);
+
+            MemberDetail memberDetail = member.getMemberDetail();
+            if (memberDetail == null) {
+                memberDetail = new MemberDetail();
+                memberDetail.setMember(member);
+            }
+            memberDetail.setPhone(phone);
+
+            memberService.updateMemberDetail(memberDetail);
+
+            session.setAttribute("member", member);
+            response.put("success", true);
+        } else {
+            response.put("success", false);
+            response.put("message", "세션이 만료되었습니다.");
+        }
+        return response;
     }
 }
