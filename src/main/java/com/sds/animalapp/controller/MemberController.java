@@ -34,6 +34,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.domain.Sns;
+import com.sds.animalapp.model.member.KakaoLoginService;
 import com.sds.animalapp.model.member.MemberService;
 import com.sds.animalapp.model.member.RoleService;
 import com.sds.animalapp.model.member.SnsService;
@@ -49,21 +50,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class MemberController {
+	
+	@Autowired
+	private KakaoLoginService kakaoLoginService;
     
     @Autowired
     private NaverLogin naverLogin;
-    
-    @Autowired 
-    private KaKaoLogin kakaoLogin;
-    
-    @Autowired
-    private MemberService memberService;
     
     @Autowired
     private RoleService roleService;
     
     @Autowired
     private SnsService snsService;
+    
+    @Autowired
+    private MemberService memberService;
 
     @Value("${upload.directory}")
     private String uploadDirectory;
@@ -118,94 +119,21 @@ public class MemberController {
 	@GetMapping("/member/sns/kakao/callback")
 	public ModelAndView kakaoCallback(HttpServletRequest request) {
 		
-		String code  = request.getParameter("code");
+		KaKaoOAuthToken oAuthToken = kakaoLoginService.getKakaoAccessToken(request);
 		
-		log.info("카카오가 보내 임시 코드는 "+code);
+		//회원 가입 추상화 
+		Member dto = kakaoLoginService.registMember(oAuthToken);
 		
-		MultiValueMap<String, String> params  = new LinkedMultiValueMap<String, String>();
-		params.add("code", code);
-		params.add("client_id", kakaoLogin.getClient_id());
-		params.add("redirect_uri", kakaoLogin.getRedirect_uri());
-		params.add("grant_type", kakaoLogin.getGrant_type());
-		
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Content-Type", "application/x-www-form-urlencoded");
-		
-		HttpEntity entity = new HttpEntity(params, headers);
-		
-		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<String> responseEntity=restTemplate.exchange(kakaoLogin.getToken_request_url(), HttpMethod.POST, entity, String.class);
-		
-		String body = responseEntity.getBody();
-		log.info("카카오가 보낸 토큰을 포함한 응답정보는 "+body);
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		
-		KaKaoOAuthToken oAuthToken=null;
-		try {
-			oAuthToken = objectMapper.readValue(body, KaKaoOAuthToken.class);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-		
-		HttpHeaders headers2 = new HttpHeaders();
-		headers2.add("Authorization", "Bearer "+oAuthToken.getAccess_token());
-		
-		HttpEntity entity2 = new HttpEntity(headers2);
-		
-		RestTemplate restTemplate2 = new RestTemplate();
-		ResponseEntity<String> responseEntity2 = restTemplate2.exchange(kakaoLogin.getUserinfo_url() , HttpMethod.GET, entity2, String.class);
-		String body2 = responseEntity2.getBody();
-		
-		log.info("카카오가 보낸 사용자 정보는 "+body2);
-		
-		ObjectMapper objectMapperInfo = new ObjectMapper();
-		Map<String, Object> kakaoUserInfo = new HashMap<>();
-		try {
-			kakaoUserInfo = objectMapperInfo.readValue(body2, Map.class);
-		} catch (JsonMappingException e) {
-			e.printStackTrace();
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-		}
-
-		String kakaoId = String.valueOf(kakaoUserInfo.get("id"));
-		String nickname = (String) ((Map<String, Object>) kakaoUserInfo.get("properties")).get("nickname");
-		String profileImage = (String) ((Map<String, Object>) kakaoUserInfo.get("properties")).get("profile_image");
-		
-		Member member = new Member();
-		member.setUid(kakaoId);
-		member.setNickname(nickname);
-		member.setSns(snsService.selectByName("kakao")); 
-		member.setRole(roleService.selectByName("USER"));//일반 회원 가입이므로...
-		log.info(profileImage);
-		member.setProfile_image_url(profileImage);
-	
-		//중복된 회원이 없다면, 가입을 시킨다...(즉 최초 한번은 가입을 회원 정보를 보관해놓자..)
-		Member dto = memberService.selectByUid(kakaoId);
-		
-		if(dto == null) { //중복된 회원이 없을때만 가입
-			memberService.regist(member);
-			dto =  member;
-		}
-		
-		//세션을 할당하여, 메인으로 보낸다..
-		HttpSession session = request.getSession();
-	    session.setAttribute("member", dto);
-	    log.debug("현재 가진 권한은 "+dto.getRole().getRole_name());
-		
-		//스프링 시큐리티의 권한 부여를 강제적으로 처리 
-		//(CustomeUserDetails 로부터 자동으로 값을 할당하는 방식이 아니라, 개발자가 수동으로 시큐리티에게 정보 주입)
-		Authentication auth = new UsernamePasswordAuthenticationToken(member.getNickname(), null, Collections.singletonList(new SimpleGrantedAuthority("USER")));
-		SecurityContextHolder.getContext().setAuthentication(auth);
-		session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+		//로그인 인증 추상화 
+		kakaoLoginService.authenticateUser(dto, request);
 		
 		ModelAndView mav = new ModelAndView("redirect:/");
 		return mav;
 	}
 	
+	/*----------------------------------------------------------------
+	 네이버 콜백 요청 처리 
+	 *---------------------------------------------------------------- */
     @GetMapping("/member/sns/naver/callback")
     public ModelAndView naverCallback(HttpServletRequest request, HttpSession session) {
         String code = request.getParameter("code");
