@@ -20,15 +20,15 @@
                         <th:li th:if="${session.member != null}" class="nav-item" id="mypageItem"><a href="/member/mypage" class="nav-link">마이페이지</a></th:li>
                             
                         <!-- 글자가 밀려 주석처리 -->
-                        
+                           
                         <th:li th:if="${session.member != null}" class="nav-item profile-container">
 						    <a href="#" class="nav-link d-flex align-items-center">
 						        <div id="briefProfile" class="profile-text me-3" th:text="${session.member.nickname + '님'}"></div>
-						        <!-- <img th:src="${session.member.profile_image_url}" class="rounded-circle img-fluid" style="max-width: 45px; height: auto;" alt="프로필 이미지"> -->
+						        <img th:src="${session.member.profile_image_url}" class="rounded-circle img-fluid" style="max-width: 45px; height: auto;" alt="프로필 이미지">
 						    </a>  
 						</th:li> 
                     </ul>
-					
+					 
                     
                 </div>
             </div>
