@@ -13,11 +13,12 @@
                         <li class="nav-item"><a href="/shelter/list" class="nav-link">보호소 조회</a></li>
                         <li class="nav-item"><a href="/animal/list" class="nav-link">동물조회</a></li>
                         <li class="nav-item"><a href="/volunteer/list" class="nav-link">봉사게시판</a></li>
-                         <th:li th:if="${session.member == null}" class="nav-item"><a href="/member/login" class="nav-link">로그인</a></th:li>
-                        <th:li th:if="${session.member != null}" class="nav-item"><a href="/member/mypage" class="nav-link">마이페이지</a></th:li>
-                        <th:li th:if="${session.member != null}" class="nav-item">
-                            <a href="javascript:logout()" class="nav-link">로그아웃</a>
-                        </th:li>
+                        <th:block th:if="${session.member == null}">
+    					<li class="login-item"><a href="/member/login" class="nav-link">로그인</a></li></th:block>
+						<th:block th:if="${session.member != null}">
+    					<li class="logout-item"><a href="/member/logout" class="nav-link">로그아웃</a></li></th:block>
+                        <th:li th:if="${session.member != null}" class="nav-item" id="mypageItem"><a href="/member/mypage" class="nav-link">마이페이지</a></th:li>
+                            
                         <!-- 글자가 밀려 주석처리 -->
                         
                         <th:li th:if="${session.member != null}" class="nav-item profile-container">
@@ -27,7 +28,7 @@
 						    </a>  
 						</th:li> 
                     </ul>
-
+					
                     
                 </div>
             </div>
@@ -37,5 +38,6 @@
         <hr class="m-0">
     </div>
     <script>
+
     </script>
 </th:block>
