@@ -41,35 +41,32 @@
 
 
 	<section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-		<div class="my-auto"
-			style="display: flex; justify-content: space-between; align-items: center;">
-			<div>
-				<div>
-					<img src="/site/images/insta4.jpg" class="img-fluid mb-3" alt=""
-						id="profileImage">
-				</div>
-			</div>
-			<div style="margin-left: 500px;">
-				<div class="subheading mb-3">
-					<input type="text" placeholder="이름 입력" id="nameInput">
-				</div>
-				<div class="subheading mb-3">
-					<input type="text" placeholder="전화번호 입력" id="phoneInput">
-				</div>
-				<button id="modifyInfoBtn">정보 수정하기</button>
-				<div>
-					<button id="modifyPhotoBtn" style="margin: 15px 0px 0px 0px;">사진
-						수정하기</button>
-					<!-- 사진 업로드 기능 추가 -->
-					<form id="pictureForm" style="display: none;"
-						enctype="multipart/form-data">
-						<input type="file" name="file" id="pictureFileInput">
-						<button type="button" id="pictureBtn">사진 업로드</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+    <div class="my-auto" style="display: flex; justify-content: space-between; align-items: center;">
+        <div>
+            <div>
+                <img src="/site/images/insta4.jpg" class="img-fluid mb-3" alt="" id="profileImage">
+            </div>
+        </div>
+        <div style="margin-left: 500px;">
+            <div class="subheading mb-3">
+                <input type="text" placeholder="이름 입력" id="nameInput">
+            </div>
+            <div class="subheading mb-3">
+                <input type="text" placeholder="전화번호 입력" id="phoneInput">
+            </div>
+            <button id="modifyInfoBtn">정보 수정하기</button>
+            <div>
+                <button id="modifyPhotoBtn" style="margin: 15px 0px 0px 0px;">사진 수정하기</button>
+                <!-- 사진 업로드 기능 추가 -->
+                <form id="pictureForm" style="display: none;" enctype="multipart/form-data">
+                    <input type="file" name="file" id="pictureFileInput">
+                    <button type="button" id="pictureBtn">사진 업로드</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 	<p class="mb-5" style="max-width: 500px;"></p>
 	</div>
@@ -518,45 +515,70 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-        $(document).ready(function() {
-            $('#modifyPhotoBtn').on('click', function() {
-                $('#pictureForm').show();
-            });
+$(document).ready(function() {
+    $('#modifyInfoBtn').on('click', function() {
+        var name = $('#nameInput').val();
+        var phone = $('#phoneInput').val();
 
-            $('#pictureBtn').on('click', function(event) {
-                event.preventDefault();  // 폼 제출 막기
-                var fileInput = $('#pictureFileInput')[0];
-                var formData = new FormData();
-                formData.append('file', fileInput.files[0]);
-
-                $.ajax({
-                    url: '/upload',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
-                    success: function(result) {
-                        if (result.success) {
-                            alert('사진이 업로드되었습니다.');
-                            var imageUrl = result.imageUrl;
-                            console.log('New image URL:', imageUrl);
-                            var $profileImage = $('#profileImage');
-                            if ($profileImage.length === 0) {
-                                $profileImage = $('<img>', {
-                                    id: 'profileImage',
-                                    class: 'img-fluid mb-3'
-                                });
-                                $('#imageContainer').append($profileImage);
-                            }
-                            $profileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
-                        } else {
-                            alert('사진 업로드에 실패했습니다.');
-                        }
-                    },
-                    error: function(error) {
-                        console.error('Error:', error);
-                    }
-                });
-            });
+        $.ajax({
+            url: '/updateProfile',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ name: name, phone: phone }),
+            success: function(response) {
+                if (response.success) {
+                    alert('정보가 업데이트되었습니다.');
+                    $('#briefProfile').text(name + '님');
+                } else {
+                    alert('정보 업데이트에 실패했습니다.');
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
         });
+    });
+
+    $('#modifyPhotoBtn').on('click', function() {
+        $('#pictureForm').show();
+    });
+
+    $('#pictureBtn').on('click', function(event) {
+        event.preventDefault();
+        var fileInput = $('#pictureFileInput')[0];
+        var formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        $.ajax({
+            url: '/upload',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function(result) {
+                if (result.success) {
+                    alert('사진이 업로드되었습니다.');
+                    var imageUrl = result.imageUrl;
+                    var $profileImage = $('#profileImage');
+                    if ($profileImage.length === 0) {
+                        $profileImage = $('<img>', {
+                            id: 'profileImage',
+                            class: 'img-fluid mb-3'
+                        });
+                        $('#imageContainer').append($profileImage);
+                    }
+                    $profileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
+
+                    var $headerProfileImage = $('#headerProfileImage');
+                    $headerProfileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
+                } else {
+                    alert('사진 업로드에 실패했습니다.');
+                }
+            },
+            error: function(error) {
+                console.error('Error:', error);
+            }
+        });
+    });
+});
 </script>

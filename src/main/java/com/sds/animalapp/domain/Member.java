@@ -12,4 +12,14 @@ public class Member {
 	private Role role; //has a 관계로 erd 상의 부모를 보유
 	private String profile_image_url;
 	private MemberDetail memberDetail;
+	
+	 private String profileImageUrl;
+	
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
 }

@@ -3,15 +3,19 @@
 <mapper namespace="com.sds.animalapp.model.member.MemberDetailDAO">
 
 	
-	<insert id="insert" parameterType="MemberDetail">
-		insert into member_detail(password, phone, addr, member_idx)
-		values(#{password}, #{phone}, #{addr}, #{member.member_idx})
-	</insert>
-	
-	
-	<!-- member_idx 에 속한 상세정보 가져오기  -->
-	<select id="selectByMemberIdx" parameterType="int" resultType="MemberDetail">
-		select * from member_detail where member_idx=#{member_idx}
-	</select>
+    <insert id="insert" parameterType="MemberDetail">
+        insert into member_detail(password, phone, member_idx)
+        values(#{password}, #{phone}, #{member.member_idx})
+    </insert>
+
+    <select id="selectByMemberIdx" parameterType="int" resultType="MemberDetail">
+        select * from member_detail where member_idx=#{member_idx}
+    </select>
+
+    <update id="update" parameterType="MemberDetail">
+        update member_detail
+        set phone=#{phone}
+        where member_idx=#{member.member_idx}
+    </update>
 	
 </mapper>
