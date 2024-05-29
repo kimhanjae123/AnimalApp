@@ -26,9 +26,11 @@ public class ShelterController {
 	
 
 	@GetMapping("/shelter/list")
-	public String getShelter(Shelter shelter,Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage) throws Exception{
+	public String getShelter(Shelter shelter,Model model) throws Exception{
 		List shelterList = shelterApiService.getShelterList(shelter);
 		model.addAttribute("shelterList",shelterList);
+		shelterList.forEach(System.out::println);
+		shelterService.insert(shelterList);
 		return "shelter/list";
 	}
 	

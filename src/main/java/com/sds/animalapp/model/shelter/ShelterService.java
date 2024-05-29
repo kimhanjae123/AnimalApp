@@ -9,5 +9,5 @@ public interface ShelterService {
 	public int selectCount(); //총 레코드 수
 	public List selectAll(Map map);
 	public Shelter select(int shelter_idx);
-	public void saveAll(List<Shelter> shelterList);
+	public void insert(List<Shelter> shelterList);
 }

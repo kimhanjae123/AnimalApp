@@ -20,9 +20,6 @@ public class ShelterServiceImpl implements ShelterService{
 	}
 	
 	public List selectAll(Map map) {
-		
-		
-		
 		return null;
 		
 	}
@@ -33,11 +30,8 @@ public class ShelterServiceImpl implements ShelterService{
 		return null;
 	}
 
-	public void saveAll(List<Shelter> shelterList) {
-		
-		shelterDAO.saveAll(shelterList);
-		
-		
+	public void insert(List<Shelter> shelterList) {
+		shelterDAO.insert(shelterList);
 		
 	}
 

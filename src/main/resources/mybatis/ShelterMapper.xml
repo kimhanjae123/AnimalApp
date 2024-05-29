@@ -7,9 +7,9 @@
 	</select>
 	
 	<insert id="insert" parameterType="Shelter">
-		insert into shelter(orgNm,care_Nm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
+		insert into shelter(orgNm,careNm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
 									weekOprEtime,careTel,dataStdDt)
-		values(#{orgNm},#{care_Nm},#{careAddr},#{divisionNm},#{lat},#{lng},#{dsignationDate},
+		values(#{orgNm},#{careNm},#{careAddr},#{divisionNm},#{lat},#{lng},#{dsignationDate},
 				   #{closeDay},#{weekOprStime},#{weekOprEtime},#{careTel},#{dataStdDt})
 	</insert>
 	
