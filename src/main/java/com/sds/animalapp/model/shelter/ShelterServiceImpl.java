@@ -14,8 +14,6 @@ public class ShelterServiceImpl implements ShelterService{
 	@Autowired
 	private ShelterDAO shelterDAO;
 	
-	@Autowired
-	private ShelterApiService shelterApiService;
 	
 	public int selectCount() {
 		return 0;
@@ -24,13 +22,23 @@ public class ShelterServiceImpl implements ShelterService{
 	public List selectAll(Map map) {
 		
 		
+		
 		return null;
+		
 	}
 
 	
 
 	public Shelter select(int shelter_idx) {
 		return null;
+	}
+
+	public void saveAll(List<Shelter> shelterList) {
+		
+		shelterDAO.saveAll(shelterList);
+		
+		
+		
 	}
 
 }
