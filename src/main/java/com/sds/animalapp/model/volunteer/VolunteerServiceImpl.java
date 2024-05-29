@@ -21,7 +21,6 @@ public class VolunteerServiceImpl implements VolunteerService {
 	
 	//봉사List모두 가져오기
 	public List selectAll(Map map) {
-		System.out.println(map.get("keyword"));
 		return volunteerDAO.selectAll(map);
 	}
 	

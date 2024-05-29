@@ -17,6 +17,7 @@
 	    WHERE title LIKE CONCAT('%', #{keyword}, '%') OR shelter_name LIKE CONCAT('%', #{keyword}, '%')
 	    LIMIT #{startIndex}, #{rowCount}
 	</select>	
+	
     <select id="select" parameterType="int" resultType="VolunteerNotice">
 		SELECT * FROM volunteer_notice
 	    WHERE vol_event_post_idx = #{id}

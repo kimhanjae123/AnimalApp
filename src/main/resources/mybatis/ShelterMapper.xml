@@ -1,10 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="com.sds.animalapp.model.shelter.ShelterDAO">
+
+	<select id="selectCount" parameterType="String" resultType="int">
+	    SELECT COUNT(*) FROM shelter 
+	</select>
 	
 	<select id="selectAll" parameterType="java.util.Map" resultType="Shelter">
 		select * from shelter 
+		LIMIT #{startIndex}, #{rowCount}
 	</select>
+	
+	<select id="select" parameterType="int" resultType="Shelter">
+		SELECT * FROM shelter 
+	    WHERE shelter_idx = #{shelter_idx}
+	</select>	
 	
 	<insert id="insert" parameterType="Shelter">
 		insert into shelter(orgNm,careNm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,

@@ -18,17 +18,15 @@ import com.sds.animalapp.model.volunteer.VolunteerService;
 public class VolunteerController {
 	
 	@Autowired
-	VolunteerService volunteerService;
-	
-	@Autowired
-	private Pager pager;
+	private VolunteerService volunteerService;
 	
 	@GetMapping("/volunteer/list")
 	public String volunteerList(Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage, @RequestParam(value="keyword", defaultValue="") String keyword) {
-		
+		Pager pager = new Pager();
 		pager.init(volunteerService.selectCount(keyword), currentPage);
 		
-		HashMap map=new HashMap();
+		//직관적이지 못해서? startIndex, rowCount, keyword를 해시맵으로 넘기지 않고 각 변수 세개로 넘겨도 좋고 파라미터클래스를 만드는 것도 좋다.
+		HashMap<String, Object> map=new HashMap();
 		map.put("startIndex", pager.getStartIndex());
 		map.put("rowCount", pager.getPageSize());
 		map.put("keyword", keyword);
