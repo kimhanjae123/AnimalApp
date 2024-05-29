@@ -22,25 +22,8 @@
     <section>
         <div class="container">
             <h2>Hover Rows</h2>
-            <select id="sido" th:value="${sidoCode}">
-                <option th:selected="${sidoCode}==00" value="00">전국</option>
-                <option th:selected="${sidoCode}==11" value="11">서울특별시</option>
-                <option th:selected="${sidoCode}==21" value="21">부산광역시</option>
-                <option th:selected="${sidoCode}==22" value="22">대구광역시</option>
-                <option th:selected="${sidoCode}==23" value="23">인천광역시</option>
-                <option th:selected="${sidoCode}==24" value="24">광주광역시</option>
-                <option th:selected="${sidoCode}==25" value="25">대전광역시</option>
-                <option th:selected="${sidoCode == '26'}" value="26">울산광역시</option>
-                <option th:selected="${sidoCode == '29'}" value="29">세종특별자치시</option>
-                <option th:selected="${sidoCode == '31'}" value="31">경기도</option>
-                <option th:selected="${sidoCode == '32'}" value="32">강원도</option>
-                <option th:selected="${sidoCode == '33'}" value="33">충청북도</option>
-                <option th:selected="${sidoCode == '34'}" value="34">충청남도</option>
-                <option th:selected="${sidoCode == '35'}" value="35">전라북도</option>
-                <option th:selected="${sidoCode == '36'}" value="36">전라남도</option>
-                <option th:selected="${sidoCode == '37'}" value="37">경상북도</option>
-                <option th:selected="${sidoCode == '38'}" value="38">경상남도</option>
-                <option th:selected="${sidoCode == '39'}" value="39">제주특별자치도</option>
+            <select id="sido" th:value="${currentSidoCode}">
+                <option th:each="sido, i :${sidoList}" th:selected="${currentSidoCode}==${sido.sido_code}" th:value="${sido.sido_code}" th:text="${sido.sido_name}"></option>
             </select>
             <select id="signgu">
                 <option value="">시군구:선택//아직 안됨</option>
@@ -78,7 +61,7 @@
                     <ul class="pagination justify-content-center">
 
                         <li class="page-item" th:class="${pager.firstPage == 1 ? 'disabled' : ''}">
-                            <a class="page-link" href="#" th:href="@{/shelter/list(currentPage=${pager.firstPage-1}, sidoCode=${sidoCode}, keyword=${keyword})}" aria-label="Previous">
+                            <a class="page-link" href="#" th:href="@{/shelter/list(currentPage=${pager.firstPage-1}, currentSidoCode=${currentSidoCode}, keyword=${keyword})}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                                 <span class="sr-only">Previous</span>
                             </a>
@@ -86,11 +69,11 @@
 
                         <li th:each="i : ${#numbers.sequence(pager.firstPage , pager.lastPage)}"
               th:class="${pager.currentPage==i? 'page-item active':'page-item'}">
-              <a class="page-link" th:href="@{/shelter/list(currentPage=${i}, sidoCode=${sidoCode}, keyword=${keyword})}" th:text="${i}"></a>
+              <a class="page-link" th:href="@{/shelter/list(currentPage=${i}, currentSidoCode=${currentSidoCode}, keyword=${keyword})}" th:text="${i}"></a>
             </li>
 
             <li class="page-item" th:class="${pager.lastPage == pager.totalPage ? 'disabled' : ''}">
-              <a class="page-link" href="#" th:href="@{/shelter/list(currentPage=${pager.lastPage+1}, sidoCode=${sidoCode}, keyword=${keyword})}"
+              <a class="page-link" href="#" th:href="@{/shelter/list(currentPage=${pager.lastPage+1}, currentSidoCode=${currentSidoCode}, keyword=${keyword})}"
                 aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
                 <span class="sr-only">Next</span>
@@ -122,9 +105,9 @@
   $(function () {
     $("#bt_search").click(function () {
       var searchKeyword = $("#search").val();
-      var sidoCode= $("#sido").val();
+      var currentSidoCode= $("#sido").val();
       // URL에 검색어 파라미터 추가하여 이동
-      location.href = "/shelter/list?sidoCode=" + encodeURIComponent(sidoCode) + "&keyword=" + encodeURIComponent(searchKeyword);
+      location.href = "/shelter/list?currentSidoCode=" + encodeURIComponent(currentSidoCode) + "&keyword=" + encodeURIComponent(searchKeyword);
     });
   });
   $(function () {

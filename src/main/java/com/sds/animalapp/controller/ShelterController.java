@@ -2,7 +2,6 @@ package com.sds.animalapp.controller;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Shelter;
-import com.sds.animalapp.domain.VolunteerNotice;
 import com.sds.animalapp.model.shelter.ShelterApiService;
 import com.sds.animalapp.model.shelter.ShelterService;
+import com.sds.animalapp.model.shelter.SidoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,17 +26,20 @@ public class ShelterController {
 
 	@Autowired
 	private ShelterService shelterService;
+	
+	@Autowired
+	private SidoService sidoService;
 
 	@GetMapping("/shelter/list")
 	public String getShelter(Shelter shelter, Model model,
 			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword,
-			@RequestParam(value = "sidoCode", defaultValue = "00") int sidoCode) throws Exception {
+			@RequestParam(value = "currentSidoCode", defaultValue = "00") String currentSidoCode) throws Exception {
 		
 		Pager pager = new Pager();
 		pager.init(shelterService.selectCount(keyword), currentPage);
 		
-		log.info(keyword);
+		List sidoList = sidoService.selectAll();
 
 		HashMap<String, Object> map = new HashMap();
 		map.put("startIndex", pager.getStartIndex());
@@ -45,15 +47,12 @@ public class ShelterController {
 		map.put("keyword", keyword);
 		
 		List shelterList = shelterService.selectAll(map);
-		
-		
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("shelterList", shelterList);
+		model.addAttribute("sidoList", sidoList);
 		model.addAttribute("keyword", keyword);
-		model.addAttribute("sidoCode", sidoCode);
-		
-		log.info(String.valueOf(sidoCode));
+		model.addAttribute("currentSidoCode", currentSidoCode);
 
 		return "shelter/list";
 	}
