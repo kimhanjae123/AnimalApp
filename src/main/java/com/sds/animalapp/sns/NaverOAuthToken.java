@@ -9,4 +9,5 @@ public class NaverOAuthToken {
 	private String refresh_token;
 	private String token_type;
 	private String expires_in;
+	private String profile_image_url;
 }

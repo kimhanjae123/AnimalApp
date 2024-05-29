@@ -37,6 +37,7 @@ public class NaverLogin {
 	@Value("${sns.naver.userinfo_url}")
 	private String userinfo_url;
 	
+	
 	//로그인 요청 시 가져갈 파라미터 문자열 
 	public String getGrantUrl() {
 		StringBuilder sb = new StringBuilder();
