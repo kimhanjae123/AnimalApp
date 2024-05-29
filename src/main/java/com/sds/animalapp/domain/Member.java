@@ -13,8 +13,8 @@ public class Member {
 	private String profile_image_url;
 	private MemberDetail memberDetail;
 	
-	 private String profileImageUrl;
-	
+	private String profileImageUrl;
+
     public String getProfileImageUrl() {
         return profileImageUrl;
     }

@@ -40,7 +40,6 @@ import com.sds.animalapp.model.member.KakaoLoginService;
 import com.sds.animalapp.model.member.MemberService;
 import com.sds.animalapp.model.member.RoleService;
 import com.sds.animalapp.model.member.SnsService;
-import com.sds.animalapp.sns.KaKaoLogin;
 import com.sds.animalapp.sns.KaKaoOAuthToken;
 import com.sds.animalapp.sns.NaverLogin;
 import com.sds.animalapp.sns.NaverOAuthToken;
@@ -55,7 +54,7 @@ public class MemberController {
 	
 	@Autowired
 	private KakaoLoginService kakaoLoginService;
-    
+
     @Autowired
     private NaverLogin naverLogin;
     
@@ -134,101 +133,110 @@ public class MemberController {
 	}
 	
 
-	/*----------------------------------------------------------------
-	 네이버 콜백 요청 처리 
-	 *---------------------------------------------------------------- */
-    @GetMapping("/member/sns/naver/callback")
-    public ModelAndView naverCallback(HttpServletRequest request, HttpSession session) {
-        String code = request.getParameter("code");
+	 /*----------------------------------------------------------------
+    네이버 콜백 요청 처리 
+    *---------------------------------------------------------------- */
+	@GetMapping("/member/sns/naver/callback")
+	public ModelAndView naverCallback(HttpServletRequest request, HttpSession session) {
+	    String code = request.getParameter("code");
 
-        String token_url = naverLogin.getToken_request_url();
-        MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
-        params.add("code", code);
-        params.add("client_id", naverLogin.getClient_id());
-        params.add("client_secret", naverLogin.getClient_secret());
-        params.add("redirect_uri", naverLogin.getRedirect_uri());
-        params.add("grant_type", naverLogin.getGrant_type());
-        params.add("state", naverLogin.getState());
+	    String token_url = naverLogin.getToken_request_url();
+	    MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+	    params.add("code", code);
+	    params.add("client_id", naverLogin.getClient_id());
+	    params.add("client_secret", naverLogin.getClient_secret());
+	    params.add("redirect_uri", naverLogin.getRedirect_uri());
+	    params.add("grant_type", naverLogin.getGrant_type());
+	    params.add("state", naverLogin.getState());
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Type", "application/x-www-form-urlencoded");
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-Type", "application/x-www-form-urlencoded");
+	    HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(params, headers);
 
-        RestTemplate restTemplate = new RestTemplate();
-        ResponseEntity<String> responseEntity = restTemplate.exchange(token_url, HttpMethod.POST, entity, String.class);
+	    RestTemplate restTemplate = new RestTemplate();
+	    ResponseEntity<String> responseEntity = restTemplate.exchange(token_url, HttpMethod.POST, entity, String.class);
 
-        String body = responseEntity.getBody();
-        log.info("네이버가 보낸 인증 완료 정보는 " + body);
+	    String body = responseEntity.getBody();
+	    log.info("네이버가 보낸 인증 완료 정보는 " + body);
 
-        ObjectMapper objectMapper = new ObjectMapper();
-        NaverOAuthToken oAuthToken = null;
+	    ObjectMapper objectMapper = new ObjectMapper();
+	    NaverOAuthToken oAuthToken = null;
 
-        try {
-            oAuthToken = objectMapper.readValue(body, NaverOAuthToken.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+	    try {
+	        oAuthToken = objectMapper.readValue(body, NaverOAuthToken.class);
+	    } catch (JsonMappingException e) {
+	        e.printStackTrace();
+	    } catch (JsonProcessingException e) {
+	        e.printStackTrace();
+	    }
 
-        String userinfo_url = naverLogin.getUserinfo_url();
-        HttpHeaders headers2 = new HttpHeaders();
-        headers2.add("Authorization", "Bearer " + oAuthToken.getAccess_token());
-        HttpEntity<?> entity2 = new HttpEntity<>(headers2);
+	    String userinfo_url = naverLogin.getUserinfo_url();
+	    HttpHeaders headers2 = new HttpHeaders();
+	    headers2.add("Authorization", "Bearer " + oAuthToken.getAccess_token());
+	    HttpEntity<?> entity2 = new HttpEntity<>(headers2);
 
-        ResponseEntity<String> userEntity = restTemplate.exchange(userinfo_url, HttpMethod.GET, entity2, String.class);
-        String userBody = userEntity.getBody();
-        log.info(userBody);
+	    ResponseEntity<String> userEntity = restTemplate.exchange(userinfo_url, HttpMethod.GET, entity2, String.class);
+	    String userBody = userEntity.getBody();
+	    log.info(userBody);
 
-        ObjectMapper objectMapper2 = new ObjectMapper();
-        HashMap<String, Object> userMap = null;
+	    ObjectMapper objectMapper2 = new ObjectMapper();
+	    HashMap<String, Object> userMap = null;
 
-        try {
-            userMap = objectMapper2.readValue(userBody, HashMap.class);
-        } catch (JsonMappingException e) {
-            e.printStackTrace();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+	    try {
+	        userMap = objectMapper2.readValue(userBody, HashMap.class);
+	    } catch (JsonMappingException e) {
+	        e.printStackTrace();
+	    } catch (JsonProcessingException e) {
+	        e.printStackTrace();
+	    }
 
-        Map<String, Object> response = (Map<String, Object>) userMap.get("response");
-        String id = (String) response.get("id");
-        String email = (String) response.get("email");
-        String name = (String) response.get("name");
+	    Map<String, Object> response = (Map<String, Object>) userMap.get("response");
 
-        log.debug("id = " + id);
-        log.debug("email = " + email);
-        log.debug("name = " + name);
+	    log.debug("response map: " + response); // 응답하나 안 하나 추가한 코드 없어도 상관없음
 
-        Member member = new Member();
-        member.setUid(id);
-        member.setNickname(name);
-        member.setEmail(email);
+	    String id = (String) response.get("id");
+	    String email = (String) response.get("email");
+	    String name = (String) response.get("name");
+	    String profile_image = (String) response.get("profile_image");
 
-        Sns naverSns = snsService.selectByName("naver");
-        if (naverSns == null) {
-            throw new RuntimeException("SNS 'naver' not found in database.");
-        }
-        member.setSns(naverSns);
-        member.setRole(roleService.selectByName("USER"));
+	    log.debug("id = " + id);
+	    log.debug("email = " + email);
+	    log.debug("name = " + name);
+	    log.debug("profile_image = " + profile_image);
 
-        Member dto = memberService.selectByUid(id);
+	    Member member = new Member();
+	    member.setUid(id);
+	    member.setNickname(name);
+	    member.setEmail(email);
+	    member.setProfileImageUrl(profile_image); 
 
-        if (dto == null) {
-            memberService.regist(member);
-            dto = member;
-        }
+	    Sns naverSns = snsService.selectByName("naver");
+	    if (naverSns == null) {
+	        throw new RuntimeException("SNS 'naver' db에 없어요");
+	    }
+	    member.setSns(naverSns);
+	    member.setRole(roleService.selectByName("USER"));
 
-        session.setAttribute("member", dto);
-        log.debug("현재 가진 권한은 " + dto.getRole().getRole_name());
+	    Member dto = memberService.selectByUid(id);
 
-        Authentication auth = new UsernamePasswordAuthenticationToken(member.getNickname(), null, Collections.singletonList(new SimpleGrantedAuthority("USER")));
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+	    if (dto == null) {
+	        memberService.regist(member);
+	        dto = member;
+	    } else {
+	        dto.setProfileImageUrl(profile_image);
+	        memberService.update(dto); // 프로필 사진 상시 업데이트 
+	    }
 
-        return new ModelAndView("redirect:/member/mypage");
-    }
-    
+	    session.setAttribute("member", dto);
+	    log.debug("현재 가진 권한은 " + dto.getRole().getRole_name());
+
+	    Authentication auth = new UsernamePasswordAuthenticationToken(dto.getNickname(), null, Collections.singletonList(new SimpleGrantedAuthority("USER")));
+	    SecurityContextHolder.getContext().setAuthentication(auth);
+	    session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+
+	    return new ModelAndView("redirect:/member/mypage");
+	}
+
     // 정보 수정 버튼 처리 
     @PostMapping("/updateProfile")
     @ResponseBody

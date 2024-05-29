@@ -11,25 +11,9 @@
 <meta name="author" content="">
 <meta name="keywords" content="">
 <meta name="description" content="">
-</head>
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ"
-	crossorigin="anonymous">
-
-<link rel="stylesheet" type="text/css" href="css/vendor.css">
-<link rel="stylesheet" type="text/css" href="style.css">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Chilanka&family=Montserrat:wght@300;400;500&display=swap"
-	rel="stylesheet">
+	<!-- 헤더 링크 -->
+	<th:block th:replace="~{fragments/header_link :: header_link}" />
 
 </head>
 
@@ -141,189 +125,209 @@
 				<h2 class="  text-center">관심등록 동물</h2>
 				<div class="mb-5 heading-border"></div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12 ">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #17a2b8; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
 					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-globe mr-3 text-info"></i>관할 구역
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>보호센터 명</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #ffc107; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-laptop mr-3 text-warning"></i>사진으로 대체 예정
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>품종</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #28a745; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-camera mr-3 text-success"></i>사진으로 대체 예정
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>품종</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #2196f3; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-area-chart mr-3 text-primary"></i>날짜
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>보호센터명</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-		</div>
-
 		<div class="row my-auto">
 			<div class="col-12">
 				<h2 class="  text-center">입양 신청 현황</h2>
 				<div class="mb-5 heading-border"></div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12 ">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #17a2b8; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
 					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-globe mr-3 text-info"></i>관할 구역
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>보호센터 명</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #ffc107; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-laptop mr-3 text-warning"></i>사진으로 대체 예정
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>품종</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #28a745; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-camera mr-3 text-success"></i>사진으로 대체 예정
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>품종</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #2196f3; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-area-chart mr-3 text-primary"></i>날짜
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>보호센터명</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="row my-auto">
+		<div class="row my-auto" name="vol_check">
 			<div class="col-12">
 				<h2 class="  text-center">봉사활동 신청 현황</h2>
 				<div class="mb-5 heading-border"></div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12 ">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #17a2b8; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
 					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-globe mr-3 text-info"></i>관할 구역
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>보호센터 명</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #ffc107; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-laptop mr-3 text-warning"></i>사진으로 대체 예정
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>품종</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #28a745; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-camera mr-3 text-success"></i>사진으로 대체 예정
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>품종</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-			<div class="resume-item col-md-6 col-sm-12">
+			<div class="resume-item col-md-3 col-sm-2 ">
 				<div class="card mx-0 p-4 mb-5"
 					style="border-color: #2196f3; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
-					<div class="resume-content mr-auto">
+					<div class=" resume-content mr-auto">
 						<h4 class="mb-3">
-							<i class="fa fa-area-chart mr-3 text-primary"></i>날짜
+							<i class="fa fa-globe mr-3 text-info" style="margin:10px;"></i>신청명
+							<input type="text" style="margin:20px;">
 						</h4>
-						<p>보호센터명</p>
+						<p style="margin:20px;">일시<input type="text" style="margin:20px;"><p>신청 인원</p></p>
+						
 					</div>
 					<div class="resume-date text-md-right">
 						<button>바로가기</button>
 					</div>
 				</div>
 			</div>
-		</div>
 	</section>
 
 	<section id="insta" class="my-5">
@@ -498,15 +502,15 @@
 	</div>
 
 
-	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="/site/js/jquery-1.11.0.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
 		crossorigin="anonymous"></script>
-	<script src="js/plugins.js"></script>
-	<script src="js/script.js"></script>
+	<script src="/site/js/plugins.js"></script>
+	<script src="/site/js/script.js"></script>
 	<script
 		src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </body>

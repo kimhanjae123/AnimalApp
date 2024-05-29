@@ -69,5 +69,10 @@ public class MemberServiceImpl implements MemberService {
     public void updateMemberDetail(MemberDetail memberDetail) {
         memberDetailDAO.update(memberDetail); // MemberDetail 업데이트 메서드 호출
     }
+
+    @Override
+    public void update(Member member) {
+        memberDAO.update(member); // Member 업데이트 메서드 호출
+    }
 }
 
