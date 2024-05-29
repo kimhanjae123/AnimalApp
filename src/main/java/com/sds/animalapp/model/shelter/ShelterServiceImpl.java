@@ -16,15 +16,11 @@ public class ShelterServiceImpl implements ShelterService{
 	
 	
 	public int selectCount() {
-		return 0;
+		return shelterDAO.selectCount();
 	}
 	
 	public List selectAll(Map map) {
-		
-		
-		
-		return null;
-		
+		return shelterDAO.selectAll(map);
 	}
 
 	

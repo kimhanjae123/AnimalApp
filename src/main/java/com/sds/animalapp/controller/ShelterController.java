@@ -15,6 +15,9 @@ import com.sds.animalapp.domain.Shelter;
 import com.sds.animalapp.model.shelter.ShelterApiService;
 import com.sds.animalapp.model.shelter.ShelterService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class ShelterController {
 	
@@ -23,12 +26,24 @@ public class ShelterController {
 	
 	@Autowired
 	private ShelterService shelterService;
-	
 
 	@GetMapping("/shelter/list")
 	public String getShelter(Shelter shelter,Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage) throws Exception{
-		List shelterList = shelterApiService.getShelterList(shelter);
+		Pager pager = new Pager();
+		pager.init(shelterService.selectCount(), currentPage);
+		
+		HashMap<String, Object> map=new HashMap();
+		map.put("startIndex", pager.getStartIndex());
+		map.put("rowCount", pager.getPageSize());
+		
+		List shelterList = shelterService.selectAll(map);
+		
+		log.info("dddddd"+String.valueOf(pager.getTotalRecord()));
+
+		
+		model.addAttribute("pager", pager);
 		model.addAttribute("shelterList",shelterList);
+		
 		return "shelter/list";
 	}
 	
