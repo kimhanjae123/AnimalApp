@@ -31,7 +31,8 @@ public class ShelterController {
 	@GetMapping("/shelter/list")
 	public String getShelter(Shelter shelter, Model model,
 			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			@RequestParam(value = "keyword") String keyword) throws Exception {
+			@RequestParam(value = "keyword", defaultValue = "") String keyword,
+			@RequestParam(value = "sidoCode", defaultValue = "00") int sidoCode) throws Exception {
 		
 		Pager pager = new Pager();
 		pager.init(shelterService.selectCount(keyword), currentPage);
@@ -44,10 +45,15 @@ public class ShelterController {
 		map.put("keyword", keyword);
 		
 		List shelterList = shelterService.selectAll(map);
+		
+		
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("shelterList", shelterList);
 		model.addAttribute("keyword", keyword);
+		model.addAttribute("sidoCode", sidoCode);
+		
+		log.info(String.valueOf(sidoCode));
 
 		return "shelter/list";
 	}
