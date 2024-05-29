@@ -21,43 +21,45 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ShelterController {
-	
+
 	@Autowired
 	private ShelterApiService shelterApiService;
-	
+
 	@Autowired
 	private ShelterService shelterService;
 
 	@GetMapping("/shelter/list")
-	public String getShelter(Shelter shelter,Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage) throws Exception{
-		Pager pager = new Pager();
-		pager.init(shelterService.selectCount(), currentPage);
+	public String getShelter(Shelter shelter, Model model,
+			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
+			@RequestParam(value = "keyword") String keyword) throws Exception {
 		
-		HashMap<String, Object> map=new HashMap();
+		Pager pager = new Pager();
+		pager.init(shelterService.selectCount(keyword), currentPage);
+		
+		log.info(keyword);
+
+		HashMap<String, Object> map = new HashMap();
 		map.put("startIndex", pager.getStartIndex());
 		map.put("rowCount", pager.getPageSize());
+		map.put("keyword", keyword);
 		
 		List shelterList = shelterService.selectAll(map);
-		
-		log.info("dddddd"+String.valueOf(pager.getTotalRecord()));
 
-		
 		model.addAttribute("pager", pager);
-		model.addAttribute("shelterList",shelterList);
-		
+		model.addAttribute("shelterList", shelterList);
+		model.addAttribute("keyword", keyword);
+
 		return "shelter/list";
 	}
-	
-	//세부창
-    @GetMapping("/shelter/detail")
-    public String getDetail(Model model, @RequestParam(value="id") int shelter_idx) {
-    	Shelter shelter = shelterService.select(shelter_idx);
-    	
-    	model.addAttribute("detail", shelter);
-    	
-    	return "shelter/detail";
-    }
-    
-	
-	
+
+	// 세부창
+	@GetMapping("/shelter/detail")
+	public String getDetail(Model model, @RequestParam(value = "id") int shelter_idx) {
+		Shelter shelter = shelterService.select(shelter_idx);
+
+		model.addAttribute("detail", shelter);
+
+		return "shelter/detail";
+	}
+
 }

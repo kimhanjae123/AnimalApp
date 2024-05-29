@@ -15,8 +15,8 @@ public class ShelterServiceImpl implements ShelterService{
 	private ShelterDAO shelterDAO;
 	
 	
-	public int selectCount() {
-		return shelterDAO.selectCount();
+	public int selectCount(String keyword) {
+		return shelterDAO.selectCount(keyword);
 	}
 	
 	public List selectAll(Map map) {
