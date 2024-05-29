@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Shelter;
+import com.sds.animalapp.domain.VolunteerNotice;
 import com.sds.animalapp.model.shelter.ShelterApiService;
 import com.sds.animalapp.model.shelter.ShelterService;
 
@@ -47,10 +48,16 @@ public class ShelterController {
 		return "shelter/list";
 	}
 	
-	@GetMapping("/shelter/detail")
-	public String getDetail(){
-		return "shelter/detail";
-	}
+	//세부창
+    @GetMapping("/shelter/detail")
+    public String getDetail(Model model, @RequestParam(value="id") int shelter_idx) {
+    	Shelter shelter = shelterService.select(shelter_idx);
+    	
+    	model.addAttribute("detail", shelter);
+    	
+    	return "shelter/detail";
+    }
+    
 	
 	
 }

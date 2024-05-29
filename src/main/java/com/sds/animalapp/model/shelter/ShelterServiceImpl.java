@@ -26,7 +26,7 @@ public class ShelterServiceImpl implements ShelterService{
 	
 
 	public Shelter select(int shelter_idx) {
-		return null;
+		return shelterDAO.select(shelter_idx);
 	}
 
 	public void saveAll(List<Shelter> shelterList) {

@@ -11,6 +11,11 @@
 		LIMIT #{startIndex}, #{rowCount}
 	</select>
 	
+	<select id="select" parameterType="int" resultType="Shelter">
+		SELECT * FROM shelter 
+	    WHERE shelter_idx = #{shelter_idx}
+	</select>	
+	
 	<insert id="insert" parameterType="Shelter">
 		insert into shelter(orgNm,care_Nm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
 									weekOprEtime,careTel,dataStdDt)

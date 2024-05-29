@@ -41,11 +41,12 @@
     </thead>
     <tbody>
       <tr th:each="shelter, i :${shelterList}">
-		<td th:text="${shelter.orgNm}"></td>
+		<td>
+            <a th:href="@{/shelter/detail(id=${shelter.shelter_idx})}" th:text="${shelter.orgNm}"></a>
+        </td>
 		<td th:text="${shelter.careNm}"></td>
 		<td th:text="${shelter.careTel}"></td>
 		<td th:text="${shelter.careAddr}"></td>
-		<td></td>
       </tr>
     </tbody>
   </table>  
