@@ -5,11 +5,11 @@ import lombok.Data;
 @Data
 public class Shelter {
 	
-	public int shelter_idx;
+	private String shelter_idx;
 	
 	//1건의 보호소 정보를 불러왔을 떄 사용될 변수들
 	private String orgNm;
-	private String care_nm;
+	private String careNm;
 	private String careAddr;
 	private String divisionNm;
 	private double lat;

@@ -30,7 +30,7 @@
   <input type="text">
   <button type="button">조회</button>
   
-  <table class="table table-hover">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th>관할구역</th>
@@ -40,98 +40,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>서울시</td>
-        <td>XX병원</td>
-        <td>010-1234-5678</td>
-        <td>서울시 관악구...</td>
+      <tr th:each="shelter, i :${shelterList}">
+		<td th:text="${shelter.orgNm}"></td>
+		<td th:text="${shelter.careNm}"></td>
+		<td th:text="${shelter.careTel}"></td>
+		<td th:text="${shelter.careAddr}"></td>
+		<td></td>
       </tr>
-      <tr>
-        <td>서울시</td>
-        <td>XX병원</td>
-        <td>010-1234-5678</td>
-        <td>서울시 관악구...</td>
-      </tr>
-      <tr>
-        <td>서울시</td>
-        <td>XX병원</td>
-        <td>010-1234-5678</td>
-        <td>서울시 관악구...</td>
-      </tr>
-      <tr>
-        <td>서울시</td>
-        <td>XX병원</td>
-        <td>010-1234-5678</td>
-        <td>서울시 관악구...</td>
-      </tr>
-      <tr>
-        <td>서울시</td>
-        <td>XX병원</td>
-        <td>010-1234-5678</td>
-        <td>서울시 관악구...</td>
-      </tr>
-      
     </tbody>
-  </table>
+  </table>  
 </div>
   </section>
-
-
-  <section id="insta" class="my-5">
-    <div class="row g-0 py-5">
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-        </div>
-        <a href="#">
-          <img src="/site/images/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-        </div>
-        <a href="#">
-          <img src="/site/images/insta2.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-        </div>
-        <a href="#">
-          <img src="/site/images/insta3.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-        </div>
-        <a href="#">
-          <img src="/site/images/insta4.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-        </div>
-        <a href="#">
-          <img src="/site/images/insta5.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-      <div class="col instagram-item  text-center position-relative">
-        <div class="icon-overlay d-flex justify-content-center position-absolute">
-          <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-        </div>
-        <a href="#">
-          <img src="/site/images/insta6.jpg" alt="insta-img" class="img-fluid rounded-3">
-        </a>
-      </div>
-    </div>
-  </section>
-
-  
-
   <footer id="footer" class="my-5">
     <div class="container py-5 my-5">
       <div class="row">
@@ -260,5 +179,7 @@
   <script src="/site/js/script.js"></script>
   <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 </body>
+<script type="text/javascript">
+</script>
 
 </html>
