@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class Sido {
-	private String sido_code;
-	private String sido_name;
+	private String orgCd;
+	private String orgdownNm;
 }

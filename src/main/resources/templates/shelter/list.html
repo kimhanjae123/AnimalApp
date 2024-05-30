@@ -23,7 +23,7 @@
         <div class="container">
             <h2>Hover Rows</h2>
             <select id="sido" th:value="${currentSidoCode}">
-                <option th:each="sido, i :${sidoList}" th:selected="${currentSidoCode}==${sido.sido_code}" th:value="${sido.sido_code}" th:text="${sido.sido_name}"></option>
+                <option th:each="sido, i :${sidoList}" th:selected="${currentSidoCode}==${sido.orgCd}" th:value="${sido.orgCd}" th:text="${sido.orgdownNm}"></option>
             </select>
             <select id="signgu">
                 <option value="">시군구:선택//아직 안됨</option>
