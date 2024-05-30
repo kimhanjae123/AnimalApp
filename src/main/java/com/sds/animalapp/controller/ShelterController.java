@@ -30,9 +30,6 @@ public class ShelterController {
 	
 	@Autowired
 	private SidoService sidoService;
-	
-	@Autowired
-	private ShelterSelectParam shelterSelectParam;
 
 	@GetMapping("/shelter/list")
 	public String getShelter(Shelter shelter, Model model,
@@ -40,14 +37,11 @@ public class ShelterController {
 			@RequestParam(value = "keyword", defaultValue = "") String keyword,
 			@RequestParam(value = "currentSidoCode", defaultValue = "00") String currentSidoCode) throws Exception {
 		
-		List shelterList = shelterApiService.getShelterList(shelter);
-	
 		Pager pager = new Pager();
 		pager.init(shelterService.selectCount(keyword), currentPage);
 		
 		List sidoList = sidoService.selectAll();
 		
-		shelterService.selectAll(shelterSelectParam);
 		//Shelter DB 테이블이 시도 테이블과 시군구 테이블을 참조하도록 수정한 후 검색 다시 구현
 		ShelterSelectParam shelterSelectParam = new ShelterSelectParam();
 		shelterSelectParam.setKeyword(keyword);
@@ -55,7 +49,12 @@ public class ShelterController {
 		shelterSelectParam.setRowCount(pager.getPageSize());
 		shelterSelectParam.setCurrentSidoCode(currentSidoCode);
 		
-		shelterService.selectAll(shelterSelectParam);
+		List signgu = shelterService.selectAll(shelterSelectParam);
+		
+		List shelterList = shelterApiService.getShelterList(shelter);
+		
+		shelterList.forEach(System.out::println);
+		shelterService.insert(shelterList);
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("shelterList", shelterList);
