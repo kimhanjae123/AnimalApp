@@ -26,10 +26,10 @@
                 <option th:each="sido, i :${sidoList}" th:selected="${currentSidoCode}==${sido.orgCd}" th:value="${sido.orgCd}" th:text="${sido.orgdownNm}"></option>
             </select>
             <select id="signgu" th:value="${currentSignguCode}">
-                <option value="00">시군구:무관</option>
-                <!-- Assuming these are dynamic options, ensure these are properly filled dynamically -->
-                <option th:each="signgu, i :${signguList}" th:value="${signgu.orgCd}" th:text="${signgu.orgdownNm}"></option>
-            </select>
+			    <option value="00">시군구:무관</option>
+			    <option th:each="signgu, i :${signguList}" th:value="${signgu.orgCd}" th:selected="${signgu.orgCd == currentSignguCode}" th:text="${signgu.orgdownNm}"></option>
+			</select>
+
             <input type="text" id="search" th:value="${keyword != null ? keyword : ''}">
             <button type="button" id="bt_search">조회</button>
 
