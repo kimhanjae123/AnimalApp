@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Shelter;
+import com.sds.animalapp.domain.ShelterSelectParam;
 import com.sds.animalapp.model.shelter.ShelterApiService;
 import com.sds.animalapp.model.shelter.ShelterService;
 import com.sds.animalapp.model.shelter.SidoService;
@@ -40,13 +41,15 @@ public class ShelterController {
 		pager.init(shelterService.selectCount(keyword), currentPage);
 		
 		List sidoList = sidoService.selectAll();
-
-		HashMap<String, Object> map = new HashMap();
-		map.put("startIndex", pager.getStartIndex());
-		map.put("rowCount", pager.getPageSize());
-		map.put("keyword", keyword);
 		
-		List shelterList = shelterService.selectAll(map);
+		//Shelter DB 테이블이 시도 테이블과 시군구 테이블을 참조하도록 수정한 후 검색 다시 구현
+		ShelterSelectParam shelterSelectParam = new ShelterSelectParam();
+		shelterSelectParam.setKeyword(keyword);
+		shelterSelectParam.setStartIndex(pager.getStartIndex());
+		shelterSelectParam.setRowCount(pager.getPageSize());
+		shelterSelectParam.setCurrentSidoCode(currentSidoCode);
+		
+		List shelterList = shelterService.selectAll(shelterSelectParam);
 
 		model.addAttribute("pager", pager);
 		model.addAttribute("shelterList", shelterList);
