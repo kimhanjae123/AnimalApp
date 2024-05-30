@@ -20,12 +20,7 @@ public class ShelterServiceImpl implements ShelterService{
 	}
 	
 	public List selectAll(Map map) {
-<<<<<<< HEAD
-		return null;
-		
-=======
 		return shelterDAO.selectAll(map);
->>>>>>> upstream/main
 	}
 
 	

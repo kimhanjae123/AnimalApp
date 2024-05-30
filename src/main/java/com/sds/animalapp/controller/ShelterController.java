@@ -29,14 +29,11 @@ public class ShelterController {
 	private ShelterService shelterService;
 
 	@GetMapping("/shelter/list")
-<<<<<<< HEAD
-	public String getShelter(Shelter shelter,Model model) throws Exception{
+	public String getShelter(Shelter shelter,Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage) throws Exception{
 		List shelterList = shelterApiService.getShelterList(shelter);
 		model.addAttribute("shelterList",shelterList);
 		shelterList.forEach(System.out::println);
 		shelterService.insert(shelterList);
-=======
-	public String getShelter(Shelter shelter,Model model, @RequestParam(value="currentPage", defaultValue="1") int currentPage) throws Exception{
 		Pager pager = new Pager();
 		pager.init(shelterService.selectCount(), currentPage);
 		
@@ -44,7 +41,7 @@ public class ShelterController {
 		map.put("startIndex", pager.getStartIndex());
 		map.put("rowCount", pager.getPageSize());
 		
-		List shelterList = shelterService.selectAll(map);
+		shelterService.selectAll(map);
 		
 		log.info("dddddd"+String.valueOf(pager.getTotalRecord()));
 
@@ -52,7 +49,6 @@ public class ShelterController {
 		model.addAttribute("pager", pager);
 		model.addAttribute("shelterList",shelterList);
 		
->>>>>>> upstream/main
 		return "shelter/list";
 	}
 	
