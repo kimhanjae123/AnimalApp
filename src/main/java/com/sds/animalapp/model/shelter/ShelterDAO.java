@@ -17,5 +17,6 @@ public interface ShelterDAO {
 	public List selectAll(ShelterSelectParam shelterSelectParam);
 	public Shelter select(int shelter_idx);
 	public void insert(List<Shelter> shelterList);
+	public void delete(List<Shelter> shelterList);
 	
 }

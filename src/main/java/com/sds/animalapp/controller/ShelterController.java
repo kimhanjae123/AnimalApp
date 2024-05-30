@@ -54,6 +54,7 @@ public class ShelterController {
 		List shelterList = shelterApiService.getShelterList(shelter);
 		
 		shelterList.forEach(System.out::println);
+		shelterService.delete(shelterList);
 		shelterService.insert(shelterList);
 
 		model.addAttribute("pager", pager);

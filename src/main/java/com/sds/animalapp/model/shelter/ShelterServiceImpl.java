@@ -35,4 +35,9 @@ public class ShelterServiceImpl implements ShelterService{
 		
 	}
 
+	@Override
+	public void delete(List<Shelter> shelterList) {
+		shelterDAO.delete(shelterList);
+	}
+
 }
