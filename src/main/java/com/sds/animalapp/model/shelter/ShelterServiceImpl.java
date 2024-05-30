@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Shelter;
+import com.sds.animalapp.domain.ShelterSelectParam;
 
 @Service
 public class ShelterServiceImpl implements ShelterService{
@@ -15,12 +16,12 @@ public class ShelterServiceImpl implements ShelterService{
 	private ShelterDAO shelterDAO;
 	
 	
-	public int selectCount() {
-		return shelterDAO.selectCount();
+	public int selectCount(String keyword) {
+		return shelterDAO.selectCount(keyword);
 	}
 	
-	public List selectAll(Map map) {
-		return shelterDAO.selectAll(map);
+	public List selectAll(ShelterSelectParam shelterSelectParam) {
+		return shelterDAO.selectAll(shelterSelectParam);
 	}
 
 	

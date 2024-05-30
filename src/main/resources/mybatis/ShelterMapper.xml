@@ -4,10 +4,12 @@
 
 	<select id="selectCount" parameterType="String" resultType="int">
 	    SELECT COUNT(*) FROM shelter 
+	    WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
-	<select id="selectAll" parameterType="java.util.Map" resultType="Shelter">
+	<select id="selectAll" parameterType="shelterSelectParam" resultType="Shelter">
 		select * from shelter 
+		WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
 		LIMIT #{startIndex}, #{rowCount}
 	</select>
 	
