@@ -30,6 +30,9 @@ public class ShelterController {
 	
 	@Autowired
 	private SidoService sidoService;
+	
+	@Autowired
+	private ShelterSelectParam shelterSelectParam;
 
 	@GetMapping("/shelter/list")
 	public String getShelter(Shelter shelter, Model model,
@@ -44,7 +47,7 @@ public class ShelterController {
 		
 		List sidoList = sidoService.selectAll();
 		
-		//shelterService.selectAll(map);
+		shelterService.selectAll(shelterSelectParam);
 		//Shelter DB 테이블이 시도 테이블과 시군구 테이블을 참조하도록 수정한 후 검색 다시 구현
 		ShelterSelectParam shelterSelectParam = new ShelterSelectParam();
 		shelterSelectParam.setKeyword(keyword);
