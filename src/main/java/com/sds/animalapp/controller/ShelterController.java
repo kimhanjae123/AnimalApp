@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ShelterController {
-
+	//서버 가동할 때나 호균님처럼 따로 저장해놓고 수정할 수 있도록 만들어보자
 	@Autowired
 	private ShelterApiService shelterApiService;
 
