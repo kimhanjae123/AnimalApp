@@ -24,15 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ShelterController {
-<<<<<<< HEAD
-	//서버 가동할 때나 호균님처럼 따로 저장해놓고 수정할 수 있도록 만들어보자
-	@Autowired
-	private ShelterApiService shelterApiService;
-=======
 
     @Autowired
     private ShelterApiService shelterApiService;
->>>>>>> upstream/main
 
     @Autowired
     private ShelterService shelterService;
@@ -40,10 +34,7 @@ public class ShelterController {
     @Autowired
     private SidoService sidoService;
     
-    @Autowired
-    private SignguService signguService;
 
-<<<<<<< HEAD
 	@GetMapping("/shelter/list")
 	public String getShelter(Shelter shelter, Model model,
 			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
