@@ -24,9 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ShelterController {
+	@Autowired
+	private ShelterApiService shelterApiService;
 
-    @Autowired
-    private ShelterApiService shelterApiService;
 
     @Autowired
     private ShelterService shelterService;
@@ -34,33 +34,9 @@ public class ShelterController {
     @Autowired
     private SidoService sidoService;
     
+    @Autowired
+    private SignguService signguService;
 
-	@GetMapping("/shelter/list")
-	public String getShelter(Shelter shelter, Model model,
-			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
-			@RequestParam(value = "keyword", defaultValue = "") String keyword,
-			@RequestParam(value = "currentSidoCode", defaultValue = "00") String currentSidoCode) throws Exception {
-		
-		Pager pager = new Pager();
-		pager.init(shelterService.selectCount(keyword), currentPage);
-		
-		List sidoList = sidoService.selectAll();
-		
-		//Shelter DB 테이블이 시도 테이블과 시군구 테이블을 참조하도록 수정한 후 검색 다시 구현
-		ShelterSelectParam shelterSelectParam = new ShelterSelectParam();
-		shelterSelectParam.setKeyword(keyword);
-		shelterSelectParam.setStartIndex(pager.getStartIndex());
-		shelterSelectParam.setRowCount(pager.getPageSize());
-		shelterSelectParam.setCurrentSidoCode(currentSidoCode);
-		
-		List signgu = shelterService.selectAll(shelterSelectParam);
-		
-		List shelterList = shelterApiService.getShelterList(shelter);
-		
-		shelterList.forEach(System.out::println);
-		shelterService.delete(shelterList);
-		shelterService.insert(shelterList);
-=======
     @GetMapping("/shelter/list")
     public String getShelter(Shelter shelter, Model model,
             @RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
@@ -84,7 +60,6 @@ public class ShelterController {
         shelterSelectParam.setCurrentSignguCode(currentSignguCode);
         
         List shelterList = shelterService.selectAll(shelterSelectParam);
->>>>>>> upstream/main
 
         model.addAttribute("pager", pager);
         model.addAttribute("shelterList", shelterList);
