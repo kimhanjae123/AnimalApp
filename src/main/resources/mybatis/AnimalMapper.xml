@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.sds.animalapp.model.animal.AnimalDAO">
+
+	<select id="selectCount" parameterType="String" resultType="int">
+		select count(*) from animal
+		where kindCd like concat('%', #{keyword},
+		'%')
+	</select>
+
+	<!-- resultType을 Map으로 수정 -->
+	<select id="selectAll" parameterType="animalSelectParam"
+		resultType="Animal">
+		select * from animal where kindCd like concat('%',
+		#{keyword}, '%') limit #{startIndex}, #{rowCount}
+	</select>
+
+	<select id="select" parameterType="int" resultType="Animal">
+		select * from
+		animal where animal_idx=#{animal_idx}
+	</select>
+
+	<insert id="insert" parameterType="Shelter">
+		INSERT INTO animal (
+		desertionNo, filename, happenDt, happenPlace, kindCd, colorCd, age,
+		weight,
+		noticeNo, noticeSdt, noticeEdt, popfile, processState, sexCd,
+		neuterYn,
+		specialMark, careNm, careTel, careAddr, orgNm, chargeNm,
+		officetel
+		) VALUES (#{desertionNo},
+		#{filename},
+		#{happenDt},
+		#{happenPlace},
+		#{kindCd},
+		#{colorCd},
+		#{age},
+		#{weight},
+		#{noticeNo},
+		#{noticeSdt},
+		#{noticeEdt},
+		#{popfile},
+		#{processState},
+		#{sexCd},
+		#{neuterYn},
+		#{specialMark},
+		#{careNm},
+		#{careTel},
+		#{careAddr},
+		#{orgNm},
+		#{chargeNm},
+		#{officetel})
+	</insert>
+
+</mapper>
