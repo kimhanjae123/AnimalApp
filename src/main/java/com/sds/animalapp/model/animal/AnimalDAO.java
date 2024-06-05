@@ -14,6 +14,8 @@ public interface AnimalDAO {
 	public List selectAll(AnimalSelectParam animalSelectParam);
 
 	public Animal select(int animal_idx);
+	
+	public List selectPreview();
 
 	public void saveAll(List<Animal> animalList);
 }

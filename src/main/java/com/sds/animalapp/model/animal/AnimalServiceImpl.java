@@ -31,4 +31,9 @@ public class AnimalServiceImpl implements AnimalService {
 		animalDAO.saveAll(animalList);
 
 	}
+
+	public List selectPreview() {
+		
+		return animalDAO.selectPreview();
+	}
 }
