@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,10 +38,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.domain.MemberDetail;
 import com.sds.animalapp.domain.Sns;
+import com.sds.animalapp.domain.VolunteerApplication;
 import com.sds.animalapp.model.member.KakaoLoginService;
 import com.sds.animalapp.model.member.MemberService;
 import com.sds.animalapp.model.member.RoleService;
 import com.sds.animalapp.model.member.SnsService;
+import com.sds.animalapp.model.volunteer.VolunteerApplicationService;
 import com.sds.animalapp.sns.KaKaoOAuthToken;
 import com.sds.animalapp.sns.NaverLogin;
 import com.sds.animalapp.sns.NaverOAuthToken;
@@ -67,6 +71,9 @@ public class MemberController {
     @Autowired
     private MemberService memberService;
 
+    @Autowired
+    private VolunteerApplicationService volunteerApplicationService;
+    
     @Value("${upload.directory}")
     private String uploadDirectory;
 
@@ -76,7 +83,9 @@ public class MemberController {
     }
 
     @GetMapping("/member/mypage")
-    public String getMyPage() {
+    public String getMyPage(Model model) {
+        List<VolunteerApplication> volunteerApplications = volunteerApplicationService.getAllApplications();
+        model.addAttribute("volunteerApplications", volunteerApplications);
         return "member/mypage";
     }
 
