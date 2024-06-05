@@ -29,9 +29,10 @@
 		</if>
 		limit #{startIndex}, #{rowCount}
 	</select>
-	
+
 	<select id="selectPreview" resultType="Animal">
-		SELECT * FROM animal ORDER BY happenDt DESC LIMIT 4;
+		SELECT * FROM animal ORDER
+		BY happenDt DESC LIMIT 4;
 	</select>
 
 

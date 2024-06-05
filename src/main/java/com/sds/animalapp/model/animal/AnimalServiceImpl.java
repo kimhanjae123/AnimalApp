@@ -26,17 +26,8 @@ public class AnimalServiceImpl implements AnimalService {
 		return animalDAO.select(animal_idx);
 	}
 
-<<<<<<< HEAD
-=======
-	public void saveAll(List<Animal> animalList) {
-
-		animalDAO.saveAll(animalList);
-
-	}
-
 	public List selectPreview() {
-		
+
 		return animalDAO.selectPreview();
 	}
->>>>>>> e0493a208ce51209ace2bd8e5472f99f2f11c2d4
 }
