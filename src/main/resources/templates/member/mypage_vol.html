@@ -1,0 +1,63 @@
+<th:block th:fragment="mypage_vol">
+	<!-- 중복 매핑이 너무 많아 th:block 매핑 실험 -->
+	<!-- 매핑 안됨 매핑시 중복 매핑 오류 -->
+	<div class="container">
+		<div class="row my-auto">
+			<div class="col-12">
+				<h2 class="text-center">봉사활동 신청 현황</h2>
+				<div class="mb-5 heading-border"></div>
+				<div class="row my-auto">
+					<!-- application으로 받으면 또 매핑 중복 생김, 반복문 처리-->
+					<div class="col-12" th:each="volunteerApplication : ${volunteerApplications}">
+						<div class="card mx-0 p-4 mb-5"
+							style="border-color: #17a2b8; box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
+							<div class="resume-content mr-auto">
+								<h4>
+									<i class="fa fa-globe mr-3 text-info" style="margin: 10px;"></i>신청명
+									<input type="text" th:value="${volunteerApplication.title}"
+										style="margin: 20px;" readonly>
+								</h4>
+								<p style="margin: 20px;">
+									일시<input type="text" th:value="${volunteerApplication.volDate}"
+										style="margin: 20px;" readonly>
+								</p>
+							</div>
+							<div class="resume-date text-md-right">
+							<!-- =을 사용하니 오류남 -->
+								<a
+									th:href="@{'/volunteer/detail?id=' + ${volunteerApplication.noticeId}}"><button>바로가기</button></a>
+								<form th:action="@{/volunteer/cancel}" method="post"
+									style="display: inline;">
+									<input type="hidden" name="applicationId"
+										th:value="${volunteerApplication.id}">
+									<button type="submit">신청 취소</button>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</th:block>
+
+
+
+<!-- 특정 url로 이동
+<a th:href="@{https://developer-rooney.tistory.com}">글 상세보기</a>
+
+
+현재 서버 내에서 이동
+<a th:href="@{/board/list}">게시글 리스트</a>
+
+
+파라미터를 넘길 시
+<a th:href="@{/board/view(id = ${board.id})}">글 상세보기</a>
+
+
+파라미터를 여러 개 넘길 시
+<a th:href="@{/board/view(id = ${board.id}, writer = ${board.writer}})}">글 상세보기</a>
+
+
+PathVariable 사용 시
+<a th:href="@{/board/view/{id}(id = ${board.id})}">글 상세보기</a> -->

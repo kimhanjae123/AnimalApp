@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.sds.animalapp.model.volunteer.VolunteerApplicationDAO">
+    <insert id="insert" parameterType="VolunteerApplication">
+        INSERT INTO volunteer_application (title, vol_date, notice_id)
+        VALUES (#{title}, #{volDate}, #{noticeId})
+    </insert>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM volunteer_application WHERE id = #{id}
+    </delete>
+
+    <select id="findApplication" parameterType="map" resultType="VolunteerApplication">
+        SELECT * FROM volunteer_application
+        WHERE title = #{title} AND vol_date = #{volDate} AND notice_id = #{noticeId}
+    </select>
+
+    <select id="findByNoticeId" parameterType="int" resultType="VolunteerApplication">
+        SELECT * FROM volunteer_application WHERE notice_id = #{noticeId}
+    </select>
+
+    <select id="findAll" resultType="VolunteerApplication">
+        SELECT * FROM volunteer_application
+    </select>
+</mapper>
