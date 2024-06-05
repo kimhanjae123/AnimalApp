@@ -48,6 +48,7 @@ public class ShelterController {
         pager.init(shelterService.selectCount(keyword), currentPage);
         
         List<Sido> sidoList = sidoService.selectAll();
+        List<Signgu> signguList = signguService.selectAll(currentSidoCode);
         
         //List<Signgu> signguList = signguService.selectAll(currentSidoCode);
         
@@ -64,6 +65,7 @@ public class ShelterController {
         model.addAttribute("pager", pager);
         model.addAttribute("shelterList", shelterList);
         model.addAttribute("sidoList", sidoList);
+        model.addAttribute("signguList", signguList);
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentSidoCode", currentSidoCode);
         model.addAttribute("currentSignguCode", currentSignguCode);

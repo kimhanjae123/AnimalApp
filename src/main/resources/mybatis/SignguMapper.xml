@@ -5,4 +5,16 @@
 		select * from signgu
 		where uprCd = #{currentSidoCode}
 	</select>
+	<insert id="insertAll">
+	    INSERT INTO signgu (orgCd, orgdownNm, uprCd)
+	    VALUES
+	    <if test="list != null and !list.isEmpty()">
+	        <foreach collection="list" item="item" separator=",">
+	            (#{item.orgCd}, #{item.orgdownNm}, #{item.uprCd})
+	        </foreach>
+	    </if>
+	</insert>
+    <delete id="delete">
+    	delete from signgu
+    </delete>
 </mapper>

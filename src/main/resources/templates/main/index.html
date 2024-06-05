@@ -157,16 +157,16 @@
             <div class="products-carousel swiper">
                 <div class="swiper-wrapper">
                     <!-- 슬라이드 -->
-                    <div class="swiper-slide" th:each="i : ${#numbers.sequence(1, 4)}">
+                    <div class="swiper-slide" th:each="animal, i :${animalList}">
                         <div class="card position-relative">
-                            <a href="single-product.html"><img src="/site/images/item1.jpg" class="img-fluid rounded-4"
-                                    alt="image"></a>
+                            <a th:href="@{/animal/detail(id=${animal.animal_idx})}"><img th:src="@{${animal.filename}}" class="img-fluid rounded-4"
+                                    alt="image" style="width:300px; height: 300px;"></a>
                             <div class="card-body p-0">
                                 <div class="card-text-right">
                                     <p>
-                                    <h5>품종: <br></h5>
-                                    <h5>나이: <br></h5>
-                                    <h5>성별: <br></h5>
+	                                  	<h5>품종: <span th:text="${animal.kindCd}"></span></h5>
+										<h5>나이: <span th:text="${animal.age}"></span></h5>
+										<h5>성별: <span th:text="${animal.sexCd}"></span></h5>
                                     </p>
                                 </div>
 

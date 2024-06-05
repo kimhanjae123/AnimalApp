@@ -4,4 +4,17 @@
 	<select id="selectAll" resultType="Sido">
 		select * from sido 
 	</select>
+	
+	<insert id="insertAll" parameterType="java.util.List">
+        <!-- 모든 요소를 포함하는 단일 insert 문 -->
+        insert into sido(orgCd, orgdownNm)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.orgCd}, #{item.orgdownNm})
+        </foreach>
+    </insert>
+    
+    <delete id="delete">
+    	delete from sido
+    </delete>
 </mapper>

@@ -14,6 +14,10 @@
 		select * from animal where kindCd like concat('%',
 		#{keyword}, '%') limit #{startIndex}, #{rowCount}
 	</select>
+	
+	<select id="selectPreview" resultType="Animal">
+		SELECT * FROM animal ORDER BY happenDt DESC LIMIT 4;
+	</select>
 
 	<select id="select" parameterType="int" resultType="Animal">
 		select * from
