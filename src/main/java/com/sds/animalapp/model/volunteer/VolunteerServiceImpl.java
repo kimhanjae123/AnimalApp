@@ -26,13 +26,17 @@ public class VolunteerServiceImpl implements VolunteerService {
 	
 	@Override
 	public VolunteerNotice select(int id) {
-		
 		return volunteerDAO.select(id);
 	}
 
 	//글 등록
 	public void insert(VolunteerNotice volunteerNotice) {
 		volunteerDAO.insert(volunteerNotice);
+	}
+	
+	@Override
+	public int selectRegistCount(int id) {
+		return volunteerDAO.selectRegistCount(id);
 	}
 
 	@Override
@@ -46,6 +50,8 @@ public class VolunteerServiceImpl implements VolunteerService {
 		// TODO Auto-generated method stub
 		
 	}
+
+	
 
 
 

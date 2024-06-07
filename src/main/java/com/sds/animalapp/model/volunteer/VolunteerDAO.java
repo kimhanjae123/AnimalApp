@@ -10,6 +10,7 @@ import com.sds.animalapp.domain.VolunteerNotice;
 @Mapper
 public interface VolunteerDAO {
 	public int selectCount(String keyword); //게시물 수 
+	public int selectRegistCount(int id);
 	public List selectAll(Map map);//모든 게시물 가져오기
 	public VolunteerNotice select(int id);
 	public void insert(VolunteerNotice volunteer);

@@ -65,7 +65,12 @@ public class VolunteerController {
 	@GetMapping("/volunteer/detail")
     public String getDetail(Model model, @RequestParam(value = "id") int id) {
         VolunteerNotice volunteerNotice = volunteerService.select(id);
+
+		//해당 봉사를 신청한 사람 수 불러오기
+		int registNum = volunteerService.selectRegistCount(id);
+		
         model.addAttribute("detail", volunteerNotice);
+        model.addAttribute("registCount", registNum);
 
         return "volunteer/detail";
     }
