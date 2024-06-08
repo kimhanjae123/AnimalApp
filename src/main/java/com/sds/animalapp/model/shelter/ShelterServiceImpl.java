@@ -30,12 +30,14 @@ public class ShelterServiceImpl implements ShelterService{
 		return shelterDAO.select(shelter_idx);
 	}
 
-	public void saveAll(List<Shelter> shelterList) {
+	public void insert(List<Shelter> shelterList) {
+		shelterDAO.insert(shelterList);
 		
-		shelterDAO.saveAll(shelterList);
-		
-		
-		
+	}
+
+	@Override
+	public void delete(List<Shelter> shelterList) {
+		shelterDAO.delete(shelterList);
 	}
 
 }

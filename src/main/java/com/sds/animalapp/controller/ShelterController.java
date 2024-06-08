@@ -24,9 +24,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class ShelterController {
+	@Autowired
+	private ShelterApiService shelterApiService;
 
-    @Autowired
-    private ShelterApiService shelterApiService;
 
     @Autowired
     private ShelterService shelterService;
