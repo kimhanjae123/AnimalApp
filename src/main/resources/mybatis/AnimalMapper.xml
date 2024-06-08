@@ -4,56 +4,41 @@
 
 	<select id="selectCount" parameterType="String" resultType="int">
 		select count(*) from animal
-		where kindCd like concat('%', #{keyword},
-		'%')
 	</select>
 
-	<!-- resultType을 Map으로 수정 -->
-	<select id="selectAll" parameterType="animalSelectParam"
+
+	<select id="selectAll"
+		parameterType="com.sds.animalapp.domain.AnimalSelectParam"
 		resultType="Animal">
-		select * from animal where kindCd like concat('%',
-		#{keyword}, '%') limit #{startIndex}, #{rowCount}
+		select * from animal
+		where kindCd like concat('%', #{keyword}, '%')
+		<if test="age != null and age != ''">
+			and age like concat('%', #{age}, '%')
+		</if>
+		<if test="region != null and region != ''">
+			and careAddr like concat('%', #{region}, '%')
+		</if>
+		<if test="care != null and care != ''">
+			and careNm like concat('%', #{care}, '%')
+		</if>
+		<if test="sex != null and sex != ''">
+			and sexCd like concat('%', #{sex}, '%')
+		</if>
+		<if test="status != null and status != ''">
+			and processState like concat('%', #{status}, '%')
+		</if>
+		limit #{startIndex}, #{rowCount}
 	</select>
-	
+
 	<select id="selectPreview" resultType="Animal">
-		SELECT * FROM animal ORDER BY happenDt DESC LIMIT 4;
+		SELECT * FROM animal ORDER
+		BY happenDt DESC LIMIT 4;
 	</select>
+
 
 	<select id="select" parameterType="int" resultType="Animal">
 		select * from
 		animal where animal_idx=#{animal_idx}
 	</select>
-
-	<insert id="insert" parameterType="Shelter">
-		INSERT INTO animal (
-		desertionNo, filename, happenDt, happenPlace, kindCd, colorCd, age,
-		weight,
-		noticeNo, noticeSdt, noticeEdt, popfile, processState, sexCd,
-		neuterYn,
-		specialMark, careNm, careTel, careAddr, orgNm, chargeNm,
-		officetel
-		) VALUES (#{desertionNo},
-		#{filename},
-		#{happenDt},
-		#{happenPlace},
-		#{kindCd},
-		#{colorCd},
-		#{age},
-		#{weight},
-		#{noticeNo},
-		#{noticeSdt},
-		#{noticeEdt},
-		#{popfile},
-		#{processState},
-		#{sexCd},
-		#{neuterYn},
-		#{specialMark},
-		#{careNm},
-		#{careTel},
-		#{careAddr},
-		#{orgNm},
-		#{chargeNm},
-		#{officetel})
-	</insert>
 
 </mapper>
