@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.VolunteerNotice;
+import com.sds.animalapp.domain.VolunteerSelectParam;
 
 @Service
 public class VolunteerServiceImpl implements VolunteerService {
@@ -20,8 +21,8 @@ public class VolunteerServiceImpl implements VolunteerService {
 	}
 	
 	//봉사List모두 가져오기
-	public List selectAll(Map map) {
-		return volunteerDAO.selectAll(map);
+	public List selectAll(VolunteerSelectParam volunteerSelectParam) {
+		return volunteerDAO.selectAll(volunteerSelectParam);
 	}
 	
 	@Override
