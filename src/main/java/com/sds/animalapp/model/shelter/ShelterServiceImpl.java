@@ -24,7 +24,6 @@ public class ShelterServiceImpl implements ShelterService{
 		return shelterDAO.selectAll(shelterSelectParam);
 	}
 
-	
 
 	public Shelter select(int shelter_idx) {
 		return shelterDAO.select(shelter_idx);
@@ -39,5 +38,6 @@ public class ShelterServiceImpl implements ShelterService{
 	public void delete(List<Shelter> shelterList) {
 		shelterDAO.delete(shelterList);
 	}
+
 
 }
