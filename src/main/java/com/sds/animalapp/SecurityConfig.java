@@ -42,6 +42,8 @@ public class SecurityConfig {
 				.requestMatchers("/member/sns/kakao/callback").permitAll()
 				
 				.requestMatchers("/member/mypage").hasAnyAuthority("USER")
+				.requestMatchers("/volunteer/writeform").hasAnyAuthority("USER")
+				.requestMatchers("/volunteer/regist").hasAnyAuthority("USER")
 				.anyRequest().permitAll()
 			);
 	
