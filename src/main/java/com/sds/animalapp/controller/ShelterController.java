@@ -49,6 +49,9 @@ public class ShelterController {
         
         List<Sido> sidoList = sidoService.selectAll();
         List<Signgu> signguList = signguService.selectAll(currentSidoCode);
+        List shelterAllLIst = shelterApiService.getShelterList(shelter);
+        shelterService.delete(shelterAllLIst);
+        shelterService.insert(shelterAllLIst);
         
         //List<Signgu> signguList = signguService.selectAll(currentSidoCode);
         
@@ -69,6 +72,7 @@ public class ShelterController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentSidoCode", currentSidoCode);
         model.addAttribute("currentSignguCode", currentSignguCode);
+        model.addAttribute("shelterAllLIst",shelterAllLIst);
 
         return "shelter/list";
     }
