@@ -1,21 +1,16 @@
 package com.sds.animalapp.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
-import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.model.animal.AnimalService;
 import com.sds.animalapp.model.member.MemberService;
 
@@ -40,7 +35,6 @@ public class AnimalController {
 			@RequestParam(value = "status", defaultValue = "") String status) throws Exception {
 
 		Pager pager = new Pager();
-		pager.init(animalService.selectCount(keyword), currentPage);
 
 		AnimalSelectParam animalSelectParam = new AnimalSelectParam();
 		animalSelectParam.setKeyword(kind);
@@ -52,6 +46,7 @@ public class AnimalController {
 		animalSelectParam.setSex(sex);
 		animalSelectParam.setStatus(status);
 
+		pager.init(animalService.selectCount(animalSelectParam), currentPage);
 		List<Animal> animalList = animalService.selectAll(animalSelectParam);
 
 		model.addAttribute("pager", pager);

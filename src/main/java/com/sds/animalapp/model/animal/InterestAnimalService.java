@@ -1,7 +1,6 @@
 package com.sds.animalapp.model.animal;
 
 import com.sds.animalapp.domain.InterestAnimal;
-import com.sds.animalapp.domain.Member;
 
 public interface InterestAnimalService {
 
@@ -9,5 +8,5 @@ public interface InterestAnimalService {
 	public void addInterestAnimal(InterestAnimal interestAnimal);
 
 	// 관심 동물 삭제
-	public void deleteInterestAnimal(String interestAnimalIdx);
+	public void deleteInterestAnimal(int interest_animal_idx);
 }

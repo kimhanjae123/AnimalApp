@@ -6,17 +6,15 @@
 	<!-- 관심 동물 등록 -->
 	<insert id="addInterestAnimal"
 		parameterType="com.sds.animalapp.domain.InterestAnimal">
-		INSERT INTO interest_animal (member_idx,
-		animal_idx,
-		noticeNo)
-		VALUES (#{memberIdx}, #{animalIdx}, #{noticeNo})
+		INSERT INTO interest_animal (member_idx, animal_idx)
+		VALUES (#{memberIdx}, #{animalIdx})
 	</insert>
 
 	<!-- 관심 동물 삭제 -->
-	<delete id="deleteInterestAnimal" parameterType="String">
+	<delete id="deleteInterestAnimal" parameterType="int">
 		DELETE FROM
 		interest_animal
-		WHERE interest_animal_idx = #{interestAnimalIdx}
+		WHERE interest_animal_idx = #{interest_animal_idx}
 	</delete>
 
 </mapper>

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
-import com.sds.animalapp.domain.InterestAnimal;
 
 @Service
 public class AnimalServiceImpl implements AnimalService {
@@ -15,8 +14,8 @@ public class AnimalServiceImpl implements AnimalService {
 	@Autowired
 	private AnimalDAO animalDAO;
 
-	public int selectCount(String keyword) {
-		return animalDAO.selectCount(keyword);
+	public int selectCount(AnimalSelectParam animalSelectParam) {
+		return animalDAO.selectCount(animalSelectParam);
 	}
 
 	public List selectAll(AnimalSelectParam animalSelectParam) {

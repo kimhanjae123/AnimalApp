@@ -11,5 +11,5 @@ public interface InterestAnimalDAO {
 	public void addInterestAnimal(InterestAnimal interestAnimal);
 
 	// 관심 동물 삭제
-	public void deleteInterestAnimal(String interestAnimalIdx);
+	public void deleteInterestAnimal(int interestAnimalIdx);
 }

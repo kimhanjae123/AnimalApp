@@ -17,7 +17,7 @@ public class InterestAnimalServiceImpl implements InterestAnimalService {
 	}
 
 	@Override
-	public void deleteInterestAnimal(String interestAnimalIdx) {
-		interestAnimalDAO.deleteInterestAnimal(interestAnimalIdx);
+	public void deleteInterestAnimal(int interest_animal_idx) {
+		interestAnimalDAO.deleteInterestAnimal(interest_animal_idx);
 	}
 }
