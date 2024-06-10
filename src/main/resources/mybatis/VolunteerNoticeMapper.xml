@@ -7,6 +7,11 @@
 	    WHERE title LIKE CONCAT('%', #{keyword}, '%') OR shelter_name LIKE CONCAT('%', #{keyword}, '%')
 	</select>
 	
+	<select id="selectRegistCount" parameterType="int" resultType="int">
+	    SELECT COUNT(*) FROM volunteer_application
+	    WHERE notice_id = #{id}
+	</select>
+	
     <insert id="insert" parameterType="VolunteerNotice">
         INSERT INTO volunteer_notice (vol_date, recruit_count, shelter_name, body_text, title, regdate)
         VALUES (#{vol_date}, #{recruit_count}, #{shelter_name}, #{body_text}, #{title}, CURRENT_TIMESTAMP)

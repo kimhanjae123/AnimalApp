@@ -43,13 +43,22 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="participants" class="col-sm-12 col-form-label">모집
-							인원</label>
-						<div class="col-sm-12">
-							<input type="number" class="form-control" id="recruitCount"
-								name="recruitCount" th:value="${detail.recruit_count}"
-								placeholder="모집 인원을 입력해 주세요." readonly>
+						<div class="col-6" style="padding: 0;">
+							<label for="participants" class="col-sm-12 col-form-label">모집인원</label>
+							<div class="col-sm-12">
+								<input type="number" class="form-control" id="recruitCount"
+									name="recruitCount" th:value="${detail.recruit_count}"
+									placeholder="모집 인원을 입력해 주세요." readonly>
+							</div>										
 						</div>
+						<div class="col-6" style="padding: 0;">
+							<label for="participants" class="col-sm-12 col-form-label">신청인원</label>
+							<div class="col-sm-12">
+								<input type="number" class="form-control" id="registCount"
+									name="registCount" th:value="${registCount}"
+									placeholder="신청 인원 수 입니다." readonly>
+							</div>						
+						</div>						
 					</div>
 					<div class="form-group row">
 						<label for="location" class="col-sm-12 col-form-label">보호소</label>
@@ -75,7 +84,7 @@
 			<!-- noticeId, id를 둘다 쓰지 않으면 db값이 url에 계속 담김 -->
 			<input type="hidden" name="noticeId" th:value="${detail.vol_event_post_idx}"> 
 			<input type="hidden" name="id" th:value="${detail.vol_event_post_idx}">
-			<button type="submit" class="btn btn-primary">봉사 신청</button>
+			<button type="submit" class="btn btn-secondary col-12 mb-3">봉사 신청</button>
 			<button type="button" class="btn btn-secondary col-12" id="bt_list">목록으로 돌아가기</button>
 		</form>
 	</div>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.VolunteerApplication;
 import com.sds.animalapp.domain.VolunteerNotice;
+import com.sds.animalapp.domain.VolunteerSelectParam;
 import com.sds.animalapp.model.member.MemberService;
 import com.sds.animalapp.model.volunteer.VolunteerApplicationService;
 import com.sds.animalapp.model.volunteer.VolunteerService;
@@ -36,16 +37,14 @@ public class VolunteerController {
 			@RequestParam(value = "keyword", defaultValue = "") String keyword) {
 		Pager pager = new Pager();
 		pager.init(volunteerService.selectCount(keyword), currentPage);
-
-		// 직관적이지 못해서? startIndex, rowCount, keyword를 해시맵으로 넘기지 않고 각 변수 세개로 넘겨도 좋고
-		// 파라미터클래스를 만드는 것도 좋다.
-		HashMap<String, Object> map = new HashMap();
-		map.put("startIndex", pager.getStartIndex());
-		map.put("rowCount", pager.getPageSize());
-		map.put("keyword", keyword);
+		
+		VolunteerSelectParam volunteerSelectParam = new VolunteerSelectParam();
+		volunteerSelectParam.setKeyword(keyword);
+		volunteerSelectParam.setStartIndex(pager.getStartIndex());
+		volunteerSelectParam.setRowCount(pager.getPageSize());
 
 		// 봉사 목록 가져오기
-		List volunteerList = volunteerService.selectAll(map);
+		List volunteerList = volunteerService.selectAll(volunteerSelectParam);
 
 		// 모델에 데이터 추가
 		model.addAttribute("volunteerList", volunteerList);
@@ -65,7 +64,12 @@ public class VolunteerController {
 	@GetMapping("/volunteer/detail")
     public String getDetail(Model model, @RequestParam(value = "id") int id) {
         VolunteerNotice volunteerNotice = volunteerService.select(id);
+
+		//해당 봉사를 신청한 사람 수 불러오기
+		int registNum = volunteerService.selectRegistCount(id);
+		
         model.addAttribute("detail", volunteerNotice);
+        model.addAttribute("registCount", registNum);
 
         return "volunteer/detail";
     }

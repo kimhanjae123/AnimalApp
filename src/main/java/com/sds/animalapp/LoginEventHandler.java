@@ -21,7 +21,6 @@ public class LoginEventHandler extends SavedRequestAwareAuthenticationSuccessHan
 	//유저가 스프링 시큐리티 기반으로 로그인을 성공하는 시점...
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
-		System.out.println("kkkkkkk");
 		//현재 로그인 한 사용자로부터 member를 추출... 
 		//로그인 성공한 스프링 시큐리티 유저는 CustomUserDetails 라는 객체를 인스턴스로 보유한 상태이므로, 
 		//이 안에 들어잇는 Member DTO 를 꺼내서 session에 담자

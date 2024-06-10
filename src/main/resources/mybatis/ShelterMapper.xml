@@ -18,13 +18,19 @@
 	    WHERE shelter_idx = #{shelter_idx}
 	</select>	
 	
-	<insert id="insert" parameterType="Shelter">
-		insert into shelter(orgNm,care_Nm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
+	<insert id="insert" parameterType="java.util.List">
+		insert into shelter(orgNm,careNm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
 									weekOprEtime,careTel,dataStdDt)
-		values(#{orgNm},#{care_Nm},#{careAddr},#{divisionNm},#{lat},#{lng},#{dsignationDate},
-				   #{closeDay},#{weekOprStime},#{weekOprEtime},#{careTel},#{dataStdDt})
+		values
+		<foreach collection="list" item="shelter" separator=",">
+			(#{shelter.orgNm},#{shelter.careNm},#{shelter.careAddr},#{shelter.divisionNm},#{shelter.lat},#{shelter.lng},#{shelter.dsignationDate},
+				   #{shelter.closeDay},#{shelter.weekOprStime},#{shelter.weekOprEtime},#{shelter.careTel},#{shelter.dataStdDt})
+		</foreach>
 	</insert>
 	
+	<delete id="delete">
+		delete from shelter
+	</delete>
 	
 
 
