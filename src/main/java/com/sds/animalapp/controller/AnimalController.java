@@ -1,23 +1,32 @@
 package com.sds.animalapp.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
+import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.model.animal.AnimalService;
+import com.sds.animalapp.model.member.MemberService;
 
 @Controller
 public class AnimalController {
 
 	@Autowired
 	private AnimalService animalService;
+
+	@Autowired
+	private MemberService memberService; // MemberService
 
 	@GetMapping("/animal/list")
 	public String getAnimal(Animal animal, Model model,

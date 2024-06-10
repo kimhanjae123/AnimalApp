@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
+import com.sds.animalapp.domain.InterestAnimal;
 
 @Service
 public class AnimalServiceImpl implements AnimalService {

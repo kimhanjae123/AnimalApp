@@ -11,6 +11,7 @@
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <!-- 헤더링크 -->
 <th:block th:replace="~{fragments/header_link :: header_link}" />
@@ -22,6 +23,14 @@
 	<div class="container">
 		<form id="form1" class="form-horizontal">
 			<h2>동물 상세 정보</h2>
+
+			<!-- 관심 등록 버튼 -->
+			<div class="form-group row">
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-primary btn-block"
+						onclick="registerInterest()">관심 등록</button>
+				</div>
+			</div>
 
 			<!-- 동물 상세 정보 -->
 			<div class="form-group row">
@@ -41,7 +50,8 @@
 						<label for="date_time" class="col-sm-12 col-form-label">유기번호</label>
 						<div class="col-sm-12">
 							<input type="text" class="form-control"
-								th:value="${detail.desertionNo}" id="" name="" readonly>
+								th:value="${detail.desertionNo}" id="desertionNo" name=""
+								readonly>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -74,41 +84,6 @@
 					</div>
 				</div>
 				<div class="col-6">
-					<div class="form-group row">
-						<label for="date_time" class="col-sm-12 col-form-label">나이</label>
-						<div class="col-sm-12">
-							<input type="text" class="form-control" th:value="${detail.age}"
-								id="" name="" readonly>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="date_time" class="col-sm-12 col-form-label">체중</label>
-						<div class="col-sm-12">
-							<input type="text" class="form-control"
-								th:value="${detail.weight}" id="" name="" readonly>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="date_time" class="col-sm-12 col-form-label">공고시작일</label>
-						<div class="col-sm-12">
-							<input type="text" class="form-control"
-								th:value="${detail.noticeSdt}" id="" name="" readonly>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="date_time" class="col-sm-12 col-form-label">공고종료일</label>
-						<div class="col-sm-12">
-							<input type="text" class="form-control"
-								th:value="${detail.noticeEdt}" id="" name="" readonly>
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="date_time" class="col-sm-12 col-form-label">상태</label>
-						<div class="col-sm-12">
-							<input type="text" class="form-control"
-								th:value="${detail.processState}" id="" name="" readonly>
-						</div>
-					</div>
 					<div class="form-group row">
 						<label for="date_time" class="col-sm-12 col-form-label">성별</label>
 						<div class="col-sm-12">
@@ -147,24 +122,81 @@
 								th:value="${detail.careTel}" id="" name="" readonly>
 						</div>
 					</div>
+					<!-- 새로 추가된 칸 -->
+					<div class="form-group row">
+						<label for="processState" class="col-sm-12 col-form-label">상태</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control"
+								th:value="${detail.processState}" id="processState" name=""
+								readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="applicants" class="col-sm-12 col-form-label">신청
+							인원</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control"
+								th:value="${detail.applicants}" id="applicants" name="" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="age" class="col-sm-12 col-form-label">나이</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control" th:value="${detail.age}"
+								id="age" name="" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="weight" class="col-sm-12 col-form-label">체중</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control"
+								th:value="${detail.weight}" id="weight" name="" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="noticeSdt" class="col-sm-12 col-form-label">공고
+							시작일</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control"
+								th:value="${detail.noticeSdt}" id="noticeSdt" name="" readonly>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="noticeEdt" class="col-sm-12 col-form-label">공고
+							종료일</label>
+						<div class="col-sm-12">
+							<input type="text" class="form-control"
+								th:value="${detail.noticeEdt}" id="noticeEdt" name="" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 관심 등록 버튼 -->
+			<div class="form-group row">
+				<div class="col-sm-12">
+					<button type="button" class="btn btn-primary btn-block"
+						onclick="registerInterest()">입양 신청</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </body>
 </html>
-<script type="text/javascript">
-	function list() {
-		$("#form1").attr({
-			action : "/volunteer/list",
-			method : "get"
-		});
-		$("#form1").submit();
-	}
 
-	$(function() {
-		$("#bt_list").click(function() {
-			list();
+<script type="text/javascript">
+	function registerInterest(animal_idx) {
+		$.ajax({
+			type : 'POST',
+			url : '/animal/registerInterest',
+			data : {
+				animal_idx : animal_idx
+			},
+			success : function(response) {
+				alert('관심 등록이 완료되었습니다.');
+			},
+			error : function(error) {
+				alert('관심 등록에 실패하였습니다.');
+			}
 		});
-	});
+	}
 </script>

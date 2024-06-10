@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.sds.animalapp.model.animal.InterestAnimalDAO">
+
+	<!-- 관심 동물 등록 -->
+	<insert id="addInterestAnimal"
+		parameterType="com.sds.animalapp.domain.InterestAnimal">
+		INSERT INTO interest_animal (member_idx,
+		animal_idx,
+		noticeNo)
+		VALUES (#{memberIdx}, #{animalIdx}, #{noticeNo})
+	</insert>
+
+	<!-- 관심 동물 삭제 -->
+	<delete id="deleteInterestAnimal" parameterType="String">
+		DELETE FROM
+		interest_animal
+		WHERE interest_animal_idx = #{interestAnimalIdx}
+	</delete>
+
+</mapper>
