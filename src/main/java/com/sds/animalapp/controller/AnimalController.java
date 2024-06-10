@@ -47,6 +47,11 @@ public class AnimalController {
 		animalSelectParam.setStatus(status);
 
 		pager.init(animalService.selectCount(animalSelectParam), currentPage);
+
+		// 페이지에 해당하는 동물 리스트를 가져올 때 페이징 정보를 고려하여 가져와야 함
+		animalSelectParam.setStartIndex(pager.getStartIndex());
+		animalSelectParam.setRowCount(pager.getPageSize());
+
 		List<Animal> animalList = animalService.selectAll(animalSelectParam);
 
 		model.addAttribute("pager", pager);
