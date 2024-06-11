@@ -11,5 +11,5 @@ public interface InterestAnimalService {
 	public void deleteInterestAnimal(int interest_animal_idx);
 
 	// 관심 동물 중복 확인
-	boolean checkDuplicateInterestAnimal(InterestAnimal interestAnimal);
+	public boolean checkDuplicateInterestAnimal(InterestAnimal interestAnimal);
 }

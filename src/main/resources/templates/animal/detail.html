@@ -34,8 +34,6 @@
 							th:onclick="'registerInterest(' + ${detail.animal_idx} + ', ' + ${member_idx} + ')'">관심
 							등록</button>
 					</th:block>
-
-
 				</div>
 			</div>
 
@@ -181,8 +179,13 @@
 			<!-- 관심 등록 버튼 -->
 			<div class="form-group row">
 				<div class="col-sm-12">
-					<button type="button" class="btn btn-primary btn-block"
-						onclick="registerInterest()">입양 신청</button>
+					<!-- 수정된 부분: 사용자의 member_idx를 가져와서 함께 전달 -->
+					<th:block th:if="${session.member != null}"
+						th:with="member_idx=${session.member.member_idx}">
+						<button type="button" class="btn btn-primary btn-block"
+							th:onclick="'registerAdopt(' + ${detail.animal_idx} + ', ' + ${member_idx} + ')'">입양
+							신청</button>
+					</th:block>
 				</div>
 			</div>
 		</form>
@@ -204,6 +207,22 @@
 			},
 			error : function(error) {
 				alert('관심 등록에 실패하였습니다.');
+			}
+		});
+	}
+	function registerAdopt(animal_idx, member_idx) {
+		$.ajax({
+			type : 'POST',
+			url : '/animal/registerAdopt',
+			data : {
+				animal_idx : animal_idx,
+				member_idx : member_idx
+			},
+			success : function(response) {
+				alert('입양 신청이 완료되었습니다.');
+			},
+			error : function(error) {
+				alert('입양 신청에 실패하였습니다.');
 			}
 		});
 	}
