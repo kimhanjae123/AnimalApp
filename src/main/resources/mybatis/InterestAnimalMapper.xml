@@ -7,7 +7,7 @@
 	<insert id="addInterestAnimal"
 		parameterType="com.sds.animalapp.domain.InterestAnimal">
 		INSERT INTO interest_animal (member_idx, animal_idx)
-		VALUES (#{memberIdx}, #{animalIdx})
+		VALUES (#{member_idx}, #{animal_idx})
 	</insert>
 
 	<!-- 관심 동물 삭제 -->
@@ -17,4 +17,13 @@
 		WHERE interest_animal_idx = #{interest_animal_idx}
 	</delete>
 
+	<!-- 관심 동물 중복 체크 -->
+	<select id="checkDuplicateInterestAnimal"
+		parameterType="com.sds.animalapp.domain.InterestAnimal"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM interest_animal
+		WHERE member_idx =
+		#{member_idx} AND animal_idx = #{animal_idx}
+	</select>
 </mapper>

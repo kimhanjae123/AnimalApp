@@ -12,4 +12,7 @@ public interface InterestAnimalDAO {
 
 	// 관심 동물 삭제
 	public void deleteInterestAnimal(int interestAnimalIdx);
+
+	// 관심 동물 중복 확인
+	int checkDuplicateInterestAnimal(InterestAnimal interestAnimal);
 }
