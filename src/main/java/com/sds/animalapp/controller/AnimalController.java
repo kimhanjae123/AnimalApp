@@ -12,12 +12,16 @@ import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
 import com.sds.animalapp.model.animal.AnimalService;
+import com.sds.animalapp.model.member.MemberService;
 
 @Controller
 public class AnimalController {
 
 	@Autowired
 	private AnimalService animalService;
+
+	@Autowired
+	private MemberService memberService; // MemberService
 
 	@GetMapping("/animal/list")
 	public String getAnimal(Animal animal, Model model,
@@ -31,7 +35,6 @@ public class AnimalController {
 			@RequestParam(value = "status", defaultValue = "") String status) throws Exception {
 
 		Pager pager = new Pager();
-		pager.init(animalService.selectCount(keyword), currentPage);
 
 		AnimalSelectParam animalSelectParam = new AnimalSelectParam();
 		animalSelectParam.setKeyword(kind);
@@ -42,6 +45,12 @@ public class AnimalController {
 		animalSelectParam.setCare(care);
 		animalSelectParam.setSex(sex);
 		animalSelectParam.setStatus(status);
+
+		pager.init(animalService.selectCount(animalSelectParam), currentPage);
+
+		// 페이지에 해당하는 동물 리스트를 가져올 때 페이징 정보를 고려하여 가져와야 함
+		animalSelectParam.setStartIndex(pager.getStartIndex());
+		animalSelectParam.setRowCount(pager.getPageSize());
 
 		List<Animal> animalList = animalService.selectAll(animalSelectParam);
 
