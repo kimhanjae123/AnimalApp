@@ -22,8 +22,8 @@ public class AdoptAnimalServiceImpl implements AdoptAnimalService {
 	}
 
 	@Override
-	public void deleteAdoptAnimal(int adoptAnimalIdx) {
-		adoptAnimalDAO.deleteAdoptAnimal(adoptAnimalIdx);
+	public void deleteAdoptAnimal(int adopt_animal_idx) {
+		adoptAnimalDAO.deleteAdoptAnimal(adopt_animal_idx);
 	}
 
 	@Override

@@ -17,4 +17,7 @@ public interface AnimalDAO {
 
 	public List selectPreview(); // 미리보기
 
+	// 한 동물에 대한 입양신청 인원 조회
+	public int countRegistMember(int animal_idx);
+
 }

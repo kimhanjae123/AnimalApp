@@ -10,8 +10,9 @@ public interface AdoptAnimalDAO {
 	public void addAdoptAnimal(AdoptAnimal adoptAnimal);
 
 	// 입양신청 동물 삭제
-	public void deleteAdoptAnimal(int adoptAnimalIdx);
+	public void deleteAdoptAnimal(int adopt_animal_idx);
 
 	// 입양신청 동물 중복 확인
 	public int checkDuplicateAdoptAnimal(AdoptAnimal adoptAnimal);
+
 }

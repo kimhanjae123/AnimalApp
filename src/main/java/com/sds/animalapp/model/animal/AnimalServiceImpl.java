@@ -30,4 +30,9 @@ public class AnimalServiceImpl implements AnimalService {
 
 		return animalDAO.selectPreview();
 	}
+
+	@Override
+	public int countRegistMember(int animal_idx) {
+		return animalDAO.countRegistMember(animal_idx);
+	}
 }

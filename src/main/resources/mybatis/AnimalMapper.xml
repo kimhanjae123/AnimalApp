@@ -61,4 +61,13 @@
 		animal where animal_idx=#{animal_idx}
 	</select>
 
+	<!-- 한 동물에 대한 입양신청 인원 조회 -->
+	<select id="countRegistMember" parameterType="int"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM adopt_animal
+		WHERE animal_idx =
+		#{animal_idx}
+	</select>
+
 </mapper>

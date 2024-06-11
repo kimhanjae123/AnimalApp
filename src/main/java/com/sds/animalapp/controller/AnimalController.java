@@ -70,9 +70,9 @@ public class AnimalController {
 	@GetMapping("/animal/detail")
 	public String getDetail(Model model, @RequestParam(value = "id") int animal_idx) {
 		Animal animal = animalService.select(animal_idx);
-
+		int applicantsCount = animalService.countRegistMember(animal_idx); // 수정
 		model.addAttribute("detail", animal);
-
+		model.addAttribute("applicantsCount", applicantsCount); // 추가
 		return "animal/detail";
 	}
 

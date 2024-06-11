@@ -136,14 +136,17 @@
 								readonly>
 						</div>
 					</div>
+					<!-- 총 신청 인원을 표시할 요소 추가 -->
 					<div class="form-group row">
 						<label for="applicants" class="col-sm-12 col-form-label">신청
 							인원</label>
 						<div class="col-sm-12">
-							<input type="text" class="form-control" id="applicants" name=""
-								readonly>
+							<input type="text" class="form-control" id="applicants"
+								th:value="${applicantsCount}" readonly>
 						</div>
 					</div>
+
+
 					<div class="form-group row">
 						<label for="age" class="col-sm-12 col-form-label">나이</label>
 						<div class="col-sm-12">
@@ -176,18 +179,19 @@
 					</div>
 				</div>
 			</div>
-			<!-- 관심 등록 버튼 -->
+			<!-- 입양 신청 버튼 -->
 			<div class="form-group row">
 				<div class="col-sm-12">
 					<!-- 수정된 부분: 사용자의 member_idx를 가져와서 함께 전달 -->
 					<th:block th:if="${session.member != null}"
 						th:with="member_idx=${session.member.member_idx}">
 						<button type="button" class="btn btn-primary btn-block"
-							th:onclick="'registerAdopt(' + ${detail.animal_idx} + ', ' + ${member_idx} + ')'">입양
+							th:onclick="'registerAdoptConfirmation(' + ${detail.animal_idx} + ', ' + ${member_idx} + ')'">입양
 							신청</button>
 					</th:block>
 				</div>
 			</div>
+
 		</form>
 	</div>
 </body>
@@ -210,6 +214,18 @@
 			}
 		});
 	}
+	function registerAdoptConfirmation(animal_idx, member_idx) {
+		// 확인 다이얼로그 표시
+		var confirmResult = confirm("입양을 신청하시겠습니까?");
+		if (confirmResult) {
+			// 사용자가 확인을 눌렀을 때만 입양 신청 진행
+			registerAdopt(animal_idx, member_idx);
+		} else {
+			// 사용자가 취소를 눌렀을 경우 아무 동작도 하지 않음
+			return false;
+		}
+	}
+
 	function registerAdopt(animal_idx, member_idx) {
 		$.ajax({
 			type : 'POST',
