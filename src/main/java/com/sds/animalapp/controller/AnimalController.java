@@ -40,8 +40,8 @@ public class AnimalController {
 		/*---------------------------------------------------------
 		 		API 호출 코드
 		//		animalService.delete();
-		//		List<Animal> animalList = animalApiService.call();
-		//		animalService.insertAll(animalList);
+		//		List<Animal> animalAPIList = animalApiService.call();
+		//		animalService.insertAll(animalAPIList);
 		----------------------------------------------------------*/
 		Pager pager = new Pager();
 
