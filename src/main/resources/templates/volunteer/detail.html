@@ -37,8 +37,12 @@
 								name="volDate" th:value="${detail.vol_date}" readonly>
 						</div>
 					</div>
-                    <div class="form-group row">
-                        <div class="col-6" style="padding: 0;">
+
+                   
+
+					<div class="form-group row">
+						<div class="col-6" style="padding: 0;">
+
 							<label for="participants" class="col-sm-12 col-form-label">모집인원</label>
 							<div class="col-sm-12">
 								<input type="number" class="form-control" id="recruitCount"
@@ -76,11 +80,13 @@
 					</div>
 				</div>
 			</div>
-            <!-- noticeId, id를 둘다 쓰지 않으면 db값이 url에 계속 담김 -->
-            <input type="hidden" name="noticeId" th:value="${detail.vol_event_post_idx}">
-    		<input type="hidden" name="id" th:value="${detail.vol_event_post_idx}">
-    		<button type="button" id="applyBtn" class="btn btn-secondary col-12 mb-3">봉사 신청</button>
-    		<button type="button" class="btn btn-secondary col-12" id="bt_list">목록으로 돌아가기</button>
+
+			<!-- noticeId, id를 둘다 쓰지 않으면 db값이 url에 계속 담김 -->
+			<input type="hidden" name="noticeId" th:value="${detail.vol_event_post_idx}"> 
+			<input type="hidden" name="id" th:value="${detail.vol_event_post_idx}">
+			<button type="submit" class="btn btn-secondary col-12 mb-3">봉사 신청</button>
+			<button type="button" class="btn btn-secondary col-12" id="bt_list">목록으로 돌아가기</button>
+
 		</form>
     </div>
 </body>

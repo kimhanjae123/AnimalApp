@@ -17,6 +17,9 @@ import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.domain.VolunteerApplication;
 import com.sds.animalapp.domain.VolunteerNotice;
 import com.sds.animalapp.domain.VolunteerSelectParam;
+
+import com.sds.animalapp.model.member.MemberService;
+
 import com.sds.animalapp.model.volunteer.VolunteerApplicationService;
 import com.sds.animalapp.model.volunteer.VolunteerService;
 
@@ -60,7 +63,6 @@ public class VolunteerController {
 	public String getWriteForm() {
 		return "volunteer/regist";
 	}
-
 
     // 세부창
     @GetMapping("/volunteer/detail")
@@ -129,7 +131,10 @@ public class VolunteerController {
         volunteerApplicationService.apply(volunteerApplication);
         return ResponseEntity.ok("신청 완료");
     }
-
+	
+	@PostMapping("/volunteer/regist")
+	public String regist(VolunteerNotice volunteer) {
+		volunteerService.insert(volunteer);
 
     @PostMapping("/volunteer/cancel")
     @ResponseBody

@@ -128,7 +128,7 @@
                     <!--/ 슬라이드 -->
                 </div>
 
-                <div class="swiper-pagination mb-5"><!-- 슬라이드 개수 표시 -->></div>
+                <div class="swiper-pagination mb-5"><!-- 슬라이드 개수 표시 --></div>
 
             </div>
         </div>
@@ -160,7 +160,7 @@
                     <div class="swiper-slide" th:each="animal, i :${animalList}">
                         <div class="card position-relative">
                             <a th:href="@{/animal/detail(id=${animal.animal_idx})}"><img th:src="@{${animal.filename}}" class="img-fluid rounded-4"
-                                    alt="image" style="width:300px; height: 300px;"></a>
+                                    alt="image"></a>
                             <div class="card-body p-0">
                                 <div class="card-text-right">
                                     <p>
