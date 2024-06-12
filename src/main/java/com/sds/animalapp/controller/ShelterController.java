@@ -49,9 +49,9 @@ public class ShelterController {
         
         List<Sido> sidoList = sidoService.selectAll();
         List<Signgu> signguList = signguService.selectAll(currentSidoCode);
-        List shelterAllLIst = shelterApiService.getShelterList(shelter);
-        shelterService.delete(shelterAllLIst);
-        shelterService.insert(shelterAllLIst);
+        List shelterAllList = shelterApiService.getShelterList(shelter);
+        shelterService.delete(shelterAllList);
+        shelterService.insert(shelterAllList);
         
         //List<Signgu> signguList = signguService.selectAll(currentSidoCode);
         
@@ -64,6 +64,7 @@ public class ShelterController {
         shelterSelectParam.setCurrentSignguCode(currentSignguCode);
         
         List shelterList = shelterService.selectAll(shelterSelectParam);
+        
 
         model.addAttribute("pager", pager);
         model.addAttribute("shelterList", shelterList);
@@ -72,7 +73,10 @@ public class ShelterController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentSidoCode", currentSidoCode);
         model.addAttribute("currentSignguCode", currentSignguCode);
-        model.addAttribute("shelterAllLIst",shelterAllLIst);
+        model.addAttribute("shelterAllList",shelterAllList);
+        model.addAttribute("shelterlLat",shelter.getLat());
+        model.addAttribute("shelterLng",shelter.getLng());
+        
 
         return "shelter/list";
     }

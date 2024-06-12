@@ -98,6 +98,8 @@
                 </div>
             </div>
         </div>
+        <div id="map" style="width: 100%;height: 700px;"></div>
+        <br>
     </form>
 </div>
 </body>
@@ -110,6 +112,27 @@
     });
     $("#form1").submit();
   }
+  
+  function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 35.922356, lng: 128.59903},
+          zoom: 8
+      });
+
+      // 마커 위치 배열
+      var markers = [
+          {position: {lat: 35.922356, lng: 150.644}, title: 'Marker 1'}
+      ];
+
+      // 배열을 순회하며 각 마커를 맵에 추가
+      markers.forEach(function(markerInfo) {
+          var marker = new google.maps.Marker({
+              position: markerInfo.position,
+              map: map,
+              title: markerInfo.title
+          });
+      });
+  }
 
   $(function(){
     $("#bt_list").click(function(){
@@ -117,3 +140,4 @@
     });    
   });
 </script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8rEH-63KAr-Tl0v-dzo5BkS6BYvZoaD4&callback=initMap"></script>
