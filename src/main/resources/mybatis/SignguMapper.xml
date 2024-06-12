@@ -5,6 +5,12 @@
 		select * from signgu
 		where uprCd = #{currentSidoCode}
 	</select>
+	
+	<select id="select" parameterType="String" resultType="Signgu">
+		select * from signgu
+		where uprCd = #{uprCd} and orgdownNm = #{keyword}
+	</select>
+
 	<insert id="insertAll">
 	    INSERT INTO signgu (orgCd, orgdownNm, uprCd)
 	    VALUES
@@ -17,4 +23,5 @@
     <delete id="delete">
     	delete from signgu
     </delete>
+    
 </mapper>

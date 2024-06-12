@@ -5,6 +5,12 @@
 		select * from sido 
 	</select>
 	
+	<select id="select" resultType="Sido">
+		select * from sido
+		where orgdownNm LIKE CONCAT(#{keyword}, '%')
+	</select>
+	
+	
 	<insert id="insertAll" parameterType="java.util.List">
         <!-- 모든 요소를 포함하는 단일 insert 문 -->
         insert into sido(orgCd, orgdownNm)

@@ -3,35 +3,67 @@
 <mapper namespace="com.sds.animalapp.model.shelter.ShelterDAO">
 
 	<select id="selectCount" parameterType="String" resultType="int">
-	    SELECT COUNT(*) FROM shelter 
-	    WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
-	</select>
-	
-	<select id="selectAll" parameterType="shelterSelectParam" resultType="Shelter">
-		select * from shelter 
+		SELECT COUNT(*) FROM shelter
 		WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
+	</select>
+
+	<select id="selectAll" parameterType="shelterSelectParam"
+		resultType="Shelter">
+		<if test="currentSidoCode != '00' and currentSignguCode != '00'">
+			select * from shelter
+			WHERE careNm LIKE CONCAT('%', #{keyword}, '%') and uprCd = #{currentSidoCode} and uprCd = #{currentSignguCode}
+		</if>
+		<if test="currentSidoCode != '00'">
+			select * from shelter
+			WHERE careNm LIKE CONCAT('%', #{keyword}, '%') and uprCd =
+			#{currentSidoCode}
+		</if>
+		<if test="currentSidoCode == '00'">
+			select * from shelter
+			WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
+		</if>
 		LIMIT #{startIndex}, #{rowCount}
 	</select>
-	
+
+	<select id="getAllRecord" resultType="Shelter">
+		select * from shelter
+	</select>
+
 	<select id="select" parameterType="int" resultType="Shelter">
-		SELECT * FROM shelter 
-	    WHERE shelter_idx = #{shelter_idx}
-	</select>	
-	
+		SELECT * FROM
+		shelter
+		WHERE shelter_idx = #{shelter_idx}
+	</select>
+
 	<insert id="insert" parameterType="java.util.List">
-		insert into shelter(orgNm,careNm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
-									weekOprEtime,careTel,dataStdDt)
+		insert into
+		shelter(orgNm,careNm,careAddr,divisionNm,lat,lng,dsignationDate,closeDay,weekOprStime,
+		weekOprEtime,careTel,dataStdDt)
 		values
 		<foreach collection="list" item="shelter" separator=",">
 			(#{shelter.orgNm},#{shelter.careNm},#{shelter.careAddr},#{shelter.divisionNm},#{shelter.lat},#{shelter.lng},#{shelter.dsignationDate},
-				   #{shelter.closeDay},#{shelter.weekOprStime},#{shelter.weekOprEtime},#{shelter.careTel},#{shelter.dataStdDt})
+			#{shelter.closeDay},#{shelter.weekOprStime},#{shelter.weekOprEtime},#{shelter.careTel},#{shelter.dataStdDt})
 		</foreach>
 	</insert>
-	
+	<!-- Sido Table orgCd Column update method -->
+	<update id="updateSidoCode" parameterType="String">
+		UPDATE shelter
+		SET
+		uprCd = #{orgCd}
+		where shelter_idx = #{id}
+	</update>
+	<!-- Shelter Table orgCd Column update method -->
+	<update id="updateSignguCode" parameterType="String">
+		UPDATE shelter
+		SET
+		orgCd = #{orgCd}
+		where shelter_idx = #{id}
+	</update>
+
 	<delete id="delete">
 		delete from shelter
 	</delete>
-	
+
 
 
 </mapper>

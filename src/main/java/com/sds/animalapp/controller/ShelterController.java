@@ -27,7 +27,6 @@ public class ShelterController {
 	@Autowired
 	private ShelterApiService shelterApiService;
 
-
     @Autowired
     private ShelterService shelterService;
     
@@ -43,7 +42,7 @@ public class ShelterController {
             @RequestParam(value = "keyword", defaultValue = "") String keyword,
             @RequestParam(value = "currentSidoCode", defaultValue = "00") String currentSidoCode,
             @RequestParam(value = "currentSignguCode", defaultValue = "00") String currentSignguCode) throws Exception {
-        
+        //검색기능이 너무 무거워져서 테이블에 데이터 넣는 시점 변경 필요
         Pager pager = new Pager();
         pager.init(shelterService.selectCount(keyword), currentPage);
         
@@ -52,6 +51,9 @@ public class ShelterController {
         List shelterAllList = shelterApiService.getShelterList(shelter);
         shelterService.delete(shelterAllList);
         shelterService.insert(shelterAllList);
+        
+        List<Shelter> allShelterList = shelterService.getAllRecord();//테이블 모든 레코드 불러오기
+        shelterService.mapSigngu(allShelterList);//orgCd컬럼에 시군구 코드 update
         
         //List<Signgu> signguList = signguService.selectAll(currentSidoCode);
         
