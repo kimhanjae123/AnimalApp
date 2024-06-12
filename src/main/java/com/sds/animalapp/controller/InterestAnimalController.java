@@ -8,24 +8,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sds.animalapp.domain.InterestAnimal;
 import com.sds.animalapp.model.animal.InterestAnimalService;
-import com.sds.animalapp.model.member.MemberDAO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class InterestAnimalController {
 
 	@Autowired
 	private InterestAnimalService interestAnimalService;
 
-	@Autowired
-	private MemberDAO memberDAO;
-
 	@PostMapping("/animal/registerInterest")
 	@ResponseBody
 	public String registerInterest(@RequestParam("animal_idx") int animal_idx,
 			@RequestParam("member_idx") int member_idx) {
 		// 로그 추가
-		System.out.println("Received animal_idx: " + animal_idx);
-		System.out.println("Received member_idx: " + member_idx);
+		log.debug("Received animal_idx: " + animal_idx);
+		log.debug("Received member_idx: " + member_idx);
 
 		InterestAnimal interestAnimal = new InterestAnimal();
 		interestAnimal.setAnimal_idx(animal_idx); // 동물의 인덱스 설정
