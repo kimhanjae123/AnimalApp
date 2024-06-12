@@ -8,5 +8,6 @@ public interface VolunteerApplicationService {
     void apply(VolunteerApplication application);
     void cancel(int id);
     List<VolunteerApplication> getAllApplications();
-    List<VolunteerApplication> getApplicationsByNoticeId(int noticeId);
+    List<VolunteerApplication> getApplicationsByMemberIdx(int memberIdx);
+    VolunteerApplication findById(int id); // 추가된 메서드
 }
