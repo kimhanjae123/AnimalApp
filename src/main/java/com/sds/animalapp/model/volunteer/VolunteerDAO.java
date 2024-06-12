@@ -11,7 +11,7 @@ import com.sds.animalapp.domain.VolunteerSelectParam;
 public interface VolunteerDAO {
 	public int selectCount(String keyword); //게시물 수 
 	public int selectRegistCount(int id);
-	public List selectAll(VolunteerSelectParam volunteerSelectParam);//모든 게시물 가져오기
+	public List<VolunteerNotice> selectAll(VolunteerSelectParam volunteerSelectParam);//모든 게시물 가져오기
 	public VolunteerNotice select(int id);
 	public void insert(VolunteerNotice volunteer);
 	public void update(VolunteerNotice volunteer);

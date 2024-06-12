@@ -29,9 +29,6 @@ public class VolunteerController {
 	@Autowired
     private VolunteerApplicationService volunteerApplicationService;
 
-    @Autowired
-    private MemberService memberService;
-
 	@GetMapping("/volunteer/list")
 	public String volunteerList(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword) {
@@ -44,7 +41,7 @@ public class VolunteerController {
 		volunteerSelectParam.setRowCount(pager.getPageSize());
 
 		// 봉사 목록 가져오기
-		List volunteerList = volunteerService.selectAll(volunteerSelectParam);
+		List<VolunteerNotice> volunteerList = volunteerService.selectAll(volunteerSelectParam);
 
 		// 모델에 데이터 추가
 		model.addAttribute("volunteerList", volunteerList);
@@ -74,12 +71,6 @@ public class VolunteerController {
         return "volunteer/detail";
     }
 
-	@GetMapping("/volunteer/mypage")
-    public String myPageRedirect() {
-        // /member/mypage로 리다이렉트
-        return "redirect:/member/mypage";
-    }
-	
 	
 	@PostMapping("/volunteer/regist")
 	public String regist(VolunteerNotice volunteer) {

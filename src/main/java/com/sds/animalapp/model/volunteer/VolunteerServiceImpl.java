@@ -1,7 +1,6 @@
 package com.sds.animalapp.model.volunteer;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,11 +8,13 @@ import org.springframework.stereotype.Service;
 import com.sds.animalapp.domain.VolunteerNotice;
 import com.sds.animalapp.domain.VolunteerSelectParam;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class VolunteerServiceImpl implements VolunteerService {
 	
-	@Autowired
-	VolunteerDAO volunteerDAO;
+	private final VolunteerDAO volunteerDAO;
 
 	//게시물 수 카운트
 	public int selectCount(String keyword) {
@@ -21,7 +22,7 @@ public class VolunteerServiceImpl implements VolunteerService {
 	}
 	
 	//봉사List모두 가져오기
-	public List selectAll(VolunteerSelectParam volunteerSelectParam) {
+	public List<VolunteerNotice> selectAll(VolunteerSelectParam volunteerSelectParam) {
 		return volunteerDAO.selectAll(volunteerSelectParam);
 	}
 	
@@ -42,13 +43,11 @@ public class VolunteerServiceImpl implements VolunteerService {
 
 	@Override
 	public void update(VolunteerNotice volunteerNotice) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void delete(VolunteerNotice volunteerNotice) {
-		// TODO Auto-generated method stub
 		
 	}
 
