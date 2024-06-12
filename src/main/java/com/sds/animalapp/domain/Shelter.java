@@ -20,4 +20,6 @@ public class Shelter {
 	private String weekOprEtime;
 	private String careTel;
 	private String dataStdDt;
+	private String orgCd;
+	private String uprCd;
 }
