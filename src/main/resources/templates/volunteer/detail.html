@@ -113,8 +113,7 @@ $(function(){
             return;
         }
 
-        // 로컬 스토리지에 noticeId 저장
-        localStorage.setItem('volunteerNoticeId', noticeId);
+        
 
         $.ajax({
             type: "POST",
@@ -122,7 +121,11 @@ $(function(){
             data: { id: noticeId },
             success: function(response) {
                 alert(response);
+             	// 로컬 스토리지에 noticeId 저장, 신청 상태도 넣어놈 https://velog.io/@bellecode20/localStorage%EC%97%90-state-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0 
+                localStorage.setItem('volunteerNoticeId', noticeId);
+                localStorage.setItem('volunteerApplied', 'true');
                 $("#applyBtn").text("신청 취소").removeClass("btn-secondary").addClass("btn-danger").off("click").click(cancelApplication);
+                location.reload();  // 페이지 새로고침 추가
             },
             error: function(xhr) {
                 alert(xhr.responseText);
@@ -138,6 +141,8 @@ $(function(){
             alert("봉사활동 ID를 찾을 수 없습니다.");
             return;
         }
+        
+        
 
         $.ajax({
             type: "POST",
@@ -145,16 +150,33 @@ $(function(){
             data: { applicationId: noticeId },
             success: function(response) {
                 alert(response);
+             	// 로컬에서 삭제 누르면 다시 돌아오게
+                localStorage.removeItem('volunteerApplied');
                 $("#applyBtn").text("봉사 신청").removeClass("btn-danger").addClass("btn-secondary").off("click").click(applyApplication);
+                location.reload();  // 페이지 새로고침 추가
             },
             error: function(xhr) {
+            	//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText
                 alert(xhr.responseText);
             }
         });
     }
 
-    $("#applyBtn").click(applyApplication);
+ // 페이지 로드 시 로컬 스토리지의 상태에 따라 버튼 설정
+    $(document).ready(function() {
+        const noticeId = getQueryStringParameter('id');
+        const appliedNoticeId = localStorage.getItem('volunteerNoticeId');
+        const volunteerApplied = localStorage.getItem('volunteerApplied') == 'true';
+
+        if (noticeId === appliedNoticeId && volunteerApplied) {
+            $("#applyBtn").text("신청 취소").removeClass("btn-secondary").addClass("btn-danger").off("click").click(cancelApplication);
+        } else {
+            $("#applyBtn").text("봉사 신청").removeClass("btn-danger").addClass("btn-secondary").off("click").click(applyApplication);
+        }
+    });
 });
+
+
 
 </script>
 
