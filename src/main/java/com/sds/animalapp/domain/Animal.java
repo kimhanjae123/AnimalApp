@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Animal {
 
-	private String animal_idx;
+	private int animal_idx;
 
 	// 하나의 유기동물을 불러왔을 때 사용할 변수
 	private String desertionNo; // 유기번호

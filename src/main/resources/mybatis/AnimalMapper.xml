@@ -2,8 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="com.sds.animalapp.model.animal.AnimalDAO">
 
-	<select id="selectCount" parameterType="String" resultType="int">
+	<select id="selectCount"
+		parameterType="com.sds.animalapp.domain.AnimalSelectParam"
+		resultType="int">
 		select count(*) from animal
+		where kindCd like concat('%', #{keyword},
+		'%')
+		<if test="age != null and age != ''">
+			and age like concat('%', #{age}, '%')
+		</if>
+		<if test="region != null and region != ''">
+			and careAddr like concat('%', #{region}, '%')
+		</if>
+		<if test="care != null and care != ''">
+			and careNm like concat('%', #{care}, '%')
+		</if>
+		<if test="sex != null and sex != ''">
+			and sexCd like concat('%', #{sex}, '%')
+		</if>
+		<if test="status != null and status != ''">
+			and processState like concat('%', #{status}, '%')
+		</if>
+		limit #{startIndex}, #{rowCount}
 	</select>
 
 
