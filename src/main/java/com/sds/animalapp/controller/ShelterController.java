@@ -74,8 +74,8 @@ public class ShelterController {
         model.addAttribute("currentSidoCode", currentSidoCode);
         model.addAttribute("currentSignguCode", currentSignguCode);
         model.addAttribute("shelterAllList",shelterAllList);
-        model.addAttribute("shelterlLat",shelter.getLat());
-        model.addAttribute("shelterLng",shelter.getLng());
+        //model.addAttribute("shelterlLat",shelter.getLat());
+        //model.addAttribute("shelterLng",shelter.getLng());
         
 
         return "shelter/list";
