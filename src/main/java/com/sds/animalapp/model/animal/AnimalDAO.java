@@ -9,6 +9,10 @@ import com.sds.animalapp.domain.AnimalSelectParam;
 
 @Mapper
 public interface AnimalDAO {
+	public void insertAll(List<Animal> animalList); // 보호동물 API 데이터 insert 문
+
+	public void delete();
+
 	public int selectCount(AnimalSelectParam animalSelectParam); // 필터링에 따른 총 레코드 수
 
 	public List selectAll(AnimalSelectParam animalSelectParam); // 필터링에 매칭되는 모든 필터링 된 동물 조회

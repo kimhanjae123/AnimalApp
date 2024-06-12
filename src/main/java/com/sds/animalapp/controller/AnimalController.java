@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
+import com.sds.animalapp.model.animal.AnimalApiService;
 import com.sds.animalapp.model.animal.AnimalService;
 import com.sds.animalapp.model.member.MemberService;
 
@@ -19,6 +20,9 @@ public class AnimalController {
 
 	@Autowired
 	private AnimalService animalService;
+
+	@Autowired
+	AnimalApiService animalApiService;
 
 	@Autowired
 	private MemberService memberService; // MemberService
@@ -33,7 +37,12 @@ public class AnimalController {
 			@RequestParam(value = "care", defaultValue = "") String care,
 			@RequestParam(value = "sex", defaultValue = "") String sex,
 			@RequestParam(value = "status", defaultValue = "") String status) throws Exception {
-
+		/*---------------------------------------------------------
+		 		API 호출 코드
+		//		animalService.delete();
+		//		List<Animal> animalList = animalApiService.call();
+		//		animalService.insertAll(animalList);
+		----------------------------------------------------------*/
 		Pager pager = new Pager();
 
 		AnimalSelectParam animalSelectParam = new AnimalSelectParam();
