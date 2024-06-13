@@ -73,12 +73,13 @@ public class ShelterServiceImpl implements ShelterService {
 				signgu = signguDAO.select(sido.getOrgCd(), words[0]);
 			}
 			
-			log.info(shelter.getShelter_idx());
 			shelterDAO.updateSidoCode(shelter.getShelter_idx(), sido.getOrgCd());
 			//해당하는 시군구 코드가 하나만 있을경우 시도코드를 포함하여 시군구코드도 추가
 			if (signgu.size() == 1) shelterDAO.updateSignguCode(shelter.getShelter_idx(), signgu.get(0).getOrgCd()); 
 		}
 		
 	}
+
+
 
 }
