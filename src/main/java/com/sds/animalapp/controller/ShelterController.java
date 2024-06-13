@@ -43,19 +43,20 @@ public class ShelterController {
             @RequestParam(value = "currentSidoCode", defaultValue = "00") String currentSidoCode,
             @RequestParam(value = "currentSignguCode", defaultValue = "00") String currentSignguCode) throws Exception {
 
+    	ShelterSelectParam shelterSelectParam = new ShelterSelectParam();
+    	shelterSelectParam.setKeyword(keyword);
+    	shelterSelectParam.setCurrentSidoCode(currentSidoCode);
+    	shelterSelectParam.setCurrentSignguCode(currentSignguCode);
+    	
         Pager pager = new Pager();
-        pager.init(shelterService.selectCount(keyword), currentPage);
+        pager.init(shelterService.selectCount(shelterSelectParam), currentPage);
         
         List<Sido> sidoList = sidoService.selectAll();
         List<Signgu> signguList = signguService.selectAll(currentSidoCode);
         
         //Shelter DB 테이블이 시도 테이블과 시군구 테이블을 참조하도록 수정한 후 검색 다시 구현
-        ShelterSelectParam shelterSelectParam = new ShelterSelectParam();
-        shelterSelectParam.setKeyword(keyword);
         shelterSelectParam.setStartIndex(pager.getStartIndex());
         shelterSelectParam.setRowCount(pager.getPageSize());
-        shelterSelectParam.setCurrentSidoCode(currentSidoCode);
-        shelterSelectParam.setCurrentSignguCode(currentSignguCode);
         
         List shelterList = shelterService.selectAll(shelterSelectParam);
 
