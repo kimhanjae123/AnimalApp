@@ -67,6 +67,8 @@ public class ShelterController {
         
         List shelterList = shelterService.selectAll(shelterSelectParam);
         
+        
+        
 
         model.addAttribute("pager", pager);
         model.addAttribute("shelterList", shelterList);

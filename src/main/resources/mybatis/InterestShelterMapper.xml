@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
+<mapper namespace="com.sds.animalapp.model.shelter.InterestShelterDAO.java">
+
+	<insert id="insertInterestShelter" parameterType="com.sds.animalapp.domain.InterestShelter">
+	insert into interest_shelter (member_idx,shelter_idx) values (#{member_idx},#{animal_idx})
+	</insert>
+	
+	<delete id="deleteInterestShelter" parameterType="int">
+	delete from interest_shelter where interest_shelter_idx = #{interest_shelter_idx}
+	</delete>
+
+</mapper>
