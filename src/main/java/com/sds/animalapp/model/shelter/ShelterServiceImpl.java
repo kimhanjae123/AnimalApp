@@ -23,8 +23,8 @@ public class ShelterServiceImpl implements ShelterService {
 	@Autowired
 	private SidoDAO sidoDAO;
 
-	public int selectCount(String keyword) {
-		return shelterDAO.selectCount(keyword);
+	public int selectCount(ShelterSelectParam shelterSelectParam) {
+		return shelterDAO.selectCount(shelterSelectParam);
 	}
 	
 	public List<Shelter> getAllRecord() {
