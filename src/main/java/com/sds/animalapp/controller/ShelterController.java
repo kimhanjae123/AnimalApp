@@ -60,9 +60,6 @@ public class ShelterController {
         
         List shelterList = shelterService.selectAll(shelterSelectParam);
         
-        
-        
-
         model.addAttribute("pager", pager);
         model.addAttribute("shelterList", shelterList);
         model.addAttribute("sidoList", sidoList);
@@ -70,13 +67,7 @@ public class ShelterController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentSidoCode", currentSidoCode);
         model.addAttribute("currentSignguCode", currentSignguCode);
-<<<<<<< HEAD
-        model.addAttribute("shelterAllList",shelterAllList);
-        //model.addAttribute("shelterlLat",shelter.getLat());
-        //model.addAttribute("shelterLng",shelter.getLng());
         
-=======
->>>>>>> upstream/main
 
         return "shelter/list";
     }
@@ -87,7 +78,7 @@ public class ShelterController {
         Shelter shelter = shelterService.select(shelter_idx);
 
         model.addAttribute("detail", shelter);
-
+        
         return "shelter/detail";
     }
     

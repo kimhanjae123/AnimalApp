@@ -21,15 +21,23 @@ public class InterestShelterController {
 			@RequestParam("shelter_idx") int shelter_idx,
 			@RequestParam("member_idx") int member_idx) {
 		
+		
+		if(interestShelterService.duplicatedInterestShelter(shelter_idx, member_idx)) {
+			return "이미 등록된 보호소 입니다.";
+		}
+		
 		InterestShelter interestShelter = new InterestShelter();
 		interestShelter.setShelter_idx(shelter_idx);
 		interestShelter.setMember_idx(member_idx);
+		
+		
+		
 		
 		try {
 			interestShelterService.insertInterestShelter(interestShelter);
 			return "보호소 관심등록이 완료되었습니다.";
 		}catch(IllegalArgumentException e) {
-			return "이미 등록된 보호소 입니다.";
+			return "보호소 관심등록이 실패하였습니다.";
 		}
 	}
 	
