@@ -32,7 +32,7 @@ public class ShelterApiService {
 	/*-----------------------------------
 	 영화 리스트 조회
 	 -----------------------------------*/
-	public List getShelterList(Shelter Shelter) throws IOException {
+	public List getShelterList() throws IOException {
 		
 		String shelterCdResponse = null;
 		List<Shelter> shelterList= null;
