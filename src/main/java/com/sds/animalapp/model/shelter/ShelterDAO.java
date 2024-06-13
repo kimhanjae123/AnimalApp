@@ -16,7 +16,7 @@ public interface ShelterDAO {
 	public List getAllRecord();
 	public Shelter select(int shelter_idx);
 	public void insert(List<Shelter> shelterAllList);
-	public void updateSidoCode(@Param("id") String id, @Param("orgCd") String orgCd);
-	public void updateSignguCode(@Param("id") String id, @Param("orgCd") String orgCd);
+	public void updateSidoCode(@Param("id") int id, @Param("orgCd") String orgCd);
+	public void updateSignguCode(@Param("id") int id, @Param("orgCd") String orgCd);
 	public void delete(List<Shelter> shelterAllList);
 }

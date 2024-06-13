@@ -59,7 +59,7 @@ public class ShelterController {
         shelterSelectParam.setRowCount(pager.getPageSize());
         
         List shelterList = shelterService.selectAll(shelterSelectParam);
-
+        
         model.addAttribute("pager", pager);
         model.addAttribute("shelterList", shelterList);
         model.addAttribute("sidoList", sidoList);
@@ -67,6 +67,7 @@ public class ShelterController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("currentSidoCode", currentSidoCode);
         model.addAttribute("currentSignguCode", currentSignguCode);
+        
 
         return "shelter/list";
     }
@@ -77,7 +78,7 @@ public class ShelterController {
         Shelter shelter = shelterService.select(shelter_idx);
 
         model.addAttribute("detail", shelter);
-
+        
         return "shelter/detail";
     }
     
