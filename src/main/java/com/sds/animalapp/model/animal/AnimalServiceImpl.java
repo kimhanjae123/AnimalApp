@@ -14,6 +14,14 @@ public class AnimalServiceImpl implements AnimalService {
 	@Autowired
 	private AnimalDAO animalDAO;
 
+	public void insertAll(List<Animal> animalList) {
+		animalDAO.insertAll(animalList);
+	}
+
+	public void delete() {
+		animalDAO.delete();
+	}
+
 	public int selectCount(AnimalSelectParam animalSelectParam) {
 		return animalDAO.selectCount(animalSelectParam);
 	}
@@ -29,5 +37,10 @@ public class AnimalServiceImpl implements AnimalService {
 	public List selectPreview() {
 
 		return animalDAO.selectPreview();
+	}
+
+	@Override
+	public int countRegistMember(int animal_idx) {
+		return animalDAO.countRegistMember(animal_idx);
 	}
 }

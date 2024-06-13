@@ -11,7 +11,7 @@ public interface InterestAnimalDAO {
 	public void addInterestAnimal(InterestAnimal interestAnimal);
 
 	// 관심 동물 삭제
-	public void deleteInterestAnimal(int interestAnimalIdx);
+	public void deleteInterestAnimal(int interest_animal_idx);
 
 	// 관심 동물 중복 확인
 	public int checkDuplicateInterestAnimal(InterestAnimal interestAnimal);
