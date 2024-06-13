@@ -6,10 +6,12 @@
 		resultType="int">
 		SELECT COUNT(*)
 		FROM shelter
-		WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
+		WHERE careNm LIKE CONCAT('%', #{keyword},
+		'%')
 		<if test="currentSidoCode != '00' and currentSignguCode != '00'">
 			AND uprCd = #{currentSidoCode}
-			AND uprCd = #{currentSignguCode}
+			AND uprCd =
+			#{currentSignguCode}
 		</if>
 		<if test="currentSidoCode != '00' and currentSignguCode == '00'">
 			AND uprCd = #{currentSidoCode}
@@ -17,7 +19,8 @@
 	</select>
 
 
-	<select id="selectAll" parameterType="ShelterSelectParam"	resultType="Shelter">
+	<select id="selectAll" parameterType="ShelterSelectParam"
+		resultType="Shelter">
 		SELECT * FROM shelter
 		WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
 		<if test="currentSidoCode != '00'">
@@ -69,7 +72,5 @@
 	<delete id="delete">
 		delete from shelter
 	</delete>
-
-
 
 </mapper>
