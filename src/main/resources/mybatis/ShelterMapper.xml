@@ -2,28 +2,34 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd">
 <mapper namespace="com.sds.animalapp.model.shelter.ShelterDAO">
 
-	<select id="selectCount" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM shelter
+	<select id="selectCount" parameterType="ShelterSelectParam"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM shelter
 		WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
+		<if test="currentSidoCode != '00' and currentSignguCode != '00'">
+			AND uprCd = #{currentSidoCode}
+			AND uprCd = #{currentSignguCode}
+		</if>
+		<if test="currentSidoCode != '00' and currentSignguCode == '00'">
+			AND uprCd = #{currentSidoCode}
+		</if>
 	</select>
 
-	<select id="selectAll" parameterType="shelterSelectParam"
-		resultType="Shelter">
-		<if test="currentSidoCode != '00' and currentSignguCode != '00'">
-			select * from shelter
-			WHERE careNm LIKE CONCAT('%', #{keyword}, '%') and uprCd = #{currentSidoCode} and uprCd = #{currentSignguCode}
-		</if>
+
+	<select id="selectAll" parameterType="ShelterSelectParam"	resultType="Shelter">
+		SELECT * FROM shelter
+		WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
 		<if test="currentSidoCode != '00'">
-			select * from shelter
-			WHERE careNm LIKE CONCAT('%', #{keyword}, '%') and uprCd =
-			#{currentSidoCode}
+			AND uprCd = #{currentSidoCode}
 		</if>
-		<if test="currentSidoCode == '00'">
-			select * from shelter
-			WHERE careNm LIKE CONCAT('%', #{keyword}, '%')
+		<if test="currentSignguCode != '00'">
+			AND orgCd = #{currentSignguCode}
 		</if>
 		LIMIT #{startIndex}, #{rowCount}
 	</select>
+
+
 
 	<select id="getAllRecord" resultType="Shelter">
 		select * from shelter

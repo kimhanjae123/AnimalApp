@@ -11,7 +11,7 @@ import com.sds.animalapp.domain.ShelterSelectParam;
 
 @Mapper
 public interface ShelterDAO {
-	public int selectCount(String keyword); //총 레코드 수
+	public int selectCount(ShelterSelectParam shelterSelectParam); //총 레코드 수
 	public List selectAll(ShelterSelectParam shelterSelectParam);
 	public List getAllRecord();
 	public Shelter select(int shelter_idx);

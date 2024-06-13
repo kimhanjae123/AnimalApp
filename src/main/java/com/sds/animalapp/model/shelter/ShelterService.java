@@ -7,7 +7,7 @@ import com.sds.animalapp.domain.Shelter;
 import com.sds.animalapp.domain.ShelterSelectParam;
 
 public interface ShelterService {
-	public int selectCount(String keyword); //총 레코드 수
+	public int selectCount(ShelterSelectParam shelterSelectParam); //총 레코드 수
 	public List<Shelter> getAllRecord();
 	public List selectAll(ShelterSelectParam shelterSelectParam);
 	public Shelter select(int shelter_idx);
