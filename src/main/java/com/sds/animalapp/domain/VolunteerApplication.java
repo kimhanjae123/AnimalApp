@@ -6,6 +6,7 @@ import lombok.Data;
 public class VolunteerApplication {
     private int id;
     private String title;
-    private String volDate;
+    private String vol_date;
     private int noticeId;
+    private int memberIdx; 
 }
