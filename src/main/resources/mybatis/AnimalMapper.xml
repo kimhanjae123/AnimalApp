@@ -95,4 +95,58 @@
 		#{animal_idx}
 	</select>
 
+	<update id="update"
+		parameterType="com.sds.animalapp.domain.Animal">
+		UPDATE animal
+		SET filename = #{filename},
+		happenDt =
+		#{happenDt},
+		happenPlace = #{happenPlace},
+		kindCd = #{kindCd},
+		colorCd =
+		#{colorCd},
+		age = #{age},
+		weight = #{weight},
+		noticeNo = #{noticeNo},
+		noticeSdt = #{noticeSdt},
+		noticeEdt = #{noticeEdt},
+		popfile =
+		#{popfile},
+		processState = #{processState},
+		sexCd = #{sexCd},
+		neuterYn =
+		#{neuterYn},
+		specialMark = #{specialMark},
+		careNm = #{careNm},
+		careTel =
+		#{careTel},
+		careAddr = #{careAddr},
+		orgNm = #{orgNm},
+		chargeNm =
+		#{chargeNm},
+		officetel = #{officetel}
+		WHERE desertionNo = #{desertionNo}
+	</update>
+
+	<select id="selectByDesertionNo" parameterType="String"
+		resultType="Animal">
+		SELECT * FROM animal
+		WHERE desertionNo = #{desertionNo}
+	</select>
+
+	<insert id="insert" parameterType="Animal">
+		INSERT INTO animal (desertionNo, filename, happenDt, happenPlace,
+		kindCd, colorCd, age, weight, noticeNo, noticeSdt, noticeEdt, popfile,
+		processState, sexCd, neuterYn, specialMark, careNm, careTel, careAddr,
+		orgNm, chargeNm, officetel)
+		VALUES (#{desertionNo}, #{filename}, #{happenDt},
+		#{happenPlace}, #{kindCd}, #{colorCd}, #{age},
+		#{weight}, #{noticeNo}, #{noticeSdt},
+		#{noticeEdt}, #{popfile}, #{processState},
+		#{sexCd}, #{neuterYn}, #{specialMark},
+		#{careNm}, #{careTel}, #{careAddr}, #{orgNm},
+		#{chargeNm}, #{officetel})
+	</insert>
+
+
 </mapper>
