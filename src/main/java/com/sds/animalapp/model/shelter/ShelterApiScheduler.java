@@ -27,7 +27,7 @@ public class ShelterApiScheduler {
     @Autowired
     private ShelterService shelterService;
 
-	private static final String LAST_EXECUTION_TIME_FILE = "lastExecutionTime.txt";
+	private static final String LAST_EXECUTION_TIME_FILE = "shelterlastExecutionTime.txt";
 	private LocalDateTime lastExecutionTime;
 
 	@PostConstruct
