@@ -18,14 +18,15 @@ import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Shelter;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ShelterApiScheduler {
 
-	@Autowired
-	private ShelterApiService shelterApiService;
+	private final ShelterApiService shelterApiService;
 
-    @Autowired
-    private ShelterService shelterService;
+    private final ShelterService shelterService;
 
 	private static final String LAST_EXECUTION_TIME_FILE = "shelterlastExecutionTime.txt";
 	private LocalDateTime lastExecutionTime;
