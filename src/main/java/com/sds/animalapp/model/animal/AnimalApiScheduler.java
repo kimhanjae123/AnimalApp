@@ -36,13 +36,32 @@ public class AnimalApiScheduler {
 		lastExecutionTime = readLastExecutionTime();
 		if (lastExecutionTime == null || lastExecutionTime.isBefore(LocalDateTime.now().minusDays(1))) {
 			// 마지막 실행 시간이 없거나, 마지막 실행 시간이 하루 이상 지난 경우
-			callAnimalApiAndUpdateLastExecutionTime();
+			fetchData();
 		}
 	}
 
 	@Scheduled(cron = "0 0 0 * * *") // 매일 자정
 	public void fetchData() {
-		callAnimalApiAndUpdateLastExecutionTime();
+		try {
+			List<Animal> animalList = animalApiService.call(); // API 호출로 새로운 데이터 받아옴
+
+			// 기존 데이터 업데이트 및 새 데이터 추가 로직
+			for (Animal animal : animalList) {
+				Animal existingAnimal = animalService.selectByDesertionNo(animal.getDesertionNo());
+				if (existingAnimal == null) {
+					// 새로운 데이터라면 추가
+					animalService.insert(animal);
+				} else {
+					// 기존 데이터를 업데이트
+					animalService.update(animal);
+				}
+			}
+
+			lastExecutionTime = LocalDateTime.now();
+			writeLastExecutionTime(lastExecutionTime);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void callAnimalApiAndUpdateLastExecutionTime() {

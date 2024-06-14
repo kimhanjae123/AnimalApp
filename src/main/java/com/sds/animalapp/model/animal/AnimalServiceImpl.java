@@ -2,12 +2,10 @@ package com.sds.animalapp.model.animal;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
-import com.sds.animalapp.model.member.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,6 +18,15 @@ public class AnimalServiceImpl implements AnimalService {
 	public void insertAll(List<Animal> animalList) {
 		animalDAO.insertAll(animalList);
 	}
+
+	@Override
+	public void insert(Animal animal) {
+		animalDAO.insert(animal);
+	}
+
+	public void update(Animal animal) {
+		animalDAO.update(animal);
+	} // 기존 데이터 업데이트
 
 	public void delete() {
 		animalDAO.delete();
@@ -45,5 +52,10 @@ public class AnimalServiceImpl implements AnimalService {
 	@Override
 	public int countRegistMember(int animal_idx) {
 		return animalDAO.countRegistMember(animal_idx);
+	}
+
+	@Override
+	public Animal selectByDesertionNo(String desertionNo) {
+		return animalDAO.selectByDesertionNo(desertionNo);
 	}
 }

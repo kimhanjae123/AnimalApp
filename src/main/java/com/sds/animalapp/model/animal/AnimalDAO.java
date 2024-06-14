@@ -11,6 +11,10 @@ import com.sds.animalapp.domain.AnimalSelectParam;
 public interface AnimalDAO {
 	public void insertAll(List<Animal> animalList); // 보호동물 API 데이터 insert 문
 
+	void insert(Animal animal); // 새로운 데이터 삽입
+
+	void update(Animal animal); // 기존 데이터 업데이트
+
 	public void delete();
 
 	public int selectCount(AnimalSelectParam animalSelectParam); // 필터링에 따른 총 레코드 수
@@ -23,5 +27,7 @@ public interface AnimalDAO {
 
 	// 한 동물에 대한 입양신청 인원 조회
 	public int countRegistMember(int animal_idx);
+
+	Animal selectByDesertionNo(String desertionNo); // 유기번호로 동물 조회
 
 }
