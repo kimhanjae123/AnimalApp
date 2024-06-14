@@ -55,18 +55,18 @@
 		</foreach>
 	</insert>
 	<!-- Sido Table orgCd Column update method -->
-	<update id="updateSidoCode" parameterType="String">
+	<update id="updateSidoCode" parameterType="shelterSidoMappingParam">
 		UPDATE shelter
 		SET
 		uprCd = #{orgCd}
-		where shelter_idx = #{id}
+		where shelter_idx = #{shelter_idx}
 	</update>
 	<!-- Shelter Table orgCd Column update method -->
-	<update id="updateSignguCode" parameterType="String">
+	<update id="updateSignguCode" parameterType="shelterSidoMappingParam">
 		UPDATE shelter
 		SET
 		orgCd = #{orgCd}
-		where shelter_idx = #{id}
+		where shelter_idx = #{shelter_idx}
 	</update>
 
 	<delete id="delete">

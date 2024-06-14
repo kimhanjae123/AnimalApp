@@ -1,13 +1,13 @@
 package com.sds.animalapp.model.shelter;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.sds.animalapp.domain.Shelter;
 import com.sds.animalapp.domain.ShelterSelectParam;
+import com.sds.animalapp.domain.ShelterSidoMappingParam;
 
 @Mapper
 public interface ShelterDAO {
@@ -16,8 +16,8 @@ public interface ShelterDAO {
 	public List getAllRecord();
 	public Shelter select(int shelter_idx);
 	public void insert(List<Shelter> shelterAllList);
-	public void updateSidoCode(@Param("id") int id, @Param("orgCd") String orgCd);
-	public void updateSignguCode(@Param("id") int id, @Param("orgCd") String orgCd);
+	public void updateSidoCode(ShelterSidoMappingParam shelterSidoMappingParam);
+	public void updateSignguCode(ShelterSidoMappingParam shelterSidoMappingParam);
 	public void delete(List<Shelter> shelterAllList);
 	
 	public int findShelterIdxByCareNm(String careNm);
