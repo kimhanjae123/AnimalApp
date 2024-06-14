@@ -87,8 +87,7 @@ public class AnimalApiService {
 				JSONArray array = (JSONArray) json.get("item");
 
 				Gson gson = new Gson();
-				Type shelterArray = new TypeToken<List<Animal>>() {
-				}.getType();
+				Type shelterArray = new TypeToken<List<Animal>>() {}.getType();
 				animalList = gson.fromJson(array.toJSONString(), shelterArray);
 
 				if (animalList != null) {
