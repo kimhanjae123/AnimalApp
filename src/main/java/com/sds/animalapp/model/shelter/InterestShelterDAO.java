@@ -12,6 +12,6 @@ public interface InterestShelterDAO {
 	
 	public void deleteInterestShelter(int interest_shetler_idx);
 	
-	public boolean duplicatedInterestShelter (int member_idx, int shelter_idx);
+	public int duplicatedInterestShelter (InterestShelter interestShelter);
 	
 }
