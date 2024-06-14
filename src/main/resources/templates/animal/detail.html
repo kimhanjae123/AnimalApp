@@ -115,12 +115,10 @@
 						<label for="careNm" class="col-sm-12 col-form-label">보호소
 							이름</label>
 						<div class="col-sm-12">
-							<!-- 보호소 이름 클릭 시 URL 수정 -->
-							<a th:href="@{'/shelter/detail/' + ${detail.careNm}}"
+							<a th:href="@{'/shelter/detail?careNm=' + ${detail.careNm}}"
 								class="form-control" readonly> <span
 								th:text="${detail.careNm}"></span>
 							</a>
-
 						</div>
 					</div>
 

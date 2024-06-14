@@ -36,7 +36,7 @@ public class AnimalApiScheduler {
 		lastExecutionTime = readLastExecutionTime();
 		if (lastExecutionTime == null || lastExecutionTime.isBefore(LocalDateTime.now().minusDays(1))) {
 			// 마지막 실행 시간이 없거나, 마지막 실행 시간이 하루 이상 지난 경우
-			callAnimalApiAndUpdateLastExecutionTime();
+			//callAnimalApiAndUpdateLastExecutionTime();
 		}
 	}
 

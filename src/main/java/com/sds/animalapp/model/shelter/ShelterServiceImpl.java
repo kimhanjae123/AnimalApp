@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Shelter;
 import com.sds.animalapp.domain.ShelterSelectParam;
+import com.sds.animalapp.domain.ShelterSidoMappingParam;
 import com.sds.animalapp.domain.Sido;
 import com.sds.animalapp.domain.Signgu;
 
@@ -72,14 +73,26 @@ public class ShelterServiceImpl implements ShelterService {
 				sido = sidoDAO.select(shelter.getOrgNm());
 				signgu = signguDAO.select(sido.getOrgCd(), words[0]);
 			}
+			ShelterSidoMappingParam shelterSidoMappingParam = new ShelterSidoMappingParam();
+			shelterSidoMappingParam.setOrgCd(sido.getOrgCd());
+			shelterSidoMappingParam.setShelter_idx(shelter.getShelter_idx());
+			shelterDAO.updateSidoCode(shelterSidoMappingParam);
 			
-			shelterDAO.updateSidoCode(shelter.getShelter_idx(), sido.getOrgCd());
 			//해당하는 시군구 코드가 하나만 있을경우 시도코드를 포함하여 시군구코드도 추가
-			if (signgu.size() == 1) shelterDAO.updateSignguCode(shelter.getShelter_idx(), signgu.get(0).getOrgCd()); 
+			if (signgu.size() == 1) {
+				shelterSidoMappingParam.setOrgCd(signgu.get(0).getOrgCd());
+				shelterSidoMappingParam.setShelter_idx(shelter.getShelter_idx());
+				shelterDAO.updateSignguCode(shelterSidoMappingParam); 
+			}
 		}
 		
 	}
 
+	
+	@Override
+    public int findShelterIdxByCareNm(String careNm) {
+        return shelterDAO.findShelterIdxByCareNm(careNm);
+    }
 
 
 }

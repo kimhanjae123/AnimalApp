@@ -7,12 +7,15 @@ import org.springframework.stereotype.Service;
 
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
+import com.sds.animalapp.model.member.MemberService;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class AnimalServiceImpl implements AnimalService {
 
-	@Autowired
-	private AnimalDAO animalDAO;
+	private final AnimalDAO animalDAO;
 
 	public void insertAll(List<Animal> animalList) {
 		animalDAO.insertAll(animalList);

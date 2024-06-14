@@ -14,18 +14,19 @@ import com.sds.animalapp.domain.AnimalSelectParam;
 import com.sds.animalapp.model.animal.AnimalApiService;
 import com.sds.animalapp.model.animal.AnimalService;
 import com.sds.animalapp.model.member.MemberService;
+import com.sds.animalapp.model.volunteer.VolunteerDAO;
+
+import lombok.RequiredArgsConstructor;
 
 @Controller
+@RequiredArgsConstructor
 public class AnimalController {
 
-	@Autowired
-	private AnimalService animalService;
+	private final AnimalService animalService;
 
-	@Autowired
-	AnimalApiService animalApiService;
-
-	@Autowired
-	private MemberService memberService; // MemberService
+	private final AnimalApiService animalApiService;
+	
+	private final MemberService memberService; // MemberService
 
 	@GetMapping("/animal/list")
 	public String getAnimal(Animal animal, Model model,
