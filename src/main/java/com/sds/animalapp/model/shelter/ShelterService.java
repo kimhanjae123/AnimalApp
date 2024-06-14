@@ -14,4 +14,5 @@ public interface ShelterService {
 	public void insert(List<Shelter> shelterAllList);
 	public void delete(List<Shelter> shelterAllList);
 	public void mapSigngu(List<Shelter> allShelterList);//시군구 코드 컬럼에 매핑하는 메서드
+	public int findShelterIdxByCareNm(String careNm);
 }

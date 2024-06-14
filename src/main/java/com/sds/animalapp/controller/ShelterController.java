@@ -74,11 +74,22 @@ public class ShelterController {
 
     // 세부창
     @GetMapping("/shelter/detail")
-    public String getDetail(Model model, @RequestParam(value = "id") int shelter_idx) {
-        Shelter shelter = shelterService.select(shelter_idx);
+    public String getDetail(Model model, @RequestParam(value = "id", required = false) Integer shelter_idx,
+                            @RequestParam(value = "careNm", required = false) String careNm) {
+        // shelter_idx가 제공되지 않은 경우 careNm으로 shelter_idx를 찾음
+        if (shelter_idx == null && careNm != null && !careNm.isEmpty()) {
+            shelter_idx = shelterService.findShelterIdxByCareNm(careNm);
+        }
 
+        // shelter_idx가 여전히 null인 경우 에러 페이지로 리디렉션
+        if (shelter_idx == null) {
+            return "redirect:/error";
+        }
+
+        // shelter_idx가 존재하면 해당 shelter 정보를 조회하여 모델에 추가
+        Shelter shelter = shelterService.select(shelter_idx);
         model.addAttribute("detail", shelter);
-        
+
         return "shelter/detail";
     }
     

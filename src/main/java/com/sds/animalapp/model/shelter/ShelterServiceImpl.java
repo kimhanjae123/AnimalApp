@@ -80,6 +80,11 @@ public class ShelterServiceImpl implements ShelterService {
 		
 	}
 
+	
+	@Override
+    public int findShelterIdxByCareNm(String careNm) {
+        return shelterDAO.findShelterIdxByCareNm(careNm);
+    }
 
 
 }

@@ -19,4 +19,6 @@ public interface ShelterDAO {
 	public void updateSidoCode(@Param("id") int id, @Param("orgCd") String orgCd);
 	public void updateSignguCode(@Param("id") int id, @Param("orgCd") String orgCd);
 	public void delete(List<Shelter> shelterAllList);
+	
+	public int findShelterIdxByCareNm(String careNm);
 }
