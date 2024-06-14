@@ -19,9 +19,18 @@ public class InterestShelterServiceImpl implements InterestShelterService{
 		interestShelterDAO.deleteInterestShelter(interest_shetler_idx);
 	}
 
-	public boolean duplicatedInterestShelter(int shelter_idx, int member_idx) {
-		return interestShelterDAO.duplicatedInterestShelter(shelter_idx, member_idx) != null;
+	@Override
+	public boolean duplicatedInterestShelter(int member_idx, int shelter_idx) {
+		if(interestShelterDAO.duplicatedInterestShelter(member_idx, shelter_idx)) {
+			return false;
+		}
+		InterestShelter interestShelter = new InterestShelter();
+		interestShelter.setMember_idx(member_idx);
+		interestShelter.setShelter_idx(shelter_idx);
+		
+		return true;
 	}
+
 
 
 }

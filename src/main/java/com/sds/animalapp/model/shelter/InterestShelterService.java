@@ -8,7 +8,6 @@ public interface InterestShelterService {
 	
 	public void deleteInterestShelter(int interest_shetler_idx);
 	
-	public boolean duplicatedInterestShelter(int shelter_idx,int member_idx);
-	
+	public boolean duplicatedInterestShelter (int member_idx, int shelter_idx);
 	
 }
