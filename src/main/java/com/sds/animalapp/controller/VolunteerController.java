@@ -57,10 +57,23 @@ public class VolunteerController {
 	}
 
 	@GetMapping("/volunteer/writeform")
-	public String getWriteForm() {
+	public String getWriteForm(HttpSession session) {
+		Member member = (Member) session.getAttribute("member");
+        if (member == null) return "redirect:/member/login";
+        
 		return "volunteer/regist";
 	}
 
+	@PostMapping("/volunteer/regist") 
+	public String regist(VolunteerNotice volunteer, HttpSession session) { 
+		Member member = (Member) session.getAttribute("member");
+        if (member == null) return "redirect:/member/login";
+        volunteer.setMember_idx(member.getMember_idx());
+		volunteerService.insert(volunteer);
+		
+		return "redirect:/volunteer/list"; 
+	}
+	
 	// 세부창
 	@GetMapping("/volunteer/detail")
 	public String getDetail(Model model, @RequestParam(value = "id") int noticeId) {
@@ -83,11 +96,6 @@ public class VolunteerController {
 	}
 
 	
-	 @PostMapping("/volunteer/regist") 
-	 public String regist(VolunteerNotice volunteer) { 
-		 volunteerService.insert(volunteer);
-		 return "redirect:/volunteer/list"; 
-	 }
 
 	@PostMapping("/volunteer/apply")
 	@ResponseBody
