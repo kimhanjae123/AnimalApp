@@ -72,6 +72,7 @@
 		<if test="status != null and status != ''">
 			and processState like concat('%', #{status}, '%')
 		</if>
+		order by happenDt desc
 		limit #{startIndex}, #{rowCount}
 	</select>
 
@@ -135,16 +136,23 @@
 	</select>
 
 	<insert id="insert" parameterType="Animal">
-		INSERT INTO animal (desertionNo, filename, happenDt, happenPlace,
-		kindCd, colorCd, age, weight, noticeNo, noticeSdt, noticeEdt, popfile,
-		processState, sexCd, neuterYn, specialMark, careNm, careTel, careAddr,
-		orgNm, chargeNm, officetel)
+		INSERT INTO animal
+		(desertionNo, filename, happenDt, happenPlace,
+		kindCd, colorCd, age,
+		weight, noticeNo, noticeSdt, noticeEdt, popfile,
+		processState, sexCd,
+		neuterYn, specialMark, careNm, careTel, careAddr,
+		orgNm, chargeNm,
+		officetel)
 		VALUES (#{desertionNo}, #{filename}, #{happenDt},
 		#{happenPlace}, #{kindCd}, #{colorCd}, #{age},
-		#{weight}, #{noticeNo}, #{noticeSdt},
+		#{weight}, #{noticeNo},
+		#{noticeSdt},
 		#{noticeEdt}, #{popfile}, #{processState},
-		#{sexCd}, #{neuterYn}, #{specialMark},
-		#{careNm}, #{careTel}, #{careAddr}, #{orgNm},
+		#{sexCd},
+		#{neuterYn}, #{specialMark},
+		#{careNm}, #{careTel}, #{careAddr},
+		#{orgNm},
 		#{chargeNm}, #{officetel})
 	</insert>
 
