@@ -150,7 +150,7 @@
   
   function initMap() {
       window.addEventListener('DOMContentLoaded', (event) => {
-          const shelterLat = parseFloat(document.getElementById('shelterLat').value);
+    	  const shelterLat = parseFloat(document.getElementById('shelterLat').value);
           const shelterLng = parseFloat(document.getElementById('shelterLng').value);
           const shelterNm = document.getElementById('shelterNm').value;
           const shelterCareAddr = document.getElementById('shelterCareAddr').value;
@@ -204,13 +204,12 @@
     });    
   });
   //유기동물list 페이지로 redirect
-$(function() {
-    $("#bt_search_animal").click(function() {
-        let care = $("#shelterNm").val(); //관할기관
-        care = care.replace(/\([^)]*\)/g, ''); //괄호와 내부 내용 제거
-        location.href = "/animal/list?care=" + encodeURIComponent(care);
-    });
-});
-
+	$(function() {
+		$("#bt_search_animal").click(function() {
+			let care = $("#shelterNm").val(); //관할기관
+			care = care.replace(/\([^)]*\)/g, ''); //괄호와 내부 내용 제거
+			location.href = "/animal/list?care=" + encodeURIComponent(care);
+		});
+	});
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8rEH-63KAr-Tl0v-dzo5BkS6BYvZoaD4&callback=initMap"></script>
