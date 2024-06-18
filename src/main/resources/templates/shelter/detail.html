@@ -105,7 +105,7 @@
             </div>
         </div>
         <div id="map" style="width: 100%;height: 700px;"></div>
-        <div id="no-info" style="width: 100%;height: 700px;"></div>
+        <div id="no-info" style='flex'></div>
         <br>
     </form>
 </div>
@@ -146,13 +146,57 @@
 		});
 	}
 	
-  function list(){
-    $("#form1").attr({
-      action:"/volunteer/list",
-      method:"get"
-    });
-    $("#form1").submit();
+  
+
+  
+  function initMap() {
+      window.addEventListener('DOMContentLoaded', (event) => {
+          const shelterLat = parseFloat(document.getElementById('shelterLat').value);
+          const shelterLng = parseFloat(document.getElementById('shelterLng').value);
+          const shelterNm = document.getElementById('shelterNm').value;
+          const mapDiv = document.getElementById('map');
+          const center = { lat: shelterLat, lng: shelterLng };
+          const map = new google.maps.Map(mapDiv, {
+              center: center,
+              zoom: 15,
+              draggable: false, // 지도 드래그 비활성화
+              scrollwheel: false, // 스크롤 줌 비활성화
+              disableDoubleClickZoom: true // 더블 클릭 줌 비활성화
+          });
+          
+          if(shelterLat == 0 && shelterLng == 0){
+        	// 유효한 값이 없는 경우 "정보가 없습니다" 메시지 표시
+              const infoWindow = new google.maps.InfoWindow({
+                  content: '위치정보가 없습니다',
+                  position: center
+              });
+              infoWindow.open(map);
+          }else{
+        	  // 마커 추가 예시
+              const marker = new google.maps.Marker({
+                  position: center,
+                  map: map,
+                  title: shelterNm
+              });
+              
+              const infoWindow = new google.maps.InfoWindow({
+                  content: shelterNm
+              });
+              
+              marker.addListener('click', function() {
+                  infoWindow.open(map, marker);
+              });
+          }
+      });
   }
+  
+  function list(){
+	    $("#form1").attr({
+	      action:"/volunteer/list",
+	      method:"get"
+	    });
+	    $("#form1").submit();
+	  }
 
   $(function(){
     $("#bt_list").click(function(){
@@ -160,57 +204,13 @@
     });    
   });
   //유기동물list 페이지로 redirect
-	$(function() {
-		$("#bt_search_animal").click(function() {
-			const care = $("#shelterNm").val(); //관할기관
-			care = care.replace(/\([^)]*\)/g, ''); //괄호와 내부 내용 제거
-			location.href = "/animal/list?care=" + encodeURIComponent(care);
-		});
-	});
-	
-	 function initMap() {
-	      window.addEventListener('DOMContentLoaded', (event) => {
-	          const shelterLat = parseFloat(document.getElementById('shelterLat').value);
-	          const shelterLng = parseFloat(document.getElementById('shelterLng').value);
-	          const shelterNm = document.getElementById('shelterNm').value;
-	          
-	          
-	          if(shelterLat == 0 && shelterLng == 0){
-	        	// 유효한 값이 없는 경우 "위치정보가 없습니다" 메시지 표시
-	        	document.getElementById('map').style.display='none';//위도경도가0이면 지도 숨기기
-	        	const noInfoDiv = document.ElementById('no-info');
-	        	noInfoDiv.style.display = 'block';
-	        	noInfoDiv.innerText = '위치정보가 없습니다.';
-	          }else{
-	        	  const mapDiv = document.getElementById('map');
-		          const center = { lat: shelterLat, lng: shelterLng };
-		          const map = new google.maps.Map(mapDiv, {
-		              center: center,
-		              zoom: 15
-		          });
+$(function() {
+    $("#bt_search_animal").click(function() {
+        let care = $("#shelterNm").val(); //관할기관
+        care = care.replace(/\([^)]*\)/g, ''); //괄호와 내부 내용 제거
+        location.href = "/animal/list?care=" + encodeURIComponent(care);
+    });
+});
 
-		          // 마커 추가 예시
-		          const marker = new google.maps.Marker({
-		              position: center,
-		              map: map,
-		              title: shelterNm
-		          });
-		          
-		          const infoWindow = new google.maps.InfoWindow({
-		              content: shelterNm
-		          });
-		          
-		          marker.addListener('click', function() {
-		              infoWindow.open(map, marker);
-		          });
-	          }
-	         
-	      });
-	  }
-	
-	
-	
-	
-	
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8rEH-63KAr-Tl0v-dzo5BkS6BYvZoaD4&callback=initMap"></script>
