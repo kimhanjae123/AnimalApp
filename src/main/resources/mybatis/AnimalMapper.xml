@@ -72,7 +72,7 @@
 		<if test="status != null and status != ''">
 			and processState like concat('%', #{status}, '%')
 		</if>
-		order by desertionNo desc
+		order by happenDt desc
 		limit #{startIndex}, #{rowCount}
 	</select>
 
