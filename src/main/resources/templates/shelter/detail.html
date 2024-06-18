@@ -105,6 +105,7 @@
             </div>
         </div>
         <div id="map" style="width: 100%;height: 700px;"></div>
+        <div id="no-info" style='flex'></div>
         <br>
     </form>
 </div>
@@ -145,13 +146,7 @@
 		});
 	}
 	
-  function list(){
-    $("#form1").attr({
-      action:"/volunteer/list",
-      method:"get"
-    });
-    $("#form1").submit();
-  }
+  
 
   
   function initMap() {
@@ -159,42 +154,49 @@
     	  const shelterLat = parseFloat(document.getElementById('shelterLat').value);
           const shelterLng = parseFloat(document.getElementById('shelterLng').value);
           const shelterNm = document.getElementById('shelterNm').value;
-          console.log("shelterLat: " + shelterLat);
-          console.log("shelterLng: " + shelterLng);
-          
-          
-          if(shelterLat == 0 && shelterLng == 0){
-        	// 유효한 값이 없는 경우 "정보가 없습니다" 메시지 표시
-              const infoWindow = new google.maps.InfoWindow({
-                  content: '정보가 없습니다',
-                  position: center
-              });
-              infoWindow.open(map);
-          }
-          
           const mapDiv = document.getElementById('map');
           const center = { lat: shelterLat, lng: shelterLng };
           const map = new google.maps.Map(mapDiv, {
               center: center,
-              zoom: 15
-          });
-
-          // 마커 추가 예시
-          const marker = new google.maps.Marker({
-              position: center,
-              map: map,
-              title: shelterNm
+              zoom: 15,
+              draggable: false, // 지도 드래그 비활성화
+              scrollwheel: false, // 스크롤 줌 비활성화
+              disableDoubleClickZoom: true // 더블 클릭 줌 비활성화
           });
           
-          const infoWindow = new google.maps.InfoWindow({
-              content: shelterNm
-          });
-          
-          marker.addListener('click', function() {
-              infoWindow.open(map, marker);
-          });
+          if(shelterLat == 0 && shelterLng == 0){
+        	// 유효한 값이 없는 경우 "정보가 없습니다" 메시지 표시
+              const infoWindow = new google.maps.InfoWindow({
+                  content: '위치정보가 없습니다',
+                  position: center
+              });
+              infoWindow.open(map);
+          }else{
+        	  // 마커 추가 예시
+              const marker = new google.maps.Marker({
+                  position: center,
+                  map: map,
+                  title: shelterNm
+              });
+              
+              const infoWindow = new google.maps.InfoWindow({
+                  content: shelterNm
+              });
+              
+              marker.addListener('click', function() {
+                  infoWindow.open(map, marker);
+              });
+          }
       });
   }
+  
+  function list(){
+	    $("#form1").attr({
+	      action:"/volunteer/list",
+	      method:"get"
+	    });
+	    $("#form1").submit();
+	  }
 
   $(function(){
     $("#bt_list").click(function(){
