@@ -156,7 +156,7 @@
   
   function initMap() {
       window.addEventListener('DOMContentLoaded', (event) => {
-          const shelterLat = parseFloat(document.getElementById('shelterLat').value);
+    	  const shelterLat = parseFloat(document.getElementById('shelterLat').value);
           const shelterLng = parseFloat(document.getElementById('shelterLng').value);
           const shelterNm = document.getElementById('shelterNm').value;
           console.log("shelterLat: " + shelterLat);
@@ -204,7 +204,7 @@
   //유기동물list 페이지로 redirect
 	$(function() {
 		$("#bt_search_animal").click(function() {
-			const care = $("#shelterNm").val(); //관할기관
+			let care = $("#shelterNm").val(); //관할기관
 			care = care.replace(/\([^)]*\)/g, ''); //괄호와 내부 내용 제거
 			location.href = "/animal/list?care=" + encodeURIComponent(care);
 		});
