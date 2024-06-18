@@ -105,7 +105,6 @@
             </div>
         </div>
         <div id="map" style="width: 100%;height: 700px;"></div>
-        <div id="no-info" style='flex'></div>
         <br>
     </form>
 </div>
@@ -154,6 +153,7 @@
           const shelterLat = parseFloat(document.getElementById('shelterLat').value);
           const shelterLng = parseFloat(document.getElementById('shelterLng').value);
           const shelterNm = document.getElementById('shelterNm').value;
+          const shelterCareAddr = document.getElementById('shelterCareAddr').value;
           const mapDiv = document.getElementById('map');
           const center = { lat: shelterLat, lng: shelterLng };
           const map = new google.maps.Map(mapDiv, {
@@ -165,22 +165,22 @@
           });
           
           if(shelterLat == 0 && shelterLng == 0){
-        	// 유효한 값이 없는 경우 "정보가 없습니다" 메시지 표시
+        	// 유효한 값이 없는 경우 "위치정보가 없습니다" 메시지 표시
               const infoWindow = new google.maps.InfoWindow({
                   content: '위치정보가 없습니다',
                   position: center
               });
               infoWindow.open(map);
           }else{
-        	  // 마커 추가 예시
               const marker = new google.maps.Marker({
                   position: center,
                   map: map,
-                  title: shelterNm
+                  title: 'Hello World!',
+                  animation: google.maps.Animation.DROP
               });
               
               const infoWindow = new google.maps.InfoWindow({
-                  content: shelterNm
+                  content: '<div style="font-weight: bold;">' + shelterCareAddr + '</div>'
               });
               
               marker.addListener('click', function() {
