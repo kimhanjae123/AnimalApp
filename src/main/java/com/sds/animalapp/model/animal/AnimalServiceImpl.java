@@ -58,4 +58,9 @@ public class AnimalServiceImpl implements AnimalService {
 	public Animal selectByDesertionNo(String desertionNo) {
 		return animalDAO.selectByDesertionNo(desertionNo);
 	}
+
+	public Integer selectShelter_idxByCareNm(String careNm) {
+		Integer result = animalDAO.selectShelter_idxByCareNm(careNm);
+		return result;
+	}
 }

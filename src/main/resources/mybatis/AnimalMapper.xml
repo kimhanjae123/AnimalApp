@@ -157,5 +157,11 @@
 		#{chargeNm}, #{officetel})
 	</insert>
 
+	<select id="selectShelter_idxByCareNm" parameterType="String"
+		resultType="java.lang.Integer">
+		SELECT shelter_idx
+		FROM shelter
+		WHERE careNm = #{careNm}
+	</select>
 
 </mapper>

@@ -118,10 +118,16 @@
 							<label for="careNm" class="col-sm-12 col-form-label">보호소
 								이름</label>
 							<div class="col-sm-12">
-								<a th:href="@{'/shelter/detail?careNm=' + ${detail.careNm}}"
+								<a th:if="${shelter_idx != null}"
+									th:href="@{'/shelter/detail?careNm=' + ${detail.careNm}}"
 									class="form-control" readonly> <span
 									th:text="${detail.careNm}"></span>
+								</a> <a th:unless="${shelter_idx != null}"
+									th:href="@{'https://search.naver.com/search.naver?query=' + ${detail.careNm}}"
+									target="_blank" class="form-control" readonly> <span
+									th:text="${detail.careNm}"></span>
 								</a>
+
 							</div>
 						</div>
 						<div class="form-group row">

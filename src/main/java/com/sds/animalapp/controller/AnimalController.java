@@ -25,7 +25,7 @@ public class AnimalController {
 	private final AnimalService animalService;
 
 	private final AnimalApiService animalApiService;
-	
+
 	private final MemberService memberService; // MemberService
 
 	@GetMapping("/animal/list")
@@ -81,6 +81,9 @@ public class AnimalController {
 	public String getDetail(Model model, @RequestParam(value = "id") int animal_idx) {
 		Animal animal = animalService.select(animal_idx);
 		int applicantsCount = animalService.countRegistMember(animal_idx); // 수정
+		String careNm = animal.getCareNm();
+		Integer shelter_idx = animalService.selectShelter_idxByCareNm(careNm);
+		model.addAttribute("shelter_idx", shelter_idx);
 		model.addAttribute("detail", animal);
 		model.addAttribute("applicantsCount", applicantsCount); // 추가
 		return "animal/detail";
