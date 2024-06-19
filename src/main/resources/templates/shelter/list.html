@@ -20,18 +20,25 @@
 
     <section>
         <div class="container">
-            <h2>Hover Rows</h2>
-            <select id="sido" th:value="${currentSidoCode}">
-                <option th:selected="${currentSidoCode}==00" value="00">전국</option>
-                <option th:each="sido, i :${sidoList}" th:selected="${currentSidoCode}==${sido.orgCd}" th:value="${sido.orgCd}" th:text="${sido.orgdownNm}"></option>
-            </select>
-            <select id="signgu" th:value="${currentSignguCode}">
-			    <option value="00">시군구:무관</option>
-			    <option th:each="signgu, i :${signguList}" th:value="${signgu.orgCd}" th:selected="${signgu.orgCd == currentSignguCode}" th:text="${signgu.orgdownNm}"></option>
-			</select>
-
-            <input type="text" id="search" th:value="${keyword != null ? keyword : ''}">
-            <button type="button" id="bt_search">조회</button>
+            <h2>동물보호센터</h2>
+            <form class="form-inline">
+                <div class="form-group mx-sm-2 mb-2">
+                    <select class="form-select" id="sido" th:value="${currentSidoCode}">
+                        <option th:selected="${currentSidoCode}==00" value="00">전국</option>
+                        <option th:each="sido, i :${sidoList}" th:selected="${currentSidoCode}==${sido.orgCd}" th:value="${sido.orgCd}" th:text="${sido.orgdownNm}"></option>
+                    </select>
+                </div>
+                <div class="form-group mx-sm-2 mb-2">
+                    <select class="form-select" id="signgu" th:value="${currentSignguCode}">
+                        <option value="00">시군구:무관</option>
+                        <option th:each="signgu, i :${signguList}" th:value="${signgu.orgCd}" th:selected="${signgu.orgCd == currentSignguCode}" th:text="${signgu.orgdownNm}"></option>
+                    </select>
+                </div>
+                <div class="form-group mx-sm-2 mb-2">
+                    <input type="text" class="form-control" id="search" th:value="${keyword != null ? keyword : ''}">
+                </div>
+                <button class="btn btn btn-primary mb-2" type="button" id="bt_search">조회</button>
+            </form>
 
             <table class="table table-striped">
                 <thead>
