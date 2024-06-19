@@ -100,7 +100,8 @@
                 </div>
             </div>
             <div class="col-12">
-            	<button type="button" id="bt_search_animal" class="btn btn-secondary col-12" style="margin: 0 auto;">해당 보호소에 있는 동물 조회</button>
+            	<button type="button" id="bt_search_animal" class="btn btn-secondary col-12 mb-3" >해당 보호소에 있는 동물 조회</button>
+            	<button type="button" id="bt_shelter_list" class="btn btn-secondary col-12" ;>목록으로 돌아가기</button>
             </div>
         </div>
         <div id="map" style="width: 100%;height: 700px;"></div>
@@ -196,11 +197,22 @@
 	    });
 	    $("#form1").submit();
 	  }
+  
+  function shelter_list(){
+	  $("#form1").attr({
+		  action:"/shelter/list",
+		  method:"get"
+	  });
+	  $("#form1").submit();
+  }
 
   $(function(){
     $("#bt_list").click(function(){
       list();      
     });    
+    $("#bt_shelter_list").click(function(){
+    	shelter_list();
+    });
   });
   //유기동물list 페이지로 redirect
 	$(function() {
