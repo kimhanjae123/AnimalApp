@@ -25,4 +25,6 @@ public interface AnimalService {
 	int countRegistMember(int animal_idx); // 한 동물에 대한 입양신청 인원 조회
 
 	Animal selectByDesertionNo(String desertionNo); // 유기번호로 동물 조회
+
+	Integer selectShelter_idxByCareNm(String careNm);
 }

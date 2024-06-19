@@ -30,4 +30,6 @@ public interface AnimalDAO {
 
 	Animal selectByDesertionNo(String desertionNo); // 유기번호로 동물 조회
 
+	Integer selectShelter_idxByCareNm(String careNm);
+
 }
