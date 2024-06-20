@@ -11,6 +11,7 @@ import com.sds.animalapp.domain.InterestShelter;
 
 @Mapper
 public interface InterestShelterDAO {
+<<<<<<< HEAD
     
     void insertInterestShelter(InterestShelter interestShelter);
     
@@ -28,3 +29,13 @@ public interface InterestShelterDAO {
     
     InterestShelter findInterestByShelterIdxAndMemberIdx(@Param("shelter_idx") int shelter_idx, @Param("member_idx") int member_idx);
 }
+=======
+	
+	public void insertInterestShelter(InterestShelter interestShelter);
+	
+	public void deleteInterestShelter(int interest_shetler_idx);
+	
+	public int duplicatedInterestShelter (InterestShelter interestShelter);
+	
+}
+>>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05

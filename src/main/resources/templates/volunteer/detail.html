@@ -85,8 +85,12 @@
 					</div>
 				</div>
 			</div>
+<<<<<<< HEAD
 			<input type="hidden" id="recordNum" name="recordNum"
 				th:value="${registCount}" readonly>
+=======
+			<input type="hidden" id="recordNum" name="recordNum" th:value="${registCount}" readonly>
+>>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
 			<!-- noticeId, id를 둘다 쓰지 않으면 db값이 url에 계속 담김 -->
 			<input type="hidden" name="noticeId"
 				th:value="${detail.vol_event_post_idx}"> <input
@@ -158,8 +162,12 @@ $(document).ready(function() {
             url: "/volunteer/cancel",
             data: { applicationId: noticeId },
             success: function(response) {
+<<<<<<< HEAD
                 alert("신청 취소 완료!");
                 localStorage.removeItem('volunteerNoticeId');
+=======
+                alert(response);
+>>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
                 location.reload();  // 페이지 새로고침 추가
             },
             error: function(xhr) {
@@ -172,6 +180,7 @@ $(document).ready(function() {
     $(document).ready(function() {
         const noticeId = getQueryStringParameter('id');
         const appliedNoticeId = localStorage.getItem('volunteerNoticeId');
+<<<<<<< HEAD
         const recordNum = $('#recordNum').val();
         const applyBtn = $('#applyBtn');
         
@@ -180,6 +189,16 @@ $(document).ready(function() {
             $("#applyBtn").text("신청 취소").removeClass("btn-secondary").addClass("btn-danger").off("click").click(cancelApplication);
         } else {
             console.log("봉사신청버튼 생성");
+=======
+		const recordNum = $('#recordNum').val();
+		const applyBtn = $('#applyBtn');
+		//출처: https://tang-co.tistory.com/86 [쪽파코딩:티스토리]
+        if (recordNum >= 1) {
+        	console.log("신청취소버튼 생성");
+            $("#applyBtn").text("신청 취소").removeClass("btn-secondary").addClass("btn-danger").off("click").click(cancelApplication);
+        } else {
+        	console.log("봉사신청버튼 생성");
+>>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
             $("#applyBtn").text("봉사 신청").removeClass("btn-danger").addClass("btn-secondary").off("click").click(applyApplication);
         }
     });
