@@ -27,23 +27,23 @@
         <div class="my-auto" style="display: flex; justify-content: space-between; align-items: center;">
             <div>
                 <div>
-                    <img src="/site/images/insta4.jpg" class="img-fluid mb-3" alt="" id="profileImage">
+                    <img th:src="${profileImage}" class="img-fluid mb-3" alt="Profile Image" id="profileImage">
                 </div>
             </div>
             <div style="margin-left: 500px;">
                 <div class="subheading mb-3">
-                    <input type="text" placeholder="이름 입력" id="nameInput">
+                    <input type="text" class="form-control" placeholder="이름 입력" id="nameInput">
                 </div>
                 <div class="subheading mb-3">
-                    <input type="text" placeholder="전화번호 입력" id="phoneInput">
+                    <input type="text" class="form-control" placeholder="전화번호 입력" id="phoneInput">
                 </div>
-                <button id="modifyInfoBtn">정보 수정하기</button>
+                <button class="btn btn-primary mb-2" id="modifyInfoBtn">정보 수정하기</button>
                 <div>
-                    <button id="modifyPhotoBtn" style="margin: 15px 0px 0px 0px;">사진 수정하기</button>
+                    <button class="btn btn-primary mb-2" id="modifyPhotoBtn" style="margin: 15px 0px 0px 0px;">사진 수정하기</button>
                     <!-- 사진 업로드 기능 추가 -->
                     <form id="pictureForm" style="display: none;" enctype="multipart/form-data">
                         <input type="file" name="file" id="pictureFileInput">
-                        <button type="button" id="pictureBtn">사진 업로드</button>
+                        <button class="btn btn-primary mb-2" type="button" id="pictureBtn">사진 업로드</button>
                     </form>
                 </div>
             </div>
@@ -196,6 +196,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
 
 // 정보 수정 이벤트 
 $(document).ready(function() {

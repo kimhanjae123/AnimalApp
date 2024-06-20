@@ -109,7 +109,12 @@ public class MemberController {
         if (member == null) {
             return "redirect:/member/login";
         }
-
+        
+        String profileImage = member.getProfile_image_url();
+        log.debug(profileImage);
+        model.addAttribute("profileImage",profileImage);
+        
+        
         // Volunteer Applications
         List<VolunteerApplication> volunteerApplications = volunteerApplicationService.getApplicationsByMemberIdx(member.getMember_idx());
         model.addAttribute("volunteerApplications", volunteerApplications);
