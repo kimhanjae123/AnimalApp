@@ -53,16 +53,10 @@
 
 					<th:block th:if="${session.member != null}"
 						th:with="member_idx=${session.member.member_idx}">
-<<<<<<< HEAD
 						<button type="button" class="btn btn-primary btn-block"
 							name="interest-button"
 							th:attr="data-animal-idx=${detail.animal_idx}, data-member-idx=${session.member.member_idx}, data-kind-cd=${detail.kindCd}, data-popfile=${detail.popfile}"
 							onclick="registerInterestButtonClick(this)">관심 동물 등록</button>
-=======
-						<button type="button" class="btn btn-secondary btn-block"
-							th:onclick="'registerInterest(' + ${detail.animal_idx} + ', ' + ${member_idx} + ')'">관심
-							등록</button>
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
 					</th:block>
 
 				</div>
@@ -226,16 +220,10 @@
 					<!-- 입양 신청 버튼을 누르면 kindCd와 popfile도 adopt_animal db에 담기게 수정 -->
 					<th:block th:if="${session.member != null}"
 						th:with="member_idx=${session.member.member_idx}">
-<<<<<<< HEAD
 						<button type="button" class="btn btn-primary btn-block"
 							name="adopt-button"
 							th:attr="data-animal-idx=${detail.animal_idx}, data-member-idx=${session.member.member_idx}, data-kind-cd=${detail.kindCd}, data-popfile=${detail.popfile}"
 							onclick="registerAdoptButtonClick(this)">입양 신청</button>
-=======
-						<button type="button" class="btn btn-secondary btn-block"
-							th:onclick="'registerAdoptConfirmation(' + ${detail.animal_idx} + ', ' + ${member_idx} + ')'">입양
-							신청</button>
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
 					</th:block>
 
 				</div>

@@ -20,33 +20,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class InterestShelterController {
-<<<<<<< HEAD
-=======
-	
-	@Autowired
-	private InterestShelterService interestShelterService;
-	
-	@PostMapping("/shelter/registInterestShelter")
-	@ResponseBody
-	public String registInterestShelter(
-			@RequestParam("shelter_idx") int shelter_idx,
-			@RequestParam("member_idx") int member_idx) {
-		
-		
-		InterestShelter interestShelter = new InterestShelter();
-        interestShelter.setShelter_idx(shelter_idx);
-        interestShelter.setMember_idx(member_idx);
-		
-			
-		try {
-			interestShelterService.insertInterestShelter(interestShelter);
-			return "보호소 관심등록이 완료되었습니다.";
-		}catch (IllegalArgumentException e) {
-			return "이미 등록된 관심동물 입니다.";
-		}
-	}
-	
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
 
     @Autowired
     private InterestShelterService interestShelterService;

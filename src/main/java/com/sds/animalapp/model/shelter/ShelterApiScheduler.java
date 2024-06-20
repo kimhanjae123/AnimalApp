@@ -16,13 +16,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.mysql.cj.log.Log;
 import com.sds.animalapp.domain.Shelter;
 
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ShelterApiScheduler {
@@ -52,20 +49,14 @@ public class ShelterApiScheduler {
 	private void callShelterApiAndUpdateLastExecutionTime() {
 		try {
 			List shelterAllList = shelterApiService.getShelterList();
-
-			// shelterAllList가 null인지 확인하고, null이 아닌 경우에만 아래 작업을 진행합니다.
-			if (shelterAllList != null && !shelterAllList.isEmpty()) {
-			   shelterService.delete(shelterAllList);
-			   shelterService.insert(shelterAllList);
-
-			   List<Shelter> allShelterList = shelterService.getAllRecord(); // 테이블 모든 레코드 불러오기
-			   shelterService.mapSigngu(allShelterList); // orgCd컬럼에 시군구 코드 update
-
-			   LocalDateTime lastExecutionTime = LocalDateTime.now();
-			   writeLastExecutionTime(lastExecutionTime);
-			}else {
-				log.info("Shelter API request failed");
-			}
+	        shelterService.delete(shelterAllList);
+	        shelterService.insert(shelterAllList);
+	        
+	        List<Shelter> allShelterList = shelterService.getAllRecord();//테이블 모든 레코드 불러오기
+	        shelterService.mapSigngu(allShelterList);//orgCd컬럼에 시군구 코드 update
+	        
+	        lastExecutionTime = LocalDateTime.now();
+	        writeLastExecutionTime(lastExecutionTime);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

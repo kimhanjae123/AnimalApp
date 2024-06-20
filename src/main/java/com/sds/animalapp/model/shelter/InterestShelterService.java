@@ -12,13 +12,9 @@ public interface InterestShelterService {
 	// 마음에 드는 보호소 삭제
 	public void deleteInterestShelter(int interest_shetler_idx);
 	
-<<<<<<< HEAD
 	// 마음에 드는 보호소 중복 확인
 	public boolean duplicatedInterestShelter(int shelter_idx,int member_idx);
 	
-=======
-	public boolean duplicatedInterestShelter (InterestShelter interestShelter);
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
 	
 	List<InterestShelter> getAllInterests();
     List<InterestShelter> getInterestByMemberIdx(int member_idx);

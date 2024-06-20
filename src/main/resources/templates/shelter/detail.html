@@ -25,18 +25,12 @@
 				<div class="col-sm-12">
 					<th:block th:if="${session.member != null}"
 						th:with="member_idx=${session.member.member_idx}">
-<<<<<<< HEAD
 						<button type="button" class="btn btn-primary btn-block"
 							id="interest-button"
 							th:data-shelter-idx="${detail.shelter_idx}"
 							th:data-member-idx="${member_idx}"
 							th:data-orgNm="${detail.orgNm}"
 							th:data-careNm="${detail.careNm}">관심 보호소 등록</button>
-=======
-						<button type="button" class="btn btn-secondary btn-block"
-							th:onclick="'registInterestShelter(' + ${detail.shelter_idx} + ', ' + ${member_idx} + ')'">관심
-							등록</button>
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
 					</th:block>
 				</div>
 		</div>
@@ -120,7 +114,6 @@
 </body>
 </html>
 <script th:inline="javascript">
-<<<<<<< HEAD
 $(document).ready(function() {
     console.log("준비 완료");
 
@@ -298,101 +291,6 @@ function updateInterestShelterButton(shelterIdx, isInterested) {
               });
           }
       });
-  }
-  
-  function list(){
-	    $("#form1").attr({
-	      action:"/volunteer/list",
-	      method:"get"
-	    });
-	    $("#form1").submit();
-	  }
-  
-  function shelter_list(){
-	  $("#form1").attr({
-		  action:"/shelter/list",
-		  method:"get"
-	  });
-	  $("#form1").submit();
-=======
-	function registInterestShelter(shelter_idx,member_idx){
-		
-		$.ajax({
-			url : '/shelter/registInterestShelter',
-			type:"POST",
-			data : {
-				shelter_idx : shelter_idx,
-				member_idx : member_idx
-			},
-			success : function(response){
-				alert("관심 보호소 등록 완료");
-			},
-			error:function(error){
-				alert("관심 보호소 등록 실패");
-			}
-		});
-	}
-	
-	function getShelterList(careNm){
-		$.ajax({
-			url : '/rest/shelter',
-			type:"GET",
-			data:{
-				care_nm : careNm
-			},
-			success:function(response){
-				console.log(response);
-			},
-			error : function(xhr,status,error){
-				console.error('Error',status,error);
-			}
-		});
-	}
-	
-  
-
-  
-  function initMap() {
-      window.addEventListener('DOMContentLoaded', (event) => {
-    	  const shelterLat = parseFloat(document.getElementById('shelterLat').value);
-          const shelterLng = parseFloat(document.getElementById('shelterLng').value);
-          const shelterNm = document.getElementById('shelterNm').value;
-          const shelterCareAddr = document.getElementById('shelterCareAddr').value;
-          const mapDiv = document.getElementById('map');
-          const center = { lat: shelterLat, lng: shelterLng };
-          const map = new google.maps.Map(mapDiv, {
-              center: center,
-              zoom: 15,
-              draggable: false, // 지도 드래그 비활성화
-              scrollwheel: false, // 스크롤 줌 비활성화
-              disableDoubleClickZoom: true // 더블 클릭 줌 비활성화
-          });
-          
-          if(shelterLat == 0 && shelterLng == 0){
-        	// 유효한 값이 없는 경우 "위치정보가 없습니다" 메시지 표시
-              const infoWindow = new google.maps.InfoWindow({
-                  content: '위치정보가 없습니다',
-                  position: center
-              });
-              infoWindow.open(map);
-          }else{
-              const marker = new google.maps.Marker({
-                  position: center,
-                  map: map,
-                  title: 'Hello World!',
-                  animation: google.maps.Animation.DROP
-              });
-              
-              const infoWindow = new google.maps.InfoWindow({
-                  content: '<div style="font-weight: bold;">' + shelterCareAddr + '</div>'
-              });
-              
-              marker.addListener('click', function() {
-                  infoWindow.open(map, marker);
-              });
-          }
-      });
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
   }
   
   function list(){

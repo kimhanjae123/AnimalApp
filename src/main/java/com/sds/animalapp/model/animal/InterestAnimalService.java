@@ -15,13 +15,9 @@ public interface InterestAnimalService {
 
 	// 관심 동물 중복 확인
 	public boolean checkDuplicateInterestAnimal(InterestAnimal interestAnimal);
-<<<<<<< HEAD
 	
 	List<InterestAnimal> getAllInterests();
     List<InterestAnimal> getInterestByMemberIdx(int member_idx);
     InterestAnimal findById(int interest_animal_idx);
     InterestAnimal findInterestByAnimalIdxAndMemberIdx(int animal_idx, int member_idx);
 }
-=======
-}
->>>>>>> aafef1acfb92816cd30bb6d72f90720bf08eba05
