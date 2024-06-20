@@ -35,15 +35,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sds.animalapp.domain.AdoptAnimal;
+import com.sds.animalapp.domain.InterestAnimal;
+import com.sds.animalapp.domain.InterestShelter;
 import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.domain.MemberDetail;
 import com.sds.animalapp.domain.Sns;
 import com.sds.animalapp.domain.VolunteerApplication;
+import com.sds.animalapp.model.animal.AdoptAnimalService;
+import com.sds.animalapp.model.animal.InterestAnimalService;
 import com.sds.animalapp.model.member.KakaoLoginService;
 import com.sds.animalapp.model.member.MemberService;
 import com.sds.animalapp.model.member.RoleService;
 import com.sds.animalapp.model.member.SnsService;
+import com.sds.animalapp.model.shelter.InterestShelterService;
 import com.sds.animalapp.model.volunteer.VolunteerApplicationService;
+import com.sds.animalapp.model.volunteer.VolunteerService;
 import com.sds.animalapp.sns.KaKaoOAuthToken;
 import com.sds.animalapp.sns.NaverLogin;
 import com.sds.animalapp.sns.NaverOAuthToken;
@@ -73,6 +80,18 @@ public class MemberController {
 
     @Autowired
     private VolunteerApplicationService volunteerApplicationService;
+    
+    @Autowired
+    private VolunteerService volunteerService;
+    
+    @Autowired
+    private AdoptAnimalService adoptAnimalService;
+    
+    @Autowired
+    private InterestAnimalService interestAnimalService;
+    
+    @Autowired 
+    private InterestShelterService interestShelterService;
 
     @Value("${upload.directory}")
     private String uploadDirectory;
@@ -85,16 +104,31 @@ public class MemberController {
  
     @GetMapping("/member/mypage")
     public String getMyPage(Model model, HttpSession session) {
-    	// 로그인 값이 없음 못하게
+        // 로그인 값이 없음 못하게
         Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return "redirect:/member/login";
         }
-        
+
+        // Volunteer Applications
         List<VolunteerApplication> volunteerApplications = volunteerApplicationService.getApplicationsByMemberIdx(member.getMember_idx());
         model.addAttribute("volunteerApplications", volunteerApplications);
+        
+        // Adopt Animals
+        List<AdoptAnimal> adoptAnimals = adoptAnimalService.getAdoptByMemberIdx(member.getMember_idx());
+        model.addAttribute("adoptAnimals", adoptAnimals);
+       
+        // Interest Animals 
+        List<InterestAnimal> interestAnimals =  interestAnimalService.getInterestByMemberIdx(member.getMember_idx());
+        model.addAttribute("interestAnimals", interestAnimals);
+        
+        // 	Interest Shelters 
+        List<InterestShelter> interestShelters =  interestShelterService.getInterestByMemberIdx(member.getMember_idx());
+        model.addAttribute("interestShelters", interestShelters);
+        
         return "member/mypage";
     }
+
 
     
     // 해결 방법 찾음 application.properties에 

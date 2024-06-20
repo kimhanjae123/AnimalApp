@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>봉사 활동 세부 정보</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- 헤더 링크 -->
-    <th:block th:replace="~{fragments/header_link :: header_link}" />
+<meta charset="UTF-8">
+<title>봉사 활동 세부 정보</title>
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- 헤더 링크 -->
+<th:block th:replace="~{fragments/header_link :: header_link}" />
 </head>
 <body>
-    <!-- Header Section Begin -->
+	<!-- Header Section Begin -->
 	<th:block th:replace="~{fragments/header :: header}" />
 	<!-- Header End -->
 	<div class="container">
-        <form id="form1" class="form-horizontal" method="post" th:action="@{/volunteer/apply}">
-            <!-- 제목 입력란 -->
+		<form id="form1" class="form-horizontal" method="post"
+			th:action="@{/volunteer/apply}">
+			<!-- 제목 입력란 -->
 			<div class="form-group row">
 				<label for="title" class="col-sm-12 col-form-label">제목</label>
 				<div class="col-sm-12">
@@ -26,7 +31,7 @@
 				</div>
 			</div>
 
-            <!-- 날짜 및 시간, 모집 인원, 보호소 -->
+			<!-- 날짜 및 시간, 모집 인원, 보호소 -->
 			<div class="form-group row">
 				<div class="col-4">
 					<div class="form-group row">
@@ -38,7 +43,7 @@
 						</div>
 					</div>
 
-                   
+
 
 					<div class="form-group row">
 						<div class="col-6" style="padding: 0;">
@@ -48,7 +53,7 @@
 								<input type="number" class="form-control" id="recruitCount"
 									name="recruitCount" th:value="${detail.recruit_count}"
 									placeholder="모집 인원을 입력해 주세요." readonly>
-							</div>										
+							</div>
 						</div>
 						<div class="col-6" style="padding: 0;">
 							<label for="participants" class="col-sm-12 col-form-label">신청인원</label>
@@ -56,10 +61,10 @@
 								<input type="number" class="form-control" id="registCount"
 									name="registCount" th:value="${registCount}"
 									placeholder="신청 인원 수 입니다." readonly>
-							</div>						
-						</div>						
+							</div>
+						</div>
 					</div>
-                    <div class="form-group row">
+					<div class="form-group row">
 						<label for="location" class="col-sm-12 col-form-label">보호소</label>
 						<div class="col-sm-12">
 							<input type="text" class="form-control" id="shelterName"
@@ -68,7 +73,7 @@
 						</div>
 					</div>
 				</div>
-                <div class="col-8">
+				<div class="col-8">
 					<div class="form-group row">
 						<label for="details" class="col-sm-12 col-form-label">세부
 							내용 작성란</label>
@@ -80,30 +85,35 @@
 					</div>
 				</div>
 			</div>
-			<input type="hidden" id="recordNum" name="recordNum" th:value="${registCount}" readonly>
+			<input type="hidden" id="recordNum" name="recordNum"
+				th:value="${registCount}" readonly>
 			<!-- noticeId, id를 둘다 쓰지 않으면 db값이 url에 계속 담김 -->
-			<input type="hidden" name="noticeId" th:value="${detail.vol_event_post_idx}"> 
-			<input type="hidden" name="id" th:value="${detail.vol_event_post_idx}">
-			<button type="button" id="applyBtn" class="btn btn-secondary col-12 mb-3">봉사 신청</button>
-    		<button type="button" class="btn btn-secondary col-12" id="bt_list">목록으로 돌아가기</button>
+			<input type="hidden" name="noticeId"
+				th:value="${detail.vol_event_post_idx}"> <input
+				type="hidden" name="id" th:value="${detail.vol_event_post_idx}">
+			<button type="button" id="applyBtn"
+				class="btn btn-secondary col-12 mb-3">봉사 신청</button>
+			<button type="button" class="btn btn-secondary col-12" id="bt_list">목록으로
+				돌아가기</button>
 		</form>
-    </div>
+	</div>
 </body>
 </html>
+
+
 <script type="text/javascript">
-function list() {
-    $("#form1").attr({
-      action: "/volunteer/list",
-      method: "get"
-    });
-    $("#form1").submit();
-}
+$(document).ready(function() {
+    function list() {
+        $("#form1").attr({
+          action: "/volunteer/list",
+          method: "get"
+        });
+        $("#form1").submit();
+    }
 
-$(function(){
     $("#bt_list").click(function() {
-        list();      
+        list();
     });
-
 
     function getQueryStringParameter(name) {
         const urlParams = new URLSearchParams(window.location.search);
@@ -124,8 +134,7 @@ $(function(){
             url: "/volunteer/apply",
             data: { id: noticeId },
             success: function(response) {
-                alert(response);
-             	// 로컬 스토리지에 noticeId 저장, 신청 상태도 넣어놈 https://velog.io/@bellecode20/localStorage%EC%97%90-state-%EC%A0%80%EC%9E%A5%ED%95%98%EA%B8%B0 
+                alert("신청 완료!");
                 localStorage.setItem('volunteerNoticeId', noticeId);
                 location.reload();  // 페이지 새로고침 추가
             },
@@ -149,35 +158,32 @@ $(function(){
             url: "/volunteer/cancel",
             data: { applicationId: noticeId },
             success: function(response) {
-                alert(response);
+                alert("신청 취소 완료!");
+                localStorage.removeItem('volunteerNoticeId');
                 location.reload();  // 페이지 새로고침 추가
             },
             error: function(xhr) {
-            	//https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseText
                 alert(xhr.responseText);
             }
         });
     }
 
- // 페이지 로드 시 로컬 스토리지의 상태에 따라 버튼 설정
+    // 페이지 로드 시 로컬 스토리지의 상태에 따라 버튼 설정
     $(document).ready(function() {
         const noticeId = getQueryStringParameter('id');
         const appliedNoticeId = localStorage.getItem('volunteerNoticeId');
-		const recordNum = $('#recordNum').val();
-		const applyBtn = $('#applyBtn');
-		//출처: https://tang-co.tistory.com/86 [쪽파코딩:티스토리]
+        const recordNum = $('#recordNum').val();
+        const applyBtn = $('#applyBtn');
+        
         if (recordNum >= 1) {
-        	console.log("신청취소버튼 생성");
+            console.log("신청취소버튼 생성");
             $("#applyBtn").text("신청 취소").removeClass("btn-secondary").addClass("btn-danger").off("click").click(cancelApplication);
         } else {
-        	console.log("봉사신청버튼 생성");
+            console.log("봉사신청버튼 생성");
             $("#applyBtn").text("봉사 신청").removeClass("btn-danger").addClass("btn-secondary").off("click").click(applyApplication);
         }
     });
 });
-
-
-
 </script>
 
 
@@ -187,5 +193,5 @@ $(function(){
 	
 	https://getbootstrap.com/docs/4.0/components/buttons/ danger 여기서 들고옴 기억 안 날 때 보기
  -->
-<!-- https://take-it-into-account.tistory.com/99 --> 
+<!-- https://take-it-into-account.tistory.com/99 -->
 <!-- .text 이렇게 이어 붙이기 가능 -->

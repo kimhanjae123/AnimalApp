@@ -1,5 +1,8 @@
 package com.sds.animalapp.model.animal;
 
+import java.util.List;
+
+import com.sds.animalapp.domain.AdoptAnimal;
 import com.sds.animalapp.domain.InterestAnimal;
 
 public interface InterestAnimalService {
@@ -12,4 +15,9 @@ public interface InterestAnimalService {
 
 	// 관심 동물 중복 확인
 	public boolean checkDuplicateInterestAnimal(InterestAnimal interestAnimal);
+	
+	List<InterestAnimal> getAllInterests();
+    List<InterestAnimal> getInterestByMemberIdx(int member_idx);
+    InterestAnimal findById(int interest_animal_idx);
+    InterestAnimal findInterestByAnimalIdxAndMemberIdx(int animal_idx, int member_idx);
 }

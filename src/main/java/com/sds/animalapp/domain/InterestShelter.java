@@ -8,5 +8,8 @@ public class InterestShelter {
 	private int interest_shelter_idx;
 	private int member_idx;
 	private int shelter_idx;
-	private String care_name;
+	
+	// 추가
+	private String orgNm; 
+	private String careNm;
 }

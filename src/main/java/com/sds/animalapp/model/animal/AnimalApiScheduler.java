@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -48,8 +47,6 @@ public class AnimalApiScheduler {
 
 			// 기존 데이터 업데이트 및 새 데이터 추가 로직
 			for (Animal animal : animalList) {
-				animal.setSexCd(convertSexCd(animal.getSexCd()));
-				animal.setNeuterYn(convertNeuterYn(animal.getNeuterYn()));
 				Animal existingAnimal = animalService.selectByDesertionNo(animal.getDesertionNo());
 				if (existingAnimal == null) {
 					// 새로운 데이터라면 추가
@@ -103,31 +100,5 @@ public class AnimalApiScheduler {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	private String convertSexCd(String sexCd) {
-	    switch (sexCd) {
-	        case "M":
-	            return "남";
-	        case "F":
-	            return "여";
-	        default:
-	            return "-";
-	    }
-	}
-	
-	private String convertNeuterYn(String neuterYn) {
-	    List<String> validValues = Arrays.asList("Y", "N", "U");
-	    if (validValues.contains(neuterYn)) {
-	        switch (neuterYn) {
-	            case "Y":
-	                return "완료";
-	            case "N":
-	                return "미완료";
-	            case "U":
-	                return "미상";
-	        }
-	    }
-	    return "-";
 	}
 }

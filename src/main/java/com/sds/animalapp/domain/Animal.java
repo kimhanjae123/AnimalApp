@@ -30,6 +30,4 @@ public class Animal {
 	private String orgNm;// 관할기관
 	private String chargeNm;// 담당자
 	private String officetel;// 담당자 연락처
-
-	private Integer shelter_idx;
 }
