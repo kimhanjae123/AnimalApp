@@ -25,8 +25,8 @@
 
     <section class="resume-section p-3 p-lg-5 d-flex d-column align-items-center justify-content-center" id="about">
     <div style="display: flex; align-items: center;">
-        <div style="text-align: center;">
-            <img th:src="${profileImage}" class="img-fluid mb-3" alt="Profile Image" id="profileImage" style="max-width:75%; height: auto;">
+        <div style="text-align: center; width: 300px;">
+            <img th:src="${profileImage}" class="img-fluid mb-3" alt="Profile Image" id="profileImage">
         </div>
         <div style="margin-left: 20px;">
             <div class="subheading mb-3">
@@ -63,124 +63,7 @@
         <!-- mypage에 봉사신청 -->
         <th:block th:replace="~{member/mypage_vol :: mypage_vol}" />
 
-    <section id="insta" class="my-5">
-        <div class="row g-0 py-5">
-            <div class="col instagram-item  text-center position-relative">
-                <div class="icon-overlay d-flex justify-content-center position-absolute">
-                    <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-                </div>
-                <a href="#"> <img src="/site/images/insta1.jpg" alt="insta-img" class="img-fluid rounded-3">
-                </a>
-            </div>
-            <div class="col instagram-item  text-center position-relative">
-                <div class="icon-overlay d-flex justify-content-center position-absolute">
-                    <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-                </div>
-                <a href="#"> <img src="/site/images/insta2.jpg" alt="insta-img" class="img-fluid rounded-3">
-                </a>
-            </div>
-            <div class="col instagram-item  text-center position-relative">
-                <div class="icon-overlay d-flex justify-content-center position-absolute">
-                    <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-                </div>
-                <a href="#"> <img src="/site/images/insta3.jpg" alt="insta-img" class="img-fluid rounded-3">
-                </a>
-            </div>
-            <div class="col instagram-item  text-center position-relative">
-                <div class="icon-overlay d-flex justify-content-center position-absolute">
-                    <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-                </div>
-                <a href="#"> <img src="/site/images/insta4.jpg" alt="insta-img" class="img-fluid rounded-3">
-                </a>
-            </div>
-            <div class="col instagram-item  text-center position-relative">
-                <div class="icon-overlay d-flex justify-content-center position-absolute">
-                    <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-                </div>
-                <a href="#"> <img src="/site/images/insta5.jpg" alt="insta-img" class="img-fluid rounded-3">
-                </a>
-            </div>
-            <div class="col instagram-item  text-center position-relative">
-                <div class="icon-overlay d-flex justify-content-center position-absolute">
-                    <iconify-icon class="text-white" icon="la:instagram"></iconify-icon>
-                </div>
-                <a href="#"> <img src="/site/images/insta6.jpg" alt="insta-img" class="img-fluid rounded-3">
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <footer id="footer" class="my-5">
-        <div class="container py-5 my-5">
-            <div class="row">
-
-                <div class="col-md-3">
-                    <div class="footer-menu">
-                        <img src="/site/images/logo.png" alt="logo">
-                        <p class="blog-paragraph fs-6 mt-3">Subscribe to our newsletter to get updates about our grand offers.</p>
-                        <div class="social-links">
-                            <ul class="d-flex list-unstyled gap-2">
-                                <li class="social"><a href="#"> <iconify-icon class="social-icon" icon="ri:facebook-fill"></iconify-icon>
-                                </a></li>
-                                <li class="social"><a href="#"> <iconify-icon class="social-icon" icon="ri:twitter-fill"></iconify-icon>
-                                </a></li>
-                                <li class="social"><a href="#"> <iconify-icon class="social-icon" icon="ri:pinterest-fill"></iconify-icon>
-                                </a></li>
-                                <li class="social"><a href="#"> <iconify-icon class="social-icon" icon="ri:instagram-fill"></iconify-icon>
-                                </a></li>
-                                <li class="social"><a href="#"> <iconify-icon class="social-icon" icon="ri:youtube-fill"></iconify-icon>
-                                </a></li>
-
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-menu">
-                        <h3>Quick Links</h3>
-                        <ul class="menu-list list-unstyled">
-                            <li class="menu-item"><a href="#" class="nav-link">Home</a>
-                            </li>
-                            <li class="menu-item"><a href="#" class="nav-link">About us</a></li>
-                            <li class="menu-item"><a href="#" class="nav-link">Offer</a></li>
-                            <li class="menu-item"><a href="#" class="nav-link">Services</a>
-                            </li>
-                            <li class="menu-item"><a href="#" class="nav-link">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-menu">
-                        <h3>Help Center</h3>
-                        <ul class="menu-list list-unstyled">
-                            <li class="menu-item"><a href="#" class="nav-link">FAQs</a>
-                            </li>
-                            <li class="menu-item"><a href="#" class="nav-link">Payment</a>
-                            </li>
-                            <li class="menu-item"><a href="#" class="nav-link">Returns & Refunds</a></li>
-                            <li class="menu-item"><a href="#" class="nav-link">Checkout</a>
-                            </li>
-                            <li class="menu-item"><a href="#" class="nav-link">Delivery Information</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div>
-                        <h3>Our Newsletter</h3>
-                        <p class="blog-paragraph fs-6">Subscribe to our newsletter to get updates about our grand offers.</p>
-                        <div class="search-bar border rounded-pill border-dark-subtle px-2">
-                            <form class="text-center d-flex align-items-center" action="" method="">
-                                <input type="text" class="form-control border-0 bg-transparent" placeholder="Enter your email here" />
-                                <iconify-icon class="send-icon" icon="tabler:location-filled"></iconify-icon>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </footer>
-
+    
     <!-- mypage에 봉사신청 -->
     <th:block th:replace="~{fragments/footer :: footer}" />
 
@@ -283,6 +166,8 @@ $(document).ready(function() {
         event.preventDefault(); // 기본 폼 제출 동작 막기
         const form = $(this);
         const applicationId = form.find("input[name='applicationId']").val();
+        const notice_id = form.find("input[name='notice_id']").val();
+        
         if (!applicationId) {
             alert("봉사활동 신청 ID를 찾을 수 없습니다.");
             return;
@@ -290,7 +175,10 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "/volunteer/cancel",
-            data: { applicationId: applicationId },
+            data: { 
+            	applicationId: applicationId,
+            	notice_id: notice_id
+            },
             success: function(response) {
                 alert("신청 취소 완료!");
                 localStorage.removeItem('volunteerNoticeId');
