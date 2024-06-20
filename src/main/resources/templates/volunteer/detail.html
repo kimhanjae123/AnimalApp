@@ -156,7 +156,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: "/volunteer/cancel",
-            data: { applicationId: noticeId },
+            data: { notice_id: noticeId },
             success: function(response) {
                 alert("신청 취소 완료!");
                 localStorage.removeItem('volunteerNoticeId');

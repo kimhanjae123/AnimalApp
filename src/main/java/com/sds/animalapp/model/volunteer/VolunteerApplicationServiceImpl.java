@@ -19,8 +19,8 @@ public class VolunteerApplicationServiceImpl implements VolunteerApplicationServ
     }
 
     @Override
-    public void cancel(int noticeId, int member_idx) {
-        volunteerApplicationDAO.delete(noticeId, member_idx);
+    public void cancel(int notice_id, int member_idx) {
+        volunteerApplicationDAO.delete(notice_id, member_idx);
     }
 
     @Override

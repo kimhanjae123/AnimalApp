@@ -7,7 +7,7 @@ import com.sds.animalapp.domain.VolunteerNotice;
 
 public interface VolunteerApplicationService {
     void apply(VolunteerApplication application);
-    void cancel(int noticeId, int member_idx);
+    void cancel(int notice_id, int member_idx);
     int getRecordNum(int noticeId, int member_idx);
     List<VolunteerApplication> getAllApplications();
     List<VolunteerApplication> getApplicationsByMemberIdx(int memberIdx);

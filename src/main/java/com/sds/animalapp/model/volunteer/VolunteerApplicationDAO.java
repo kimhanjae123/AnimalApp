@@ -10,7 +10,7 @@ import com.sds.animalapp.domain.VolunteerApplication;
 @Mapper
 public interface VolunteerApplicationDAO {
     int insert(VolunteerApplication application);
-    int delete(@Param("id") int id, @Param("member_idx") int member_idx);
+    int delete(@Param("notice_id") int notice_id, @Param("member_idx") int member_idx);
     VolunteerApplication findApplication(@Param("title") String title, @Param("vol_date") String vol_date, @Param("noticeId") int noticeId);
     List<VolunteerApplication> findByNoticeId(int noticeId);
     List<VolunteerApplication> findByMemberIdx(int memberIdx);
