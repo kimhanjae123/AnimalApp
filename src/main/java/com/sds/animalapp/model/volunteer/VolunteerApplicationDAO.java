@@ -11,10 +11,10 @@ import com.sds.animalapp.domain.VolunteerApplication;
 public interface VolunteerApplicationDAO {
     int insert(VolunteerApplication application);
     int delete(@Param("notice_id") int notice_id, @Param("member_idx") int member_idx);
-    VolunteerApplication findApplication(@Param("title") String title, @Param("vol_date") String vol_date, @Param("noticeId") int noticeId);
-    List<VolunteerApplication> findByNoticeId(int noticeId);
-    List<VolunteerApplication> findByMemberIdx(int memberIdx);
+    VolunteerApplication findApplication(@Param("title") String title, @Param("vol_date") String vol_date, @Param("notice_id") int notice_id);
+    List<VolunteerApplication> findByNoticeId(int notice_id);
+    List<VolunteerApplication> findByMemberIdx(int member_idx);
     List<VolunteerApplication> findAll();
-    VolunteerApplication findApplicationById(int id); // 추가된 메서드
-    int selectCount(@Param("noticeId") int noticeId, @Param("member_idx") int member_idx);
+    VolunteerApplication findApplicationById(int member_idx); // 추가된 메서드
+    int selectCount(@Param("notice_id") int notice_id, @Param("member_idx") int member_idx);
 }

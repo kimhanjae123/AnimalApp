@@ -109,6 +109,7 @@
         </div>
         <div id="map" style="width: 100%;height: 700px;"></div>
         <br>
+        <input type="hidden" id="recordNum" name="recordNum" th:value="${recordNum}" readonly>
     </form>
 </div>
 </body>
@@ -122,29 +123,11 @@ $(document).ready(function() {
     var shelterIdx = button.data('shelter-idx');
     var memberIdx = button.data('member-idx');
 
-    // 서버에서 관심 보호소 상태 확인
-    $.ajax({
-        type: 'POST',
-        url: '/shelter/checkInterestShelter',
-        data: {
-            shelter_idx: shelterIdx,
-            member_idx: memberIdx
-        },
-        success: function(response) {
-            updateInterestShelterButton(shelterIdx, response);
-        },
-        error: function(error) {
-            console.error('잘못된 interest 요청~', error);
-        }
-    });
-
-    // 로컬 스토리지 상태 확인
-    var interestShelterIdx = localStorage.getItem('interestShelterId');
-    var interestShelterApplied = localStorage.getItem('interestShelterApplied') === 'true';
-    if (interestShelterApplied && interestShelterIdx) {
-        updateInterestShelterButton(interestShelterIdx, true);
+    var recordNum = $('#recordNum').val();
+    if (recordNum >= 1) {
+        updateInterestShelterButton(true);
     } else {
-        updateInterestShelterButton(interestShelterIdx, false);
+        updateInterestShelterButton(false);
     }
 });
 
@@ -185,14 +168,10 @@ function registerInterestShelter(shelterIdx, memberIdx, orgNm, careNm, button) {
         },
         success: function(response) {
             alert('관심 보호소 등록이 완료되었습니다.');
-            localStorage.setItem('interestShelterId', shelterIdx);
-            localStorage.setItem('interestShelterApplied', 'true');
-            updateInterestShelterButton(shelterIdx, true);
-            button.disabled = false;
+            location.reload();  // 페이지 새로고침 추가
         },
         error: function(error) {
             alert('관심 보호소 등록에 실패했습니다.');
-            button.disabled = false; // 실패 시 버튼 다시 활성화
         }
     });
 }
@@ -220,27 +199,21 @@ function cancelInterestShelter(button) {
             },
             success: function(response) {
                 alert('관심 보호소 등록을 취소했습니다.');
-                localStorage.removeItem('interestShelterId');
-                localStorage.setItem('interestShelterApplied', 'false');
-                updateInterestShelterButton(shelterIdx, false);
-                button.disabled = false;
+                location.reload();  // 페이지 새로고침 추가
             },
             error: function(error) {
                 alert('관심 보호소 등록 취소에 실패했습니다.');
-                button.disabled = false; // 실패 시 버튼 다시 활성화
             }
         });
     } else {
-        button.disabled = false; // 취소를 누르면 버튼 다시 활성화
     }
 }
 
 // 버튼 상태 업데이트
-function updateInterestShelterButton(shelterIdx, isInterested) {
-    console.log("updateInterestShelterButton called with isInterested: " + isInterested);
+function updateInterestShelterButton(shelterIdx) {
     var button = $('#interest-button');
     button.off("click"); // 기존 클릭 이벤트 제거
-    if (isInterested) {
+    if (shelterIdx) {
         button.text("관심 등록 취소").removeClass("btn-primary").addClass("btn-danger").one("click", function() {
             cancelInterestShelter(this);
         });

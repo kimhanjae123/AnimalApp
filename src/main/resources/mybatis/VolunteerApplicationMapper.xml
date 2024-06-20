@@ -3,7 +3,7 @@
 <mapper namespace="com.sds.animalapp.model.volunteer.VolunteerApplicationDAO">
     <insert id="insert" parameterType="VolunteerApplication">
         INSERT INTO volunteer_application (title, vol_date, notice_id, member_idx)
-        VALUES (#{title}, #{vol_date}, #{noticeId}, #{memberIdx})
+        VALUES (#{title}, #{vol_date}, #{notice_id}, #{member_idx})
     </insert>
 
     <delete id="delete" parameterType="map">
@@ -12,7 +12,7 @@
 
     <select id="findApplication" parameterType="map" resultType="VolunteerApplication">
         SELECT * FROM volunteer_application
-        WHERE title = #{title} AND vol_date = #{vol_date} AND notice_id = #{noticeId}
+        WHERE title = #{title} AND vol_date = #{vol_date} AND notice_id = #{notice_id}
     </select>
 
     <select id="findApplicationById" parameterType="int" resultType="VolunteerApplication">
@@ -20,11 +20,11 @@
     </select>
 
     <select id="findByNoticeId" parameterType="int" resultType="VolunteerApplication">
-        SELECT * FROM volunteer_application WHERE notice_id = #{noticeId}
+        SELECT * FROM volunteer_application WHERE notice_id = #{notice_id}
     </select>
 
     <select id="findByMemberIdx" parameterType="int" resultType="VolunteerApplication">
-        SELECT * FROM volunteer_application WHERE member_idx = #{memberIdx}
+        SELECT * FROM volunteer_application WHERE member_idx = #{member_idx}
     </select>
 
     <select id="findAll" resultType="VolunteerApplication">
@@ -33,6 +33,6 @@
 
     <select id="selectCount" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM volunteer_application
-        WHERE member_idx = #{member_idx} AND notice_id = #{noticeId}
+        WHERE member_idx = #{member_idx} AND notice_id = #{notice_id}
     </select>
 </mapper>

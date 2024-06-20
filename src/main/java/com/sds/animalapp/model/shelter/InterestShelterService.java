@@ -21,5 +21,6 @@ public interface InterestShelterService {
     InterestShelter findById(int interest_shelter_idx);
     InterestShelter findInterestByShelterIdxAndMemberIdx(int shelter_idx, int member_idx);
 	
+    public int getRecordNum(int member_idx, int shelter_idx);
 	
 }

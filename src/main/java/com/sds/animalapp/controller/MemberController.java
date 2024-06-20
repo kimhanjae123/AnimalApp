@@ -114,15 +114,6 @@ public class MemberController {
         List<VolunteerApplication> volunteerApplications = volunteerApplicationService.getApplicationsByMemberIdx(member.getMember_idx());
         model.addAttribute("volunteerApplications", volunteerApplications);
         
-        VolunteerApplication firstApplication = volunteerApplications.get(0);
-        System.out.println("ID: " + firstApplication.getId());
-        System.out.println("Title: " + firstApplication.getTitle());
-        System.out.println("Volunteer Date: " + firstApplication.getVol_date());
-        System.out.println("Notice ID: " + firstApplication.getNotice_id());
-        System.out.println("Member Index: " + firstApplication.getMember_idx());
-
-
-        
         // Adopt Animals
         List<AdoptAnimal> adoptAnimals = adoptAnimalService.getAdoptByMemberIdx(member.getMember_idx());
         model.addAttribute("adoptAnimals", adoptAnimals);

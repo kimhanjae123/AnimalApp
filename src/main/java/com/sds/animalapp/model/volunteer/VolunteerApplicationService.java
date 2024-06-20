@@ -10,6 +10,6 @@ public interface VolunteerApplicationService {
     void cancel(int notice_id, int member_idx);
     int getRecordNum(int noticeId, int member_idx);
     List<VolunteerApplication> getAllApplications();
-    List<VolunteerApplication> getApplicationsByMemberIdx(int memberIdx);
+    List<VolunteerApplication> getApplicationsByMemberIdx(int member_idx);
     VolunteerApplication findById(int id); // 추가된 메서드
 }

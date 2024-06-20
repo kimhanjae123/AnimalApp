@@ -89,8 +89,7 @@
 				th:value="${registCount}" readonly>
 			<!-- noticeId, id를 둘다 쓰지 않으면 db값이 url에 계속 담김 -->
 			<input type="hidden" name="noticeId"
-				th:value="${detail.vol_event_post_idx}"> <input
-				type="hidden" name="id" th:value="${detail.vol_event_post_idx}">
+				th:value="${detail.vol_event_post_idx}">
 			<button type="button" id="applyBtn"
 				class="btn btn-secondary col-12 mb-3">봉사 신청</button>
 			<button type="button" class="btn btn-secondary col-12" id="bt_list">목록으로
@@ -171,7 +170,6 @@ $(document).ready(function() {
     // 페이지 로드 시 로컬 스토리지의 상태에 따라 버튼 설정
     $(document).ready(function() {
         const noticeId = getQueryStringParameter('id');
-        const appliedNoticeId = localStorage.getItem('volunteerNoticeId');
         const recordNum = $('#recordNum').val();
         const applyBtn = $('#applyBtn');
         

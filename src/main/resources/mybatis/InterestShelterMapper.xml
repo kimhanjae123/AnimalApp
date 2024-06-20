@@ -30,4 +30,9 @@
     <select id="findInterestByShelterIdxAndMemberIdx" parameterType="map" resultType="InterestShelter">
         SELECT * FROM interest_shelter WHERE shelter_idx = #{shelter_idx} AND member_idx = #{member_idx}
     </select>
+    
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM interest_shelter
+        WHERE member_idx = #{member_idx} AND shelter_idx = #{shelter_idx}
+    </select>
 </mapper>
