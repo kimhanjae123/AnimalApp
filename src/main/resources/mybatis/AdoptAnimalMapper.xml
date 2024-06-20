@@ -33,4 +33,9 @@
     <select id="findAdoptByAnimalIdxAndMemberIdx" parameterType="map" resultType="AdoptAnimal">
         SELECT * FROM adopt_animal WHERE animal_idx = #{animal_idx} AND member_idx = #{member_idx}
     </select>
+    
+    <select id="selectCount" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM adopt_animal
+        WHERE member_idx = #{member_idx} AND animal_idx = #{animal_idx}
+    </select>
 </mapper>

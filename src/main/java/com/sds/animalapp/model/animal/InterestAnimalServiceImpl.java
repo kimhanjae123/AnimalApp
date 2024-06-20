@@ -53,4 +53,9 @@ public class InterestAnimalServiceImpl implements InterestAnimalService {
 	public InterestAnimal findInterestByAnimalIdxAndMemberIdx(int animal_idx, int member_idx) {
 		return interestAnimalDAO.findInterestByAnimalIdxAndMemberIdx(animal_idx, member_idx);
 	}
+
+	@Override
+	public int getInterestRecordNum(int member_idx, int animal_idx) {
+		return interestAnimalDAO.selectCount(member_idx, animal_idx);
+	}
 }

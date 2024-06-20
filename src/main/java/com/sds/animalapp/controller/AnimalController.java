@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sds.animalapp.common.Pager;
 import com.sds.animalapp.domain.Animal;
 import com.sds.animalapp.domain.AnimalSelectParam;
+import com.sds.animalapp.domain.Member;
+import com.sds.animalapp.model.animal.AdoptAnimalService;
 import com.sds.animalapp.model.animal.AnimalApiService;
 import com.sds.animalapp.model.animal.AnimalService;
+import com.sds.animalapp.model.animal.InterestAnimalService;
 import com.sds.animalapp.model.member.MemberService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @Controller
@@ -25,7 +29,11 @@ public class AnimalController {
 	private final AnimalApiService animalApiService;
 
 	private final MemberService memberService; // MemberService
-
+	
+	private final InterestAnimalService interestAnimalService;
+ 	
+	private final AdoptAnimalService adoptAnimalService;
+	
 	@GetMapping("/animal/list")
 	public String getAnimal(Animal animal, Model model,
 			@RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
@@ -76,16 +84,23 @@ public class AnimalController {
 	}
 
 	@GetMapping("/animal/detail")
-	public String getDetail(Model model, @RequestParam(value = "id") int animal_idx) {
+	public String getDetail(Model model, HttpSession session, @RequestParam(value = "id") int animal_idx) {
+		Member member = (Member) session.getAttribute("member");
 		Animal animal = animalService.select(animal_idx);
 		int applicantsCount = animalService.countRegistMember(animal_idx); // 수정
+		
 		Integer shelter_idx = animalService.findShelterIdxByCareNm(animal.getCareNm());
-		System.out.println(shelter_idx);
 		if (shelter_idx != null) {
 			model.addAttribute("shelter_idx", shelter_idx);
 		}
+		
+		int interestRecordNum = interestAnimalService.getInterestRecordNum(member.getMember_idx(), animal_idx);
+		int adoptRecordNum = adoptAnimalService.getAdopteRecordNum(member.getMember_idx(), animal_idx);
+		
 		model.addAttribute("detail", animal);
 		model.addAttribute("applicantsCount", applicantsCount); // 추가
+        model.addAttribute("interestRecordNum", interestRecordNum);
+        model.addAttribute("adoptRecordNum", adoptRecordNum);
 		return "animal/detail";
 	}
 

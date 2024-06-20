@@ -18,6 +18,8 @@ public interface AdoptAnimalDAO {
 	// 입양신청 동물 중복 확인
 	public int checkDuplicateAdoptAnimal(AdoptAnimal adoptAnimal);
 	
+	public int selectCount(@Param("member_idx")int member_idx, @Param("animal_idx")int animal_idx);
+	
 	AdoptAnimal findAdopt(@Param("kindCd") String kindCd, @Param("popfile") String popfile);
 
     List<AdoptAnimal> findByMemberIdx(int member_idx);

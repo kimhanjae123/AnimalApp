@@ -31,17 +31,17 @@ public class AdoptAnimalController {
 	@ResponseBody
 	public ResponseEntity<String> registerAdopt(
 			@RequestParam("animal_idx") int animal_idx,
-			@RequestParam("member_idx") int member_idx,
 			@RequestParam("kindCd") String kindCd,
 			@RequestParam("popfile") String popfile, HttpSession session) {
-		//로그 추가
-		log.debug("받은 animal_idx: " + animal_idx);
-		log.debug("받은 member_idx: " + member_idx);
-
 		Member member = (Member) session.getAttribute("member");
 		if (member == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
 		}
+		int member_idx = member.getMember_idx();
+		//로그 추가
+		log.debug("받은 animal_idx: " + animal_idx);
+		log.debug("받은 member_idx: " + member_idx);
+
 
 		Animal animal = animalService.select(animal_idx);
 		if (animal == null) {
@@ -66,12 +66,12 @@ public class AdoptAnimalController {
 	@PostMapping("/animal/cancelAdopt")
 	@ResponseBody
 	public ResponseEntity<String> cancelAdopt(
-	        @RequestParam("animal_idx") int animal_idx,
-	        @RequestParam("member_idx") int member_idx, HttpSession session) {
+	        @RequestParam("animal_idx") int animal_idx, HttpSession session) {
 	    Member member = (Member) session.getAttribute("member");
 	    if (member == null) {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
 	    }
+	    int member_idx = member.getMember_idx();
 
 	    try {
 	        AdoptAnimal adoptAnimal = adoptAnimalService.findAdoptByAnimalIdxAndMemberIdx(animal_idx, member_idx);
