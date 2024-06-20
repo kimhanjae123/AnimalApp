@@ -23,32 +23,32 @@
     <!-- 헤더 추가 -->
     <th:block th:replace="~{fragments/header :: header}" />
 
-    <section class="resume-section p-3 p-lg-5 d-flex d-column" id="about">
-        <div class="my-auto" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-                <div>
-                    <img src="/site/images/insta4.jpg" class="img-fluid mb-3" alt="" id="profileImage">
-                </div>
+    <section class="resume-section p-3 p-lg-5 d-flex d-column align-items-center justify-content-center" id="about">
+    <div style="display: flex; align-items: center;">
+        <div style="text-align: center;">
+            <img th:src="${profileImage}" class="img-fluid mb-3" alt="Profile Image" id="profileImage" style="max-width:75%; height: auto;">
+        </div>
+        <div style="margin-left: 20px;">
+            <div class="subheading mb-3">
+                <input type="text" class="form-control" placeholder="이름 입력" id="nameInput">
             </div>
-            <div style="margin-left: 500px;">
-                <div class="subheading mb-3">
-                    <input type="text" placeholder="이름 입력" id="nameInput">
-                </div>
-                <div class="subheading mb-3">
-                    <input type="text" placeholder="전화번호 입력" id="phoneInput">
-                </div>
-                <button id="modifyInfoBtn">정보 수정하기</button>
-                <div>
-                    <button id="modifyPhotoBtn" style="margin: 15px 0px 0px 0px;">사진 수정하기</button>
-                    <!-- 사진 업로드 기능 추가 -->
-                    <form id="pictureForm" style="display: none;" enctype="multipart/form-data">
-                        <input type="file" name="file" id="pictureFileInput">
-                        <button type="button" id="pictureBtn">사진 업로드</button>
-                    </form>
-                </div>
+            <div class="subheading mb-3">
+                <input type="text" class="form-control" placeholder="전화번호 입력" id="phoneInput">
+            </div>
+            <button class="btn btn-primary mb-2" id="modifyInfoBtn">정보 수정하기</button>
+            <div style="margin-top: 15px;">
+                <button class="btn btn-primary mb-2" id="modifyPhotoBtn">사진 수정하기</button>
+                <!-- 사진 업로드 기능 추가 -->
+                <form id="pictureForm" style="display: none;" enctype="multipart/form-data">
+                    <input type="file" name="file" id="pictureFileInput">
+                    <button class="btn btn-primary mb-2" type="button" id="pictureBtn">사진 업로드</button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
     
     	<!-- mypage에 관심보호소 -->
         <th:block th:replace="~{member/mypage_shelter :: mypage_shelter}" />
@@ -196,6 +196,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
 
 // 정보 수정 이벤트 
 $(document).ready(function() {
