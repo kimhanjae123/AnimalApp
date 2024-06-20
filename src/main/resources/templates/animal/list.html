@@ -41,15 +41,15 @@
 				<div class="form-group col-md-3">
 					<label for="care">관할기관</label> <input type="text"
 						class="form-control" id="care"
-						th:value="${care != null ? care : ''}">
+						th:value="${care != null ? care : ''}" placeholder="보호소명 검색">
 				</div>
 				<div class="form-group col-md-3">
 					<label for="sex">성별</label> <select id="sex" class="form-control"
 						th:value="${sex != null ? sex : ''}">
 						<option value="">성별 선택</option>
-						<option value="M">M</option>
-						<option value="F">F</option>
-						<option value="Q">Q</option>
+						<option value="남">남</option>
+						<option value="여">여</option>
+						<option value="-">-</option>
 					</select>
 				</div>
 				<div class="form-group col-md-3">
