@@ -236,253 +236,298 @@
 </html>
 
 <script type="text/javascript">
-$(document).ready(function() {
-    // 관심 동물 등록 버튼 클릭 핸들러
-    function registerInterestButtonClick(button) {
-        var animalIdx = button.getAttribute('data-animal-idx');
-        var memberIdx = button.getAttribute('data-member-idx');
-        var kindCd = button.getAttribute('data-kind-cd');
-        var popfile = button.getAttribute('data-popfile');
+	$(document)
+			.ready(
+					function() {
+						// 관심 동물 등록 버튼 클릭 핸들러
+						function registerInterestButtonClick(button) {
+							var animalIdx = button
+									.getAttribute('data-animal-idx');
+							var memberIdx = button
+									.getAttribute('data-member-idx');
+							var kindCd = button.getAttribute('data-kind-cd');
+							var popfile = button.getAttribute('data-popfile');
 
-        if (!animalIdx || !memberIdx) {
-            alert('올바른 동물 또는 회원 정보가 필요합니다.');
-            return;
-        }
+							if (!animalIdx || !memberIdx) {
+								alert('올바른 동물 또는 회원 정보가 필요합니다.');
+								return;
+							}
 
-        var confirmResult = confirm("관심 동물로 등록할까요?");
-        if (confirmResult) {
-            button.disabled = true; // 중복 클릭 방지
-            registerInterest(animalIdx, memberIdx, kindCd, popfile, button);
-        }
-    }
+							var confirmResult = confirm("관심 동물로 등록할까요?");
+							if (confirmResult) {
+								button.disabled = true; // 중복 클릭 방지
+								registerInterest(animalIdx, memberIdx, kindCd,
+										popfile, button);
+							}
+						}
 
-    // 관심 동물 등록 요청 함수
-    function registerInterest(animalIdx, memberIdx, kindCd, popfile, button) {
-        $.ajax({
-            type: 'POST',
-            url: '/animal/registerInterest',
-            data: {
-                animal_idx: animalIdx,
-                member_idx: memberIdx,
-                kindCd: kindCd,
-                popfile: popfile
-            },
-            success: function(response) {
-                alert('관심 동물 등록이 완료되었습니다.');
-                localStorage.setItem('interestAnimalId', animalIdx);
-                localStorage.setItem('interestApplied', 'true');
-                updateInterestButton(animalIdx, true);
-            },
-            error: function(error) {
-                alert('관심 동물 등록에 실패했습니다.');
-            },
-            complete: function() {
-                button.disabled = false;
-            }
-        });
-    }
+						// 관심 동물 등록 요청 함수
+						function registerInterest(animalIdx, memberIdx, kindCd,
+								popfile, button) {
+							$.ajax({
+								type : 'POST',
+								url : '/animal/registerInterest',
+								data : {
+									animal_idx : animalIdx,
+									member_idx : memberIdx,
+									kindCd : kindCd,
+									popfile : popfile
+								},
+								success : function(response) {
+									alert('관심 동물 등록이 완료되었습니다.');
+									localStorage.setItem('interestAnimalId',
+											animalIdx);
+									localStorage.setItem('interestApplied',
+											'true');
+									updateInterestButton(animalIdx, true);
+								},
+								error : function(error) {
+									alert('관심 동물 등록에 실패했습니다.');
+								},
+								complete : function() {
+									button.disabled = false;
+								}
+							});
+						}
 
-    // 관심 동물 등록 취소
-    function cancelInterest(button) {
-        var animalIdx = button.getAttribute('data-animal-idx');
-        var memberIdx = button.getAttribute('data-member-idx');
+						// 관심 동물 등록 취소
+						function cancelInterest(button) {
+							var animalIdx = button
+									.getAttribute('data-animal-idx');
+							var memberIdx = button
+									.getAttribute('data-member-idx');
 
-        if (!animalIdx || !memberIdx) {
-            alert('올바른 동물 또는 회원 정보가 필요합니다.');
-            return;
-        }
+							if (!animalIdx || !memberIdx) {
+								alert('올바른 동물 또는 회원 정보가 필요합니다.');
+								return;
+							}
 
-        var confirmResult = confirm("관심 등록을 취소하시겠습니까?");
-        if (confirmResult) {
-            button.disabled = true; // 중복 클릭 방지
-            $.ajax({
-                type: 'POST',
-                url: '/animal/cancelInterest',
-                data: {
-                    animal_idx: animalIdx,
-                    member_idx: memberIdx
-                },
-                success: function(response) {
-                    alert('관심 동물 등록을 취소했습니다.');
-                    localStorage.removeItem('interestAnimalId');
-                    localStorage.setItem('interestApplied', 'false');
-                    updateInterestButton(animalIdx, false);
-                },
-                error: function(error) {
-                    alert('관심 동물 등록 취소에 실패했습니다.');
-                },
-                complete: function() {
-                    button.disabled = false;
-                }
-            });
-        }
-    }
+							var confirmResult = confirm("관심 등록을 취소하시겠습니까?");
+							if (confirmResult) {
+								button.disabled = true; // 중복 클릭 방지
+								$
+										.ajax({
+											type : 'POST',
+											url : '/animal/cancelInterest',
+											data : {
+												animal_idx : animalIdx,
+												member_idx : memberIdx
+											},
+											success : function(response) {
+												alert('관심 동물 등록을 취소했습니다.');
+												localStorage
+														.removeItem('interestAnimalId');
+												localStorage.setItem(
+														'interestApplied',
+														'false');
+												updateInterestButton(animalIdx,
+														false);
+											},
+											error : function(error) {
+												alert('관심 동물 등록 취소에 실패했습니다.');
+											},
+											complete : function() {
+												button.disabled = false;
+											}
+										});
+							}
+						}
 
-    // 입양 신청 버튼 클릭 핸들러
-    function registerAdoptButtonClick(button) {
-        var animalIdx = button.getAttribute('data-animal-idx');
-        var memberIdx = button.getAttribute('data-member-idx');
-        var kindCd = button.getAttribute('data-kind-cd');
-        var popfile = button.getAttribute('data-popfile');
+						// 입양 신청 버튼 클릭 핸들러
+						function registerAdoptButtonClick(button) {
+							var animalIdx = button
+									.getAttribute('data-animal-idx');
+							var memberIdx = button
+									.getAttribute('data-member-idx');
+							var kindCd = button.getAttribute('data-kind-cd');
+							var popfile = button.getAttribute('data-popfile');
 
-        if (!animalIdx || !memberIdx) {
-            alert('올바른 동물 또는 회원 정보가 필요합니다.');
-            return;
-        }
+							if (!animalIdx || !memberIdx) {
+								alert('올바른 동물 또는 회원 정보가 필요합니다.');
+								return;
+							}
 
-        var confirmResult = confirm("입양을 신청하시겠습니까?");
-        if (confirmResult) {
-            button.disabled = true; // 중복 클릭 방지
-            registerAdopt(animalIdx, memberIdx, kindCd, popfile, button);
-        }
-    }
+							var confirmResult = confirm("입양을 신청하시겠습니까?");
+							if (confirmResult) {
+								button.disabled = true; // 중복 클릭 방지
+								registerAdopt(animalIdx, memberIdx, kindCd,
+										popfile, button);
+							}
+						}
 
-    // 입양 신청 요청 함수
-    function registerAdopt(animalIdx, memberIdx, kindCd, popfile, button) {
-        $.ajax({
-            type: 'POST',
-            url: '/animal/registerAdopt',
-            data: {
-                animal_idx: animalIdx,
-                member_idx: memberIdx,
-                kindCd: kindCd,
-                popfile: popfile
-            },
-            success: function(response) {
-                alert('입양 신청이 완료되었습니다.');
-                localStorage.setItem('adoptAnimalId', animalIdx);
-                localStorage.setItem('adoptApplied', 'true');
-                updateAdoptButton(animalIdx, true);
-            },
-            error: function(error) {
-                alert('입양 신청에 실패하였습니다.');
-            },
-            complete: function() {
-                button.disabled = false;
-            }
-        });
-    }
+						// 입양 신청 요청 함수
+						function registerAdopt(animalIdx, memberIdx, kindCd,
+								popfile, button) {
+							$.ajax({
+								type : 'POST',
+								url : '/animal/registerAdopt',
+								data : {
+									animal_idx : animalIdx,
+									member_idx : memberIdx,
+									kindCd : kindCd,
+									popfile : popfile
+								},
+								success : function(response) {
+									alert('입양 신청이 완료되었습니다.');
+									localStorage.setItem('adoptAnimalId',
+											animalIdx);
+									localStorage
+											.setItem('adoptApplied', 'true');
+									updateAdoptButton(animalIdx, true);
+								},
+								error : function(error) {
+									alert('입양 신청에 실패하였습니다.');
+								},
+								complete : function() {
+									button.disabled = false;
+								}
+							});
+						}
 
-    // 입양 신청 취소
-    function cancelAdopt(button) {
-        var animalIdx = button.getAttribute('data-animal-idx');
-        var memberIdx = button.getAttribute('data-member-idx');
+						// 입양 신청 취소
+						function cancelAdopt(button) {
+							var animalIdx = button
+									.getAttribute('data-animal-idx');
+							var memberIdx = button
+									.getAttribute('data-member-idx');
 
-        if (!animalIdx || !memberIdx) {
-            alert('올바른 동물 또는 회원 정보가 필요합니다.');
-            return;
-        }
+							if (!animalIdx || !memberIdx) {
+								alert('올바른 동물 또는 회원 정보가 필요합니다.');
+								return;
+							}
 
-        var confirmResult = confirm("입양 신청을 취소하시겠습니까?");
-        if (confirmResult) {
-            button.disabled = true; // 중복 클릭 방지
-            $.ajax({
-                type: 'POST',
-                url: '/animal/cancelAdopt',
-                data: {
-                    animal_idx: animalIdx,
-                    member_idx: memberIdx
-                },
-                success: function(response) {
-                    alert('입양 신청이 취소되었습니다.');
-                    localStorage.removeItem('adoptAnimalId');
-                    localStorage.setItem('adoptApplied', 'false');
-                    updateAdoptButton(animalIdx, false);
-                },
-                error: function(error) {
-                    alert('입양 신청 취소에 실패하였습니다.');
-                },
-                complete: function() {
-                    button.disabled = false;
-                }
-            });
-        }
-    }
+							var confirmResult = confirm("입양 신청을 취소하시겠습니까?");
+							if (confirmResult) {
+								button.disabled = true; // 중복 클릭 방지
+								$.ajax({
+									type : 'POST',
+									url : '/animal/cancelAdopt',
+									data : {
+										animal_idx : animalIdx,
+										member_idx : memberIdx
+									},
+									success : function(response) {
+										alert('입양 신청이 취소되었습니다.');
+										localStorage
+												.removeItem('adoptAnimalId');
+										localStorage.setItem('adoptApplied',
+												'false');
+										updateAdoptButton(animalIdx, false);
+									},
+									error : function(error) {
+										alert('입양 신청 취소에 실패하였습니다.');
+									},
+									complete : function() {
+										button.disabled = false;
+									}
+								});
+							}
+						}
 
-    // 버튼 상태 업데이트
-    function updateInterestButton(animalIdx, isInterested) {
-        var button = $('button[name="interest-button"][data-animal-idx="' + animalIdx + '"]');
-        button.off("click"); // 기존 클릭 이벤트 제거
-        if (isInterested) {
-            button.text("관심 등록 취소").removeClass("btn-primary").addClass("btn-danger").on("click", function() {
-                cancelInterest(this);
-            });
-        } else {
-            button.text("관심 동물 등록").removeClass("btn-danger").addClass("btn-primary").on("click", function() {
-                registerInterestButtonClick(this);
-            });
-        }
-    }
+						// 버튼 상태 업데이트
+						function updateInterestButton(animalIdx, isInterested) {
+							var button = $('button[name="interest-button"][data-animal-idx="'
+									+ animalIdx + '"]');
+							button.off("click"); // 기존 클릭 이벤트 제거
+							if (isInterested) {
+								button.text("관심 등록 취소").removeClass(
+										"btn-primary").addClass("btn-danger")
+										.on("click", function() {
+											cancelInterest(this);
+										});
+							} else {
+								button.text("관심 동물 등록").removeClass(
+										"btn-danger").addClass("btn-primary")
+										.on("click", function() {
+											registerInterestButtonClick(this);
+										});
+							}
+						}
 
-    function updateAdoptButton(animalIdx, isAdopted) {
-        var button = $('button[name="adopt-button"][data-animal-idx="' + animalIdx + '"]');
-        button.off("click"); // 기존 클릭 이벤트 제거
-        if (isAdopted) {
-            button.text("입양 취소").removeClass("btn-primary").addClass("btn-danger").on("click", function() {
-                cancelAdopt(this);
-            });
-        } else {
-            button.text("입양 신청").removeClass("btn-danger").addClass("btn-primary").on("click", function() {
-                registerAdoptButtonClick(this);
-            });
-        }
-    }
+						function updateAdoptButton(animalIdx, isAdopted) {
+							var button = $('button[name="adopt-button"][data-animal-idx="'
+									+ animalIdx + '"]');
+							button.off("click"); // 기존 클릭 이벤트 제거
+							if (isAdopted) {
+								button.text("입양 취소").removeClass("btn-primary")
+										.addClass("btn-danger").on("click",
+												function() {
+													cancelAdopt(this);
+												});
+							} else {
+								button.text("입양 신청").removeClass("btn-danger")
+										.addClass("btn-primary")
+										.on("click", function() {
+											registerAdoptButtonClick(this);
+										});
+							}
+						}
 
-    // 페이지 로드 시 실행
-    $(function() {
-        var animalIdx = $('button[name="interest-button"]').data('animal-idx');
-        var memberIdx = $('button[name="interest-button"]').data('member-idx');
+						// 페이지 로드 시 실행
+						$(function() {
+							var animalIdx = $('button[name="interest-button"]')
+									.data('animal-idx');
+							var memberIdx = $('button[name="interest-button"]')
+									.data('member-idx');
 
-        // 서버에서 관심 동물 상태 확인
-        $.ajax({
-            type: 'POST',
-            url: '/animal/checkInterest',
-            data: {
-                animal_idx: animalIdx,
-                member_idx: memberIdx
-            },
-            success: function(response) {
-                updateInterestButton(animalIdx, response);
-            },
-            error: function(error) {
-                console.error('Failed to check interest status:', error);
-            }
-        });
+							// 서버에서 관심 동물 상태 확인
+							$.ajax({
+								type : 'POST',
+								url : '/animal/checkInterest',
+								data : {
+									animal_idx : animalIdx,
+									member_idx : memberIdx
+								},
+								success : function(response) {
+									updateInterestButton(animalIdx, response);
+								},
+								error : function(error) {
+									console.error(
+											'Failed to check interest status:',
+											error);
+								}
+							});
 
-        // 서버에서 입양 신청 상태 확인
-        $.ajax({
-            type: 'POST',
-            url: '/animal/checkAdopt',
-            data: {
-                animal_idx: animalIdx,
-                member_idx: memberIdx
-            },
-            success: function(response) {
-                updateAdoptButton(animalIdx, response);
-            },
-            error: function(error) {
-                console.error('Failed to check adopt status:', error);
-            }
-        });
+							// 서버에서 입양 신청 상태 확인
+							$.ajax({
+								type : 'POST',
+								url : '/animal/checkAdopt',
+								data : {
+									animal_idx : animalIdx,
+									member_idx : memberIdx
+								},
+								success : function(response) {
+									updateAdoptButton(animalIdx, response);
+								},
+								error : function(error) {
+									console.error(
+											'Failed to check adopt status:',
+											error);
+								}
+							});
 
-        // 로컬 스토리지 상태 확인
-        var interestAnimalIdx = localStorage.getItem('interestAnimalId');
-        var interestApplied = localStorage.getItem('interestApplied') === 'true';
-        if (interestApplied && interestAnimalIdx) {
-            updateInterestButton(interestAnimalIdx, true);
-        } else {
-            updateInterestButton(interestAnimalIdx, false);
-        }
+							// 로컬 스토리지 상태 확인
+							var interestAnimalIdx = localStorage
+									.getItem('interestAnimalId');
+							var interestApplied = localStorage
+									.getItem('interestApplied') === 'true';
+							if (interestApplied && interestAnimalIdx) {
+								updateInterestButton(interestAnimalIdx, true);
+							} else {
+								updateInterestButton(interestAnimalIdx, false);
+							}
 
-        var adoptAnimalIdx = localStorage.getItem('adoptAnimalId');
-        var adoptApplied = localStorage.getItem('adoptApplied') === 'true';
-        if (adoptApplied && adoptAnimalIdx) {
-            updateAdoptButton(adoptAnimalIdx, true);
-        } else {
-            updateAdoptButton(adoptAnimalIdx, false);
-        }
-    });
-});
+							var adoptAnimalIdx = localStorage
+									.getItem('adoptAnimalId');
+							var adoptApplied = localStorage
+									.getItem('adoptApplied') === 'true';
+							if (adoptApplied && adoptAnimalIdx) {
+								updateAdoptButton(adoptAnimalIdx, true);
+							} else {
+								updateAdoptButton(adoptAnimalIdx, false);
+							}
+						});
+					});
 </script>
 
 

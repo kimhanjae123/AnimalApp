@@ -58,4 +58,9 @@ public class AnimalServiceImpl implements AnimalService {
 	public Animal selectByDesertionNo(String desertionNo) {
 		return animalDAO.selectByDesertionNo(desertionNo);
 	}
+
+	@Override
+	public Integer findShelterIdxByCareNm(String careNm) {
+		return animalDAO.findShelterIdxByCareNm(careNm);
+	}
 }
