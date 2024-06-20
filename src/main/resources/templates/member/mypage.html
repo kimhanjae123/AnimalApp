@@ -243,15 +243,15 @@ $(document).ready(function() {
                 if (result.success) {
                     alert('사진이 업로드되었습니다.');
                     var imageUrl = result.imageUrl;
-                    var $profileImage = $('#profileImage');
-                    if ($profileImage.length === 0) {
-                        $profileImage = $('<img>', {
+                    var profileImage = $('#profileImage');
+                    if (profileImage.length === 0) {
+                        profileImage = $('<img>', {
                             id: 'profileImage',
                             class: 'img-fluid mb-3'
                         });
-                        $('#imageContainer').append($profileImage);
+                        $('#imageContainer').append(profileImage);
                     }
-                    $profileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
+                    profileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
 
                     var $headerProfileImage = $('#headerProfileImage');
                     $headerProfileImage.attr('src', imageUrl + '?t=' + new Date().getTime());

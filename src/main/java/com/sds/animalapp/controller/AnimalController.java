@@ -2,7 +2,6 @@ package com.sds.animalapp.controller;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,6 @@ import com.sds.animalapp.domain.AnimalSelectParam;
 import com.sds.animalapp.model.animal.AnimalApiService;
 import com.sds.animalapp.model.animal.AnimalService;
 import com.sds.animalapp.model.member.MemberService;
-import com.sds.animalapp.model.volunteer.VolunteerDAO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,7 +23,7 @@ public class AnimalController {
 	private final AnimalService animalService;
 
 	private final AnimalApiService animalApiService;
-	
+
 	private final MemberService memberService; // MemberService
 
 	@GetMapping("/animal/list")
@@ -81,6 +79,11 @@ public class AnimalController {
 	public String getDetail(Model model, @RequestParam(value = "id") int animal_idx) {
 		Animal animal = animalService.select(animal_idx);
 		int applicantsCount = animalService.countRegistMember(animal_idx); // 수정
+		Integer shelter_idx = animalService.findShelterIdxByCareNm(animal.getCareNm());
+		System.out.println(shelter_idx);
+		if (shelter_idx != null) {
+			model.addAttribute("shelter_idx", shelter_idx);
+		}
 		model.addAttribute("detail", animal);
 		model.addAttribute("applicantsCount", applicantsCount); // 추가
 		return "animal/detail";

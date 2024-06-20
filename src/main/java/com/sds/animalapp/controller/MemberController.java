@@ -300,15 +300,21 @@ public class MemberController {
         Member member = (Member) session.getAttribute("member");
         if (member != null) {
             member.setNickname(name);
+            memberService.update(member);//member 테이블 nickname 커럼값 변경
 
             MemberDetail memberDetail = member.getMemberDetail();
             if (memberDetail == null) {
                 memberDetail = new MemberDetail();
-                memberDetail.setMember(member);
+                memberDetail.setMember_idx(member.getMember_idx());
             }
             memberDetail.setPhone(phone);
-
-            memberService.updateMemberDetail(memberDetail);
+            
+            if(memberService.getMemberDetailByMemberIdx(memberDetail.getMember_idx())==0) {
+            	log.info(String.valueOf(memberService.getMemberDetailByMemberIdx(memberDetail.getMember_idx())) );
+            	memberService.insertMemberDetail(memberDetail);
+            }else {
+            	memberService.updateMemberDetail(memberDetail);
+            }
 
             session.setAttribute("member", member);
             response.put("success", true);

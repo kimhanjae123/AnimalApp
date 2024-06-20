@@ -5,13 +5,17 @@
 	
     <insert id="insert" parameterType="MemberDetail">
         insert into member_detail(password, phone, member_idx)
-        values(#{password}, #{phone}, #{member.member_idx})
+        values(#{password}, #{phone}, #{member_idx})
     </insert>
 
     <select id="selectByMemberIdx" parameterType="int" resultType="MemberDetail">
         select * from member_detail where member_idx=#{member_idx}
     </select>
 
+    <select id="countByMemberIdx" parameterType="int" resultType="int">
+        SELECT COUNT(*) FROM member_detail WHERE member_idx = #{member_idx};
+    </select>
+    
     <update id="update" parameterType="MemberDetail">
         update member_detail
         set phone=#{phone}
