@@ -7,7 +7,7 @@
     </insert>
 
     <delete id="delete" parameterType="map">
-    	DELETE FROM volunteer_application WHERE id = #{id} AND member_idx = #{member_idx}
+    	DELETE FROM volunteer_application WHERE notice_id = #{notice_id} AND member_idx = #{member_idx}
 	</delete>
 
     <select id="findApplication" parameterType="map" resultType="VolunteerApplication">

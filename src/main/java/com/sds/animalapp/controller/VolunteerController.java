@@ -127,10 +127,10 @@ public class VolunteerController {
 	  
 	  @PostMapping("/volunteer/cancel")
 	  @ResponseBody
-	  public ResponseEntity<String> cancel(@RequestParam("applicationId") int id, HttpSession session) {
+	  public ResponseEntity<String> cancel(@RequestParam("notice_id") int notice_id, HttpSession session) {
 	      Member member = (Member) session.getAttribute("member");
-	      log.info("applicationId 받은 값 찾기: " + id); // 로그 추가하여 id 값 확인
-	      volunteerApplicationService.cancel(id, member.getMember_idx());
+	      log.info("applicationId 받은 값 찾기: " + notice_id); // 로그 추가하여 id 값 확인
+	      volunteerApplicationService.cancel(notice_id, member.getMember_idx());
 	      return ResponseEntity.ok("신청 취소 완료");
 	  }
 
