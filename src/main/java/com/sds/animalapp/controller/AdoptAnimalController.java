@@ -35,8 +35,8 @@ public class AdoptAnimalController {
 			@RequestParam("kindCd") String kindCd,
 			@RequestParam("popfile") String popfile, HttpSession session) {
 		//로그 추가
-		log.debug("Received animal_idx: " + animal_idx);
-		log.debug("Received member_idx: " + member_idx);
+		log.debug("받은 animal_idx: " + animal_idx);
+		log.debug("받은 member_idx: " + member_idx);
 
 		Member member = (Member) session.getAttribute("member");
 		if (member == null) {

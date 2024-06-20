@@ -266,7 +266,7 @@ $(document).ready(function() {
 });    
 
 
-// 봉사활동 
+// 봉사신청
 $(document).ready(function() {
     $("a.volunteer-detail-link").click(function(event) {
         event.preventDefault();
@@ -277,10 +277,33 @@ $(document).ready(function() {
             alert("봉사활동 ID를 찾을 수 없습니다.");
         }
     });
+
+    $("form.cancel-application-form").submit(function(event) {
+        event.preventDefault(); // 기본 폼 제출 동작 막기
+        const form = $(this);
+        const applicationId = form.find("input[name='applicationId']").val();
+        if (!applicationId) {
+            alert("봉사활동 신청 ID를 찾을 수 없습니다.");
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/volunteer/cancel",
+            data: { applicationId: applicationId },
+            success: function(response) {
+                alert("신청 취소 완료!");
+                localStorage.removeItem('volunteerNoticeId');
+                location.reload(); // 페이지 새로고침
+            },
+            error: function(xhr) {
+                alert(xhr.responseText);
+            }
+        });
+    });
 });
- 
- 
-//입양 신청 취소 함수
+
+
+ //입양 신청 취소 함수
 function cancelAdopt(button) {
     var animalIdx = button.getAttribute('data-animal-idx');
     var memberIdx = button.getAttribute('data-member-idx');
@@ -311,7 +334,7 @@ function cancelAdopt(button) {
             }
         });
     }
-}
+} 
 
 // 관심 동물 등록 취소 함수
 function cancelInterest(button) {
@@ -347,28 +370,41 @@ function cancelInterest(button) {
 }
 
         
-        
-function cancelInterestShelter (button) {
+
+//보호소 관심 등록 취소 함수 cancelinterest 버튼이 관심 동물이랑 겹쳐서 수정
+function cancelInterestShelter(button) {
     var shelterIdx = button.getAttribute('data-shelter-idx');
     var memberIdx = button.getAttribute('data-member-idx');
-	// 링크 대신 post로 바꿔봄 
-	
-	// 그래도 연동되진 않음
-    $.ajax({
-        type: 'POST',
-        url: '/shelter/cancelInterest',
-        data: {
-            shelter_idx: shelterIdx,
-            member_idx: memberIdx
-        },
-        success: function(response) {
-            alert('관심 등록이 취소되었습니다.');
-            location.reload();
-        },
-        error: function(error) {
-            alert('관심 등록 취소에 실패하였습니다.');
-        }
-    });
+
+    if (!shelterIdx || !memberIdx) {
+        alert('올바른 보호소 또는 회원 정보가 필요함');
+        return;
+    }
+
+    var confirmResult = confirm("관심 등록을 취소하시겠습니까?");
+    if (confirmResult) {
+        button.disabled = true; // 중복 클릭 방지
+        $.ajax({
+            type: 'POST',
+            url: '/shelter/cancelInterestShelter',
+            data: {
+                shelter_idx: shelterIdx,
+                member_idx: memberIdx
+            },
+            success: function(response) {
+                alert('관심 보호소 등록을 취소했습니다.');
+                localStorage.removeItem('interestShelterId');
+                localStorage.setItem('interestShelterApplied', 'false');
+                location.reload();
+            },
+            error: function(error) {
+                alert('관심 보호소 등록 취소에 실패했습니다.');
+            },
+            complete: function() {
+                button.disabled = false;
+            }
+        });
+    }
 }
 
 </script>

@@ -5,11 +5,11 @@
         INSERT INTO volunteer_application (title, vol_date, notice_id, member_idx)
         VALUES (#{title}, #{vol_date}, #{noticeId}, #{memberIdx})
     </insert>
-    
-    <delete id="delete" parameterType="int">
-        DELETE FROM volunteer_application WHERE id = #{id}
-    </delete>
-    
+
+    <delete id="delete" parameterType="map">
+    	DELETE FROM volunteer_application WHERE id = #{id} AND member_idx = #{member_idx}
+	</delete>
+
     <select id="findApplication" parameterType="map" resultType="VolunteerApplication">
         SELECT * FROM volunteer_application
         WHERE title = #{title} AND vol_date = #{vol_date} AND notice_id = #{noticeId}
@@ -18,18 +18,21 @@
     <select id="findApplicationById" parameterType="int" resultType="VolunteerApplication">
         SELECT * FROM volunteer_application WHERE id = #{id}
     </select>
-    
+
     <select id="findByNoticeId" parameterType="int" resultType="VolunteerApplication">
         SELECT * FROM volunteer_application WHERE notice_id = #{noticeId}
     </select>
-    
+
     <select id="findByMemberIdx" parameterType="int" resultType="VolunteerApplication">
         SELECT * FROM volunteer_application WHERE member_idx = #{memberIdx}
     </select>
-    
+
     <select id="findAll" resultType="VolunteerApplication">
         SELECT * FROM volunteer_application
     </select>
+
+    <select id="selectCount" parameterType="map" resultType="int">
+        SELECT COUNT(*) FROM volunteer_application
+        WHERE member_idx = #{member_idx} AND notice_id = #{noticeId}
+    </select>
 </mapper>
-
-

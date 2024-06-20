@@ -1,6 +1,4 @@
 <th:block th:fragment="mypage_vol">
-	<!-- block으로 매핑 되나 실험 -->
-	<!-- 안됨 -->
 	<div class="container">
 		<div class="row my-auto">
 			<div class="col-12">
@@ -34,7 +32,7 @@
 											<button type="button" class="btn btn-info">바로가기</button>
 									</a></td>
 									<td class="text-center">
-										<form th:action="@{/volunteer/cancel}" method="post">
+										<form th:action="@{/volunteer/cancel}" method="post" class="cancel-application-form">
 											<input type="hidden" name="applicationId"
 												th:value="${volunteerApplication.id}">
 											<button type="submit" class="btn btn-danger">신청 취소</button>
@@ -48,8 +46,8 @@
 			</div>
 		</div>
 	</div>
-
 </th:block>
+
 
 
 <!-- 특정 url로 이동

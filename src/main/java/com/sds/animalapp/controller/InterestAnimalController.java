@@ -36,8 +36,8 @@ public class InterestAnimalController {
             @RequestParam("popfile") String popfile,
             HttpSession session) {
 
-        log.debug("Received animal_idx: " + animal_idx);
-        log.debug("Received member_idx: " + member_idx);
+        log.debug(" 받은animal_idx 값: " + animal_idx);
+        log.debug("받은 member_idx 값: " + member_idx);
 
         Member member = (Member) session.getAttribute("member");
         if (member == null) {

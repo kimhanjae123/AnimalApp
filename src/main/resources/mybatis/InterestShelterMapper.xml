@@ -3,7 +3,8 @@
 <mapper namespace="com.sds.animalapp.model.shelter.InterestShelterDAO">
 
 	<insert id="insertInterestShelter" parameterType="com.sds.animalapp.domain.InterestShelter">
-	insert into interest_shelter (member_idx,shelter_idx) values (#{member_idx},#{shelter_idx})
+	INSERT into interest_shelter (member_idx, shelter_idx, orgNm, careNm) 
+	VALUES (#{member_idx},#{shelter_idx}, #{orgNm}, #{careNm})
 	</insert>
 	
 	<delete id="deleteInterestShelter" parameterType="int">
@@ -13,4 +14,20 @@
 	<select id="duplicatedInterestShelter" resultType="com.sds.animalapp.domain.InterestShelter">
 		select * from interest_shelter where shelter_idx = #{shelter_idx} and member_idx=#{member_idx}
 	</select>
+
+    <select id="findInterestById" parameterType="int" resultType="InterestShelter">
+        SELECT * FROM interest_shelter WHERE interest_shelter_idx = #{interest_shelter_idx}
+    </select>
+    
+    <select id="findByMemberIdx" parameterType="int" resultType="InterestShelter">
+        SELECT * FROM interest_shelter WHERE member_idx = #{member_idx}
+    </select>
+    
+    <select id="findAll" resultType="InterestShelter">
+        SELECT * FROM interest_shelter
+    </select>
+    
+    <select id="findInterestByShelterIdxAndMemberIdx" parameterType="map" resultType="InterestShelter">
+        SELECT * FROM interest_shelter WHERE shelter_idx = #{shelter_idx} AND member_idx = #{member_idx}
+    </select>
 </mapper>

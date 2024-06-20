@@ -50,6 +50,7 @@ import com.sds.animalapp.model.member.RoleService;
 import com.sds.animalapp.model.member.SnsService;
 import com.sds.animalapp.model.shelter.InterestShelterService;
 import com.sds.animalapp.model.volunteer.VolunteerApplicationService;
+import com.sds.animalapp.model.volunteer.VolunteerService;
 import com.sds.animalapp.sns.KaKaoOAuthToken;
 import com.sds.animalapp.sns.NaverLogin;
 import com.sds.animalapp.sns.NaverOAuthToken;
@@ -79,6 +80,9 @@ public class MemberController {
 
     @Autowired
     private VolunteerApplicationService volunteerApplicationService;
+    
+    @Autowired
+    private VolunteerService volunteerService;
     
     @Autowired
     private AdoptAnimalService adoptAnimalService;
