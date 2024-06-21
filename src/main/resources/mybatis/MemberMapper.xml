@@ -25,11 +25,22 @@
         from member
         where uid=#{uid}
     </select>
+    
+    <select id="selectByIdx" parameterType="int" resultType="Member">
+        select * from member
+        where member_idx=#{member_idx}
+    </select>
 
     <update id="update" parameterType="Member">
         update member
         set nickname=#{nickname}, email=#{email}, profile_image_url=#{profile_image_url}
         where uid=#{uid}
+    </update>
+    
+    <update id="updateProfileImageUrl" parameterType="Map">
+        update member
+        set profile_image_url=#{imgUrl}
+        where member_idx=#{member_idx}
     </update>
 </mapper>
 

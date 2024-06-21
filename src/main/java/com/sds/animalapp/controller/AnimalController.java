@@ -93,14 +93,16 @@ public class AnimalController {
 		if (shelter_idx != null) {
 			model.addAttribute("shelter_idx", shelter_idx);
 		}
-		
-		int interestRecordNum = interestAnimalService.getInterestRecordNum(member.getMember_idx(), animal_idx);
-		int adoptRecordNum = adoptAnimalService.getAdopteRecordNum(member.getMember_idx(), animal_idx);
+		if(member!=null) {
+			int interestRecordNum = interestAnimalService.getInterestRecordNum(member.getMember_idx(), animal_idx);
+			int adoptRecordNum = adoptAnimalService.getAdopteRecordNum(member.getMember_idx(), animal_idx);
+			model.addAttribute("interestRecordNum", interestRecordNum);
+	        model.addAttribute("adoptRecordNum", adoptRecordNum);
+		}
 		
 		model.addAttribute("detail", animal);
 		model.addAttribute("applicantsCount", applicantsCount); // 추가
-        model.addAttribute("interestRecordNum", interestRecordNum);
-        model.addAttribute("adoptRecordNum", adoptRecordNum);
+        
 		return "animal/detail";
 	}
 

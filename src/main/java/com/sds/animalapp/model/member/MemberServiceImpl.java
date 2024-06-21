@@ -11,23 +11,21 @@ import com.sds.animalapp.domain.Role;
 import com.sds.animalapp.domain.Sns;
 import com.sds.animalapp.exception.MemberException;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    @Autowired
-    private SnsDAO snsDAO;
+    private final SnsDAO snsDAO;
 
-    @Autowired
-    private RoleDAO roleDAO;
+    private final RoleDAO roleDAO;
 
-    @Autowired
-    private MemberDAO memberDAO;
+    private final MemberDAO memberDAO;
 
-    @Autowired
-    private MemberDetailDAO memberDetailDAO;
+    private final MemberDetailDAO memberDetailDAO;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Transactional
     public void regist(Member member) throws MemberException {
@@ -83,6 +81,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void insertMemberDetail(MemberDetail memberDetail) {
 		memberDetailDAO.insert(memberDetail);
+	}
+
+	@Override
+	public void updateProfile(String imgUrl, int member_idx) {
+		memberDAO.updateProfileImageUrl(imgUrl, member_idx);
+	}
+
+	@Override
+	public Member getMemberByIdx(int member_idx) {
+		return memberDAO.selectByIdx(member_idx);
 	}
 }
 
