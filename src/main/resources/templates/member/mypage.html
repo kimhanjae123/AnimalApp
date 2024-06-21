@@ -168,7 +168,6 @@ $(document).ready(function() {
             },
             success: function(response) {
                 alert("신청 취소 완료!");
-                localStorage.removeItem('volunteerNoticeId');
                 location.reload(); // 페이지 새로고침
             },
             error: function(xhr) {
@@ -201,8 +200,6 @@ function cancelAdopt(button) {
             },
             success: function(response) {
                 alert('입양 신청이 취소되었습니다.');
-                localStorage.removeItem('adoptAnimalId'); // 로컬 스토리지에서 해당 정보 제거
-                localStorage.setItem('adoptApplied', 'false'); // 신청 상태 변경
                 location.reload();
             },
             error: function(error) {
@@ -234,8 +231,6 @@ function cancelInterest(button) {
             },
             success: function(response) {
                 alert('관심 동물 등록을 취소했습니다.');
-                localStorage.removeItem('interestAnimalId'); // 로컬 스토리지에서 해당 정보 제거
-                localStorage.setItem('interestApplied', 'false'); // 신청 상태 변경
                 location.reload();
             },
             error: function(error) {
@@ -269,8 +264,6 @@ function cancelInterestShelter(button) {
             },
             success: function(response) {
                 alert('관심 보호소 등록을 취소했습니다.');
-                localStorage.removeItem('interestShelterId');
-                localStorage.setItem('interestShelterApplied', 'false');
                 location.reload();
             },
             error: function(error) {
