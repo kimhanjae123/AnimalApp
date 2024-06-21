@@ -53,6 +53,11 @@ public class AdoptAnimalServiceImpl implements AdoptAnimalService {
     public AdoptAnimal findAdoptByAnimalIdxAndMemberIdx(int animal_idx, int member_idx) {
         return adoptAnimalDAO.findAdoptByAnimalIdxAndMemberIdx(animal_idx, member_idx);
     }
+
+	@Override
+	public int getAdopteRecordNum(int member_idx, int animal_idx) {
+		return adoptAnimalDAO.selectCount(member_idx, animal_idx);
+	}
 }
 
 

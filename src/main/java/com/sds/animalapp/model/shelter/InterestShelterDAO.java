@@ -27,4 +27,6 @@ public interface InterestShelterDAO {
     InterestShelter findInterestById(int interest_shelter_idx);
     
     InterestShelter findInterestByShelterIdxAndMemberIdx(@Param("shelter_idx") int shelter_idx, @Param("member_idx") int member_idx);
+    
+    int selectCount(@Param("member_idx") int member_idx, @Param("shelter_idx") int shelter_idx);
 }

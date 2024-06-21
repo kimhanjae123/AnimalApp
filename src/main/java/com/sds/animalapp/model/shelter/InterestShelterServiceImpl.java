@@ -52,4 +52,9 @@ public class InterestShelterServiceImpl implements InterestShelterService {
     public InterestShelter findInterestByShelterIdxAndMemberIdx(int shelter_idx, int member_idx) {
         return interestShelterDAO.findInterestByShelterIdxAndMemberIdx(shelter_idx, member_idx);
     }
+
+	@Override
+	public int getRecordNum(int member_idx, int shelter_idx) {
+		return interestShelterDAO.selectCount(member_idx, shelter_idx);
+	}
 }

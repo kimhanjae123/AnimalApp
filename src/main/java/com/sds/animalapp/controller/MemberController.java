@@ -129,6 +129,9 @@ public class MemberController {
         List<InterestShelter> interestShelters =  interestShelterService.getInterestByMemberIdx(member.getMember_idx());
         model.addAttribute("interestShelters", interestShelters);
         
+        String profileImage = member.getProfile_image_url();
+        model.addAttribute("profileImage",profileImage);
+        
         return "member/mypage";
     }
 

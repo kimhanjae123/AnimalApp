@@ -105,31 +105,35 @@ public class VolunteerController {
     }
     
 	  @PostMapping("/volunteer/apply")
-	  @ResponseBody public ResponseEntity<String> apply(@RequestParam("id") int id,
-	  HttpSession session) { Member member = (Member)
-	  session.getAttribute("member"); if (member == null) { return
-	  ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다."); }
-	  
-	  VolunteerNotice volunteerNotice = volunteerService.select(id); if
-	  (volunteerNotice == null) { return
-	  ResponseEntity.status(HttpStatus.NOT_FOUND).body("봉사활동을 찾을 수 없습니다."); }
-	  
-	  VolunteerApplication volunteerApplication = new VolunteerApplication();
-	  volunteerApplication.setTitle(volunteerNotice.getTitle());
-	  volunteerApplication.setVol_date(volunteerNotice.getVol_date());
-	  volunteerApplication.setNoticeId(volunteerNotice.getVol_event_post_idx());
-	  volunteerApplication.setMemberIdx(member.getMember_idx());
-	  
-	  volunteerApplicationService.apply(volunteerApplication); return
-	  ResponseEntity.ok("신청 완료!"); 
+	  @ResponseBody public ResponseEntity<String> apply(@RequestParam("id") int id, HttpSession session) { 
+		  Member member = (Member)session.getAttribute("member"); 
+		  if (member == null) { 
+			  return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다."); 
+		  }
+		  
+		  VolunteerNotice volunteerNotice = volunteerService.select(id);
+		  
+		  if(volunteerNotice == null) { 
+			  return ResponseEntity.status(HttpStatus.NOT_FOUND).body("봉사활동을 찾을 수 없습니다."); 
+		  }
+		  
+		  VolunteerApplication volunteerApplication = new VolunteerApplication();
+		  volunteerApplication.setTitle(volunteerNotice.getTitle());
+		  volunteerApplication.setVol_date(volunteerNotice.getVol_date());
+		  volunteerApplication.setNotice_id(volunteerNotice.getVol_event_post_idx());
+		  volunteerApplication.setMember_idx(member.getMember_idx());
+		  
+		  volunteerApplicationService.apply(volunteerApplication); 
+		  return ResponseEntity.ok("신청 완료!"); 
 	  
 	  }
 	  
 	  @PostMapping("/volunteer/cancel")
 	  @ResponseBody
 	  public ResponseEntity<String> cancel(@RequestParam("notice_id") int notice_id, HttpSession session) {
+		  
 	      Member member = (Member) session.getAttribute("member");
-	      log.info("applicationId 받은 값 찾기: " + notice_id); // 로그 추가하여 id 값 확인
+	      log.info("notice_id 받은 값 찾기: " + notice_id); // 로그 추가하여 id 값 확인
 	      volunteerApplicationService.cancel(notice_id, member.getMember_idx());
 	      return ResponseEntity.ok("신청 취소 완료");
 	  }

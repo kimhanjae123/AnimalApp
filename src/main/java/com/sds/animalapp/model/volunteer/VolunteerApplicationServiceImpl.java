@@ -29,8 +29,8 @@ public class VolunteerApplicationServiceImpl implements VolunteerApplicationServ
     }
 
     @Override
-    public List<VolunteerApplication> getApplicationsByMemberIdx(int memberIdx) {
-        return volunteerApplicationDAO.findByMemberIdx(memberIdx);
+    public List<VolunteerApplication> getApplicationsByMemberIdx(int member_idx) {
+        return volunteerApplicationDAO.findByMemberIdx(member_idx);
     }
 
     @Override
@@ -39,7 +39,7 @@ public class VolunteerApplicationServiceImpl implements VolunteerApplicationServ
     }
 
     @Override
-    public int getRecordNum(int noticeId, int member_idx) {
-        return volunteerApplicationDAO.selectCount(noticeId, member_idx);
+    public int getRecordNum(int notice_id, int member_idx) {
+        return volunteerApplicationDAO.selectCount(notice_id, member_idx);
     }
 }

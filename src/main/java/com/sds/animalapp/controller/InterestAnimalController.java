@@ -31,18 +31,20 @@ public class InterestAnimalController {
     @ResponseBody
     public ResponseEntity<String> registerInterest(
             @RequestParam("animal_idx") int animal_idx,
-            @RequestParam("member_idx") int member_idx,
             @RequestParam("kindCd") String kindCd,
             @RequestParam("popfile") String popfile,
             HttpSession session) {
 
+    	Member member = (Member) session.getAttribute("member");
+    	if (member == null) {
+    		return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
+    	}
+    	
+    	int member_idx = member.getMember_idx();
+    	
         log.debug(" 받은animal_idx 값: " + animal_idx);
         log.debug("받은 member_idx 값: " + member_idx);
 
-        Member member = (Member) session.getAttribute("member");
-        if (member == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
-        }
 
         Animal animal = animalService.select(animal_idx);
         if (animal == null) {
@@ -68,14 +70,14 @@ public class InterestAnimalController {
     @ResponseBody
     public ResponseEntity<String> cancelInterest(
             @RequestParam("animal_idx") int animal_idx,
-            @RequestParam("member_idx") int member_idx, HttpSession session) {
-        Member member = (Member) session.getAttribute("member");
+            HttpSession session) {
+    	Member member = (Member) session.getAttribute("member");
         if (member == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }
 
         try {
-            InterestAnimal interestAnimal = interestAnimalService.findInterestByAnimalIdxAndMemberIdx(animal_idx, member_idx);
+            InterestAnimal interestAnimal = interestAnimalService.findInterestByAnimalIdxAndMemberIdx(animal_idx, member.getMember_idx());
             if (interestAnimal == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("관심 동물 신청 내역을 찾을 수 없습니다.");
             }

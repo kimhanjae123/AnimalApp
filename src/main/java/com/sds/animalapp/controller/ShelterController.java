@@ -10,15 +10,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sds.animalapp.common.Pager;
+import com.sds.animalapp.domain.Member;
 import com.sds.animalapp.domain.Shelter;
 import com.sds.animalapp.domain.ShelterSelectParam;
 import com.sds.animalapp.domain.Sido;
 import com.sds.animalapp.domain.Signgu;
+import com.sds.animalapp.model.shelter.InterestShelterService;
 import com.sds.animalapp.model.shelter.ShelterApiService;
 import com.sds.animalapp.model.shelter.ShelterService;
 import com.sds.animalapp.model.shelter.SidoService;
 import com.sds.animalapp.model.shelter.SignguService;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -35,6 +38,9 @@ public class ShelterController {
     
     @Autowired
     private SignguService signguService;
+    
+    @Autowired
+    private InterestShelterService interestShelterService;
 
     @GetMapping("/shelter/list")
     public String getShelter(Model model,
@@ -74,8 +80,10 @@ public class ShelterController {
 
     // 세부창
     @GetMapping("/shelter/detail")
-    public String getDetail(Model model, @RequestParam(value = "id", required = false) Integer shelter_idx,
+    public String getDetail(Model model, HttpSession session, @RequestParam(value = "id", required = false) Integer shelter_idx,
                             @RequestParam(value = "careNm", required = false) String careNm) {
+    	Member member = (Member) session.getAttribute("member");
+    	
         // shelter_idx가 제공되지 않은 경우 careNm으로 shelter_idx를 찾음
         if (shelter_idx == null && careNm != null && !careNm.isEmpty()) {
             shelter_idx = shelterService.findShelterIdxByCareNm(careNm);
@@ -89,7 +97,11 @@ public class ShelterController {
         // shelter_idx가 존재하면 해당 shelter 정보를 조회하여 모델에 추가
         Shelter shelter = shelterService.select(shelter_idx);
         model.addAttribute("detail", shelter);
-
+        
+        int recordNum = interestShelterService.getRecordNum(member.getMember_idx(), shelter_idx);
+        log.info("shelter Rcord Number:" + recordNum);
+        model.addAttribute("recordNum", recordNum);
+        
         return "shelter/detail";
     }
     
