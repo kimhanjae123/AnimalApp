@@ -110,8 +110,6 @@ public class MemberController {
             return "redirect:/member/login";
         }
         
-        String profileImage = member.getProfile_image_url();
-        model.addAttribute("profileImage",profileImage);
 
         // Volunteer Applications
         List<VolunteerApplication> volunteerApplications = volunteerApplicationService.getApplicationsByMemberIdx(member.getMember_idx());
