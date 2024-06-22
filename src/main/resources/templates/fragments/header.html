@@ -3,10 +3,10 @@
         <nav class="main-menu d-flex navbar navbar-expand-lg ">
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-body justify-content-center">
-                    <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-5 mb-0">
+                    <ul class="navbar-nav menu-list list-unstyled d-flex gap-md-5 mb-0 ">
                         <div class="main-logo">
                             <a href="/">
-                                <img src="/site/images/logo.png" alt="logo" class="img-fluid">
+                                <img src="/site/images/anemone-logo.png" alt="logo" class="img-fluid" style="width: 200px; height: auto;">
                             </a>
                         </div>
                         <li class="nav-item"><a href="/shelter/list" class="nav-link">보호소 조회</a></li>
@@ -23,18 +23,18 @@
                         </th:li>
 
                         <th:block th:if="${session.member != null}">
-                            <li class="nav-item profile-container">
+                            <li class="nav-item profile-container align-items-center">
                                 <a href="#" class="nav-link d-flex align-items-center">
                                     <div id="briefProfile" class="profile-text me-3" th:text="${session.member.nickname + '님'}"></div>
 
                                     <!-- naver 로그인 시 나오는 프로필 -->
                                     <th:block th:if="${session.member.sns.sns_name == 'naver'}">
-                                        <img th:src="${session.member.profileImageUrl}" id="headerImg" alt="Profile Image" class="rounded-circle img-fluid" style="max-width: 45px; height: auto;" />
+                                        <img th:src="${session.member.profileImageUrl}" id="headerImg" alt="Profile Image" class="rounded-circle mx-auto img-fluid"/>
                                     </th:block>
 
                                     <!-- 카카오 로그인 시 나오는 프로필 -->
-                                    <th:block th:if="${session.member.sns.sns_name == 'kakao'}">
-                                        <img th:src="${session.member.profile_image_url}" id="headerImg" class="rounded-circle img-fluid" style="max-width: 45px; height: auto;" alt="프로필 이미지">
+                                    <th:block th:if="${session.member.sns.sns_name == 'kakao'}" >
+                                        <img th:src="${session.member.profile_image_url}" id="headerImg" class="rounded-circle mx-auto img-fluid"  alt="프로필 이미지">
                                     </th:block>
                                 </a>
                             </li>

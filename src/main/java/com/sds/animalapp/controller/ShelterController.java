@@ -54,8 +54,10 @@ public class ShelterController {
     	shelterSelectParam.setCurrentSidoCode(currentSidoCode);
     	shelterSelectParam.setCurrentSignguCode(currentSignguCode);
     	
+    	int selectCount = shelterService.selectCount(shelterSelectParam);
         Pager pager = new Pager();
-        pager.init(shelterService.selectCount(shelterSelectParam), currentPage);
+        pager.init(selectCount, currentPage);
+        
         
         List<Sido> sidoList = sidoService.selectAll();
         List<Signgu> signguList = signguService.selectAll(currentSidoCode);
