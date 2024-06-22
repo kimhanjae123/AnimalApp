@@ -103,6 +103,7 @@ public class MemberController {
         if (member == null) {
             return "redirect:/member/login";
         }
+        
 
         // Volunteer Applications
         List<VolunteerApplication> volunteerApplications = volunteerApplicationService.getApplicationsByMemberIdx(member.getMember_idx());

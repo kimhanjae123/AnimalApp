@@ -10,22 +10,22 @@
                     <table class="table table-bordered" style="box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.21);">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col" class="text-center">사진</th>
-                                <th scope="col" class="text-center">품종</th>
-                                <th scope="col" class="text-center">상세 정보</th>
-                                <th scope="col" class="text-center">신청 취소</th>
+                                <th scope="col" class="text-center col-3">사진</th>
+                                <th scope="col" class="text-center col-3">품종</th>
+                                <th scope="col" class="text-center col-3">상세 정보</th>
+                                <th scope="col" class="text-center col-3">신청 취소</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr th:each="adoptAnimal : ${adoptAnimals}">
-                                <td class="text-center">
+                                <td class="text-center col-3" style="vertical-align: middle;">
                                     <img th:src="${adoptAnimal.popfile}" alt="동물 사진" style="width: 100px; height: 100px; object-fit: cover;">
                                 </td>
-                                <td class="text-center" th:text="${adoptAnimal.kindCd}"></td>
-                                <td class="text-center">
+                                <td class="text-center col-3" th:text="${adoptAnimal.kindCd}" style="vertical-align: middle;"></td>
+                                <td class="text-center col-3" style="vertical-align: middle;">
                                     <a th:href="@{/animal/detail(id=${adoptAnimal.animal_idx})}" class="btn btn-info">바로가기</a>
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center col-3" style="vertical-align: middle;">
                                     <button type="button" class="btn btn-danger"
                                         th:attr="data-animal-idx=${adoptAnimal.animal_idx}, data-member-idx=${session.member.member_idx}"
                                         onclick="cancelAdopt(this)">신청 취소</button>

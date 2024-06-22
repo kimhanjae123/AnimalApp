@@ -19,7 +19,7 @@
     <update id="update" parameterType="MemberDetail">
         update member_detail
         set phone=#{phone}
-        where member_idx=#{member.member_idx}
+        where member_idx=#{member_idx}
     </update>
 	
 </mapper>
