@@ -46,19 +46,21 @@
 		<div class="container ">
 			<div class="row my-5 py-5">
 				<div class="offset-md-3 col-md-6 my-5 ">
-					<h2 class="display-3 fw-normal text-center">
-						Login with<span class="text-primary"> Naver or Kakao</span>
+					<h2 class="display-3 fw-normal text-center" style="font-size:30px;">
+						기존에 사용하시는 계정으로 간편하게 로그인하세요.
 					</h2>
 					<form>
-						<div class="mb-3">
-							<a href="javascript:getAuthForm('naver')"> <img alt=""
-								src="/login/btnG_official.png" width="600" height="90">
-							</a>
-						</div>
-						<div class="mb-3">
-							<a href="javascript:getAuthForm('kakao')"> <img alt=""
-								src="/login/kakao_login_large_wide.png">
-							</a>
+						<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; ">
+							<div class="mb-3" style="display: flex; justify-content: space-between;">
+								<a href="javascript:getAuthForm('naver')"> <img alt=""
+									src="/login/btnG_official.png" width="270" height="50">
+								</a>
+							</div>
+							<div class="mb-3" >
+								<a href="javascript:getAuthForm('kakao')"> <img alt=""
+									src="/login/kakao_login_large_wide.png" width="270" height="50">
+								</a>
+							</div>
 						</div>
 					</form>
 				</div>
