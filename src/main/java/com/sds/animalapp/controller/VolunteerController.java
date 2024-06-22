@@ -46,6 +46,8 @@ public class VolunteerController {
 
 		// 봉사 목록 가져오기
 		List<VolunteerNotice> volunteerList = volunteerService.selectAll(volunteerSelectParam);
+		
+		Member member = new Member();
 
 		// 모델에 데이터 추가
 		model.addAttribute("volunteerList", volunteerList);
