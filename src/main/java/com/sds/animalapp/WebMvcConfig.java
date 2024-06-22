@@ -15,6 +15,7 @@ addResourceLocations에서 정의한 경로에서 찾는다는 의미이다.
 @Slf4j  
 @Configuration  
 public class WebMvcConfig implements WebMvcConfigurer { 
+	
     @Override  
     public void addResourceHandlers(ResourceHandlerRegistry registry) {  
         registry.addResourceHandler("/**")  
