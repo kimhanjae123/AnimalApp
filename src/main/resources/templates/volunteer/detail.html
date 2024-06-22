@@ -88,6 +88,11 @@
                     </button>
                     <div class="collapse mt-2" id="toggleList">
                         <ul class="list-group">
+                        	<th:block th:if="${#lists.isEmpty(applicantNicAndImg)}">
+                                <li class="list-group-item">
+                                    봉사 신청 인원이 없습니다.
+                                </li>
+                            </th:block>
                             <li th:each="member, i : ${applicantNicAndImg}" class="list-group-item" >
                             	<img class="rounded-circle mx-auto img-fluid" alt="profile_image" th:src="${member.profile_image_url}" style="object-fit: cover; width: 30px; height: 30px;">
 								<span th:text="${member.nickname}"></span>                            
