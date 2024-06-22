@@ -10,8 +10,7 @@
 		'%')
 		<if test="currentSidoCode != '00' and currentSignguCode != '00'">
 			AND uprCd = #{currentSidoCode}
-			AND uprCd =
-			#{currentSignguCode}
+			AND orgCd = #{currentSignguCode}
 		</if>
 		<if test="currentSidoCode != '00' and currentSignguCode == '00'">
 			AND uprCd = #{currentSidoCode}
