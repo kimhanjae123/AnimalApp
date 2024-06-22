@@ -97,10 +97,11 @@ public class ShelterController {
         // shelter_idx가 존재하면 해당 shelter 정보를 조회하여 모델에 추가
         Shelter shelter = shelterService.select(shelter_idx);
         model.addAttribute("detail", shelter);
+        if(member!=null) {
+        	int recordNum = interestShelterService.getRecordNum(member.getMember_idx(), shelter_idx);
+            model.addAttribute("recordNum", recordNum);
+        }
         
-        int recordNum = interestShelterService.getRecordNum(member.getMember_idx(), shelter_idx);
-        log.info("shelter Rcord Number:" + recordNum);
-        model.addAttribute("recordNum", recordNum);
         
         return "shelter/detail";
     }

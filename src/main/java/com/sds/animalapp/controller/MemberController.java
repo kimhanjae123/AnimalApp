@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -57,41 +58,34 @@ import com.sds.animalapp.sns.NaverOAuthToken;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class MemberController {
 
-    @Autowired
-    private KakaoLoginService kakaoLoginService;
+   
+    private final KakaoLoginService kakaoLoginService;
 
-    @Autowired
-    private NaverLogin naverLogin;
+    private final NaverLogin naverLogin;
 
-    @Autowired
-    private RoleService roleService;
+    private final RoleService roleService;
 
-    @Autowired
-    private SnsService snsService;
+    private final SnsService snsService;
 
-    @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
 
-    @Autowired
-    private VolunteerApplicationService volunteerApplicationService;
+    private final VolunteerApplicationService volunteerApplicationService;
     
-    @Autowired
-    private VolunteerService volunteerService;
+    private final VolunteerService volunteerService;
     
-    @Autowired
-    private AdoptAnimalService adoptAnimalService;
+    private final AdoptAnimalService adoptAnimalService;
     
-    @Autowired
-    private InterestAnimalService interestAnimalService;
+    private final InterestAnimalService interestAnimalService;
     
-    @Autowired 
-    private InterestShelterService interestShelterService;
+    private final InterestShelterService interestShelterService;
 
     @Value("${upload.directory}")
     private String uploadDirectory;
@@ -127,7 +121,12 @@ public class MemberController {
         List<InterestShelter> interestShelters =  interestShelterService.getInterestByMemberIdx(member.getMember_idx());
         model.addAttribute("interestShelters", interestShelters);
         
+        // 업데이트한 member record 가져오기
+        Member updatedMember = memberService.getMemberByIdx(member.getMember_idx());
+        member.setProfile_image_url(updatedMember.getProfile_image_url());
+        
         String profileImage = member.getProfile_image_url();
+        log.info(profileImage);
         model.addAttribute("profileImage",profileImage);
         
         return "member/mypage";
@@ -135,41 +134,59 @@ public class MemberController {
 
 
     
-    // 해결 방법 찾음 application.properties에 
-    // upload.directory=C:/git_animal/AnimalApp/bin/main/static/mypage 이렇게 자기 
-    // 컴퓨터 경로에 맞게 설정해줘야함
     @PostMapping("/upload")
     @ResponseBody
-    public Map<String, Object> pictureFileInput(@RequestParam("file") MultipartFile file) {
+    // 프로필 사진 변경
+    public Map<String, Object> pictureFileInput(HttpSession session, @RequestParam("file") MultipartFile file) {
+        Member member = (Member) session.getAttribute("member");
+
         Map<String, Object> response = new HashMap<>();
-        if (!file.isEmpty()) {
+        if (!file.isEmpty()) { // 파일이 존재하면
             try {
                 // byte로 읽어오기
                 byte[] bytes = file.getBytes();
-                Path path = Paths.get(uploadDirectory, file.getOriginalFilename());
+                
+                // 회원의 고유 식별자(idx) 가져오기
+                int memberId = member.getMember_idx();
 
+                // 업로드 시간 구하기
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+                String timestamp = now.format(formatter);
+
+                // 파일 이름 생성
+                String originalFilename = file.getOriginalFilename();
+                String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+
+                String filename = memberId + "_" + timestamp+extension;
+                Path path = Paths.get(uploadDirectory, filename);
                 if (Files.notExists(path.getParent())) {
                     Files.createDirectories(path.getParent());
                 }
 
                 Files.write(path, bytes);
-                String imageUrl = "/mypage/" + file.getOriginalFilename();
+                String imageUrl = "/mypage/" + filename;
                 response.put("success", true);
                 response.put("imageUrl", imageUrl);
 
-                System.out.println("Image uploaded to: " + path.toString());
-                System.out.println("Image URL: " + imageUrl);
+                // 프로필 이미지 URL 업데이트
+                memberService.updateProfile(imageUrl, memberId);
+
+                // 업데이트한 member record 가져오기
+                Member updatedMember = memberService.getMemberByIdx(memberId);
+                member.setProfile_image_url(updatedMember.getProfile_image_url());
             } catch (IOException e) {
                 e.printStackTrace();
                 response.put("success", false);
                 response.put("message", "파일 업로드에 실패했습니다.");
             }
-        } else {
+        } else { // 파일이 없으면
             response.put("success", false);
             response.put("message", "업로드할 파일을 선택해주세요.");
         }
         return response;
     }
+
 
     // 카카오 로그인 처리
     @GetMapping("/member/sns/kakao/callback")

@@ -26,7 +26,7 @@
     <section class="resume-section p-3 p-lg-5 d-flex d-column align-items-center justify-content-center" id="about">
     <div style="display: flex; align-items: center;">
         <div style="text-align: center; width: 300px;">
-            <img th:src="${profileImage}" class="img-fluid mb-3" alt="Profile Image" id="profileImage">
+            <img th:src="@{${profileImage}}" class="img-fluid mb-3" alt="Profile Image" id="profileImage">
         </div>
         <div style="margin-left: 20px;">
             <div class="subheading mb-3">
@@ -47,8 +47,6 @@
         </div>
     </div>
 </section>
-
-
     
     	<!-- mypage에 관심보호소 -->
         <th:block th:replace="~{member/mypage_shelter :: mypage_shelter}" />
@@ -122,25 +120,11 @@ $(document).ready(function() {
             data: formData,
             contentType: false,
             processData: false,
-            success: function(result) {
-                if (result.success) {
-                    alert('사진이 업로드되었습니다.');
-                    var imageUrl = result.imageUrl;
-                    var profileImage = $('#profileImage');
-                    if (profileImage.length === 0) {
-                        profileImage = $('<img>', {
-                            id: 'profileImage',
-                            class: 'img-fluid mb-3'
-                        });
-                        $('#imageContainer').append(profileImage);
-                    }
-                    profileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
-
-                    var $headerProfileImage = $('#headerProfileImage');
-                    $headerProfileImage.attr('src', imageUrl + '?t=' + new Date().getTime());
-                } else {
-                    alert('사진 업로드에 실패했습니다.');
-                }
+            success: function(response) {
+            	var imageUrl = response.imageUrl;
+                $('#profileImage').attr('src', imageUrl); // 프로필 이미지 업데이트
+                $('#headerImg').attr('src', imageUrl); // 프로필 이미지 업데이트
+                $('#pictureForm').hide(); // 업로드 후 폼 숨기기
             },
             error: function(error) {
                 console.error('Error:', error);
@@ -184,7 +168,6 @@ $(document).ready(function() {
             },
             success: function(response) {
                 alert("신청 취소 완료!");
-                localStorage.removeItem('volunteerNoticeId');
                 location.reload(); // 페이지 새로고침
             },
             error: function(xhr) {
@@ -217,8 +200,6 @@ function cancelAdopt(button) {
             },
             success: function(response) {
                 alert('입양 신청이 취소되었습니다.');
-                localStorage.removeItem('adoptAnimalId'); // 로컬 스토리지에서 해당 정보 제거
-                localStorage.setItem('adoptApplied', 'false'); // 신청 상태 변경
                 location.reload();
             },
             error: function(error) {
@@ -250,8 +231,6 @@ function cancelInterest(button) {
             },
             success: function(response) {
                 alert('관심 동물 등록을 취소했습니다.');
-                localStorage.removeItem('interestAnimalId'); // 로컬 스토리지에서 해당 정보 제거
-                localStorage.setItem('interestApplied', 'false'); // 신청 상태 변경
                 location.reload();
             },
             error: function(error) {
@@ -285,8 +264,6 @@ function cancelInterestShelter(button) {
             },
             success: function(response) {
                 alert('관심 보호소 등록을 취소했습니다.');
-                localStorage.removeItem('interestShelterId');
-                localStorage.setItem('interestShelterApplied', 'false');
                 location.reload();
             },
             error: function(error) {
