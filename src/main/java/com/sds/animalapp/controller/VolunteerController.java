@@ -1,6 +1,7 @@
 package com.sds.animalapp.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,8 +83,6 @@ public class VolunteerController {
         Member member = (Member) session.getAttribute("member");
         if (member == null) return "redirect:/member/login";
 
-        log.info("detail에서 Id 요청 확인용: " + noticeId); // noticeId 값 로그 추가
-
         VolunteerNotice volunteerNotice = volunteerService.select(noticeId);
         if (volunteerNotice == null) {
             log.error("noticeId 값이 없음 : " + noticeId);
@@ -94,14 +93,17 @@ public class VolunteerController {
         int registNum = volunteerService.selectRegistCount(noticeId);
 
         int member_idx = member.getMember_idx();
-        log.info(String.valueOf("detail page 요청 member_idx: ") + String.valueOf(member.getMember_idx()));
+        
         //voluntear_apply 테이블에서 내가 신청한 봉사 기록 확인
         int recordNum = volunteerApplicationService.getRecordNum(noticeId, member_idx);
-        log.info("내 신청 수: " + String.valueOf(recordNum));
+        
+        //해당 게시글의 신청인원 목록 불러오기
+        List<Map> applicantNicAndImg = volunteerApplicationService.getAllApplicant(noticeId);
 
         model.addAttribute("detail", volunteerNotice);
         model.addAttribute("registCount", registNum);
         model.addAttribute("recordNum", recordNum);
+        model.addAttribute("applicantNicAndImg", applicantNicAndImg);
 
         return "volunteer/detail";
     }

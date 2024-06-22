@@ -17,4 +17,5 @@ public interface VolunteerApplicationDAO {
     List<VolunteerApplication> findAll();
     VolunteerApplication findApplicationById(int member_idx); // 추가된 메서드
     int selectCount(@Param("notice_id") int notice_id, @Param("member_idx") int member_idx);
+    List selectNic(int notice_id);
 }

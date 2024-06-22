@@ -35,4 +35,11 @@
         SELECT COUNT(*) FROM volunteer_application
         WHERE member_idx = #{member_idx} AND notice_id = #{notice_id}
     </select>
+    
+    <select id="selectNic" parameterType="int" resultType="map">
+        SELECT m.nickname, m.profile_image_url
+		FROM member m
+		JOIN volunteer_application v ON m.member_idx = v.member_idx
+		WHERE v.notice_id = #{notice_id};
+    </select>
 </mapper>

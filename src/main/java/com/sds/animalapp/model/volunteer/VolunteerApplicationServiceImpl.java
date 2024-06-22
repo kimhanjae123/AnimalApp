@@ -42,4 +42,9 @@ public class VolunteerApplicationServiceImpl implements VolunteerApplicationServ
     public int getRecordNum(int notice_id, int member_idx) {
         return volunteerApplicationDAO.selectCount(notice_id, member_idx);
     }
+
+	@Override
+	public List getAllApplicant(int notice_id) {
+		return volunteerApplicationDAO.selectNic(notice_id);
+	}
 }
