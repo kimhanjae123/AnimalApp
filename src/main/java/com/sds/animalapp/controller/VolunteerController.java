@@ -88,6 +88,12 @@ public class VolunteerController {
             log.error("noticeId 값이 없음 : " + noticeId);
             return "redirect:/error/404";
         }
+        
+    	// 봉사 게시판의 보호소와 매칭 되는 유기동물보호소 조회
+ 		Integer shelter_idx = volunteerService.findShelterIdxByCareNm(volunteerNotice.getShelter_name());
+ 		if (shelter_idx != null) {
+ 			model.addAttribute("shelter_idx", shelter_idx);
+ 		}
 
         // 해당 봉사를 신청한 사람 수 불러오기
         int registNum = volunteerService.selectRegistCount(noticeId);
