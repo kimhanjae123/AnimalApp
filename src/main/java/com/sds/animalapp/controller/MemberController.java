@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -86,6 +88,8 @@ public class MemberController {
     private final InterestAnimalService interestAnimalService;
     
     private final InterestShelterService interestShelterService;
+    
+    private final ResourceLoader resourceLoader;
 
     @Value("${upload.directory}")
     private String uploadDirectory;
@@ -141,38 +145,41 @@ public class MemberController {
         Member member = (Member) session.getAttribute("member");
 
         Map<String, Object> response = new HashMap<>();
-        if (!file.isEmpty()) { // 파일이 존재하면
+        if (!file.isEmpty()) {
             try {
-                // byte로 읽어오기
                 byte[] bytes = file.getBytes();
-                
-                // 회원의 고유 식별자(idx) 가져오기
+
                 int memberId = member.getMember_idx();
 
-                // 업로드 시간 구하기
                 LocalDateTime now = LocalDateTime.now();
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
                 String timestamp = now.format(formatter);
 
-                // 파일 이름 생성
                 String originalFilename = file.getOriginalFilename();
                 String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+                
+                //파일 경로 설정
+                String filename = memberId + "_" + timestamp + extension;
+                Resource resource = resourceLoader.getResource(uploadDirectory);
+                String parantPath = resource.getFile().getAbsolutePath();
+                parantPath = parantPath.replace("\\bin\\main\\static\\mypage", "\\src\\main\\resources\\static\\mypage");
+                log.info(parantPath);
+                
+                Path fullPath = Paths.get(parantPath).resolve(filename);
 
-                String filename = memberId + "_" + timestamp+extension;
-                Path path = Paths.get(uploadDirectory, filename);
-                if (Files.notExists(path.getParent())) {
-                    Files.createDirectories(path.getParent());
+                if (Files.notExists(fullPath.getParent())) {
+                    Files.createDirectories(fullPath.getParent());
                 }
 
-                Files.write(path, bytes);
+                System.out.println(fullPath.getParent());
+
+                Files.write(fullPath, bytes);
                 String imageUrl = "/mypage/" + filename;
                 response.put("success", true);
                 response.put("imageUrl", imageUrl);
 
-                // 프로필 이미지 URL 업데이트
                 memberService.updateProfile(imageUrl, memberId);
 
-                // 업데이트한 member record 가져오기
                 Member updatedMember = memberService.getMemberByIdx(memberId);
                 member.setProfile_image_url(updatedMember.getProfile_image_url());
             } catch (IOException e) {
@@ -180,12 +187,13 @@ public class MemberController {
                 response.put("success", false);
                 response.put("message", "파일 업로드에 실패했습니다.");
             }
-        } else { // 파일이 없으면
+        } else {
             response.put("success", false);
             response.put("message", "업로드할 파일을 선택해주세요.");
         }
         return response;
     }
+
 
 
     // 카카오 로그인 처리

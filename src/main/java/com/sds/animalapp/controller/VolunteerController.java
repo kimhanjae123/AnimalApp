@@ -37,6 +37,9 @@ public class VolunteerController {
 	@GetMapping("/volunteer/list")
 	public String volunteerList(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage,
 			@RequestParam(value = "keyword", defaultValue = "") String keyword) {
+		
+		System.out.println("이름!! "+keyword);
+		
 		Pager pager = new Pager();
 		pager.init(volunteerService.selectCount(keyword), currentPage);
 
