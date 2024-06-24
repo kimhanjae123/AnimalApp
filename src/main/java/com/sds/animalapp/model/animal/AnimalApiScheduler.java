@@ -104,30 +104,30 @@ public class AnimalApiScheduler {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private String convertSexCd(String sexCd) {
-	    switch (sexCd) {
-	        case "M":
-	            return "남";
-	        case "F":
-	            return "여";
-	        default:
-	            return "-";
-	    }
+		switch (sexCd) {
+		case "M":
+			return "남";
+		case "F":
+			return "여";
+		default:
+			return "-";
+		}
 	}
-	
+
 	private String convertNeuterYn(String neuterYn) {
-	    List<String> validValues = Arrays.asList("Y", "N", "U");
-	    if (validValues.contains(neuterYn)) {
-	        switch (neuterYn) {
-	            case "Y":
-	                return "완료";
-	            case "N":
-	                return "미완료";
-	            case "U":
-	                return "미상";
-	        }
-	    }
-	    return "-";
+		List<String> validValues = Arrays.asList("Y", "N", "U");
+		if (validValues.contains(neuterYn)) {
+			switch (neuterYn) {
+			case "Y":
+				return "완료";
+			case "N":
+				return "미완료";
+			case "U":
+				return "미상";
+			}
+		}
+		return "-";
 	}
 }
