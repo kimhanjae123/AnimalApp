@@ -7,4 +7,7 @@
 <br>아네모네를 방문하여 가까운 보호소를 확인하고, 여러분 가족에게 가장 잘 맞는 반려동물들에게 새로운 희망을 주세요.
 
 - - -
+# ERD
+![image](https://github.com/hg316/AnimalApp/assets/159999471/ac17180a-4f19-4f60-a3ab-76bdb5b1bef9)
 
+- - -
