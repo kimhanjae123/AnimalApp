@@ -41,6 +41,13 @@
 이 게시판은 함께 봉사할 인원을 모집하기 위한 공간으로, 사용자는 함꼐할 봉사자들을 보집하거나 공고를 보고 참여할 수 있습니다.
 
 - - -
+# Tech Stacks
+![image](https://github.com/hg316/Anemone/assets/159999471/34fdf4a0-b24c-4e3c-99ab-1b67ce52959e)
+
+
+
+
+- - -
 # ERD
 ![image](https://github.com/hg316/AnimalApp/assets/159999471/ac17180a-4f19-4f60-a3ab-76bdb5b1bef9)
 
