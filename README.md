@@ -25,7 +25,7 @@
 개인봉사활동을 조회하고 작성할 수 있습니다. 다른 이용자들과 함께 봉사활동에 참여할 글들을 확인할 수 있습니다.
 
 ## 기술스택
-[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1723768485279?alt=media&token=7b0d5943-ee23-4f2f-a59b-c4db566dc660)](https://github.com/msdio/stackticon)
+[![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1723768485279?alt=media&token=7b0d5943-ee23-4f2f-a59b-c4db566dc660)
 
 
 
