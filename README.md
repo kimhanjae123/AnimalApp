@@ -9,7 +9,7 @@
 
 # 주요기능
 ## 동물보호소정보 조회
-<img width="941" alt="메인페이지" src="https://github.com/user-attachments/assets/7d9e6c58-c009-44c9-8438-3a8f1c745e0a">
+<img width="500" alt="메인페이지" src="https://github.com/user-attachments/assets/7d9e6c58-c009-44c9-8438-3a8f1c745e0a">
 
 
 
