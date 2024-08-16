@@ -30,7 +30,7 @@
 ### 백엔드
 ![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1723768859122?alt=media&token=bc8bb88c-b10f-4705-84df-2a2b96ab651a)
 ### etc..
-![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1723768914353?alt=media&token=77883810-6d72-4afb-a87e-ab9fc4628111)
+![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1723769103494?alt=media&token=3f5acbe1-95ef-4334-ba0a-9dd449f6e3e1)
 
 
 
