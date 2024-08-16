@@ -12,7 +12,7 @@
 <img width="500" alt="메인페이지" src="https://github.com/user-attachments/assets/7d9e6c58-c009-44c9-8438-3a8f1c745e0a">
 
 ## 동물보호소 조회
-<img width="300" alt="보호소 페이지" src="https://github.com/user-attachments/assets/13828a21-76ef-4ac0-bc29-e36e736b93d0"> <img width="300" alt="보호소 페이지 2" src="https://github.com/user-attachments/assets/5d7a3003-d1b9-478d-a1cd-2677c30ef195">
+<img width="400" alt="보호소 페이지" src="https://github.com/user-attachments/assets/13828a21-76ef-4ac0-bc29-e36e736b93d0"> <img width="300" alt="보호소 페이지 2" src="https://github.com/user-attachments/assets/5d7a3003-d1b9-478d-a1cd-2677c30ef195">
 
 
 
