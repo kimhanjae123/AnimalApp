@@ -13,7 +13,14 @@
 아나모네의 메인페이지입니다. 소개글과 유기동물의 간단한 소개가 있습니다.
 
 ## 동물보호소 조회
-<img width="500" alt="보호소 페이지" src="https://github.com/user-attachments/assets/13828a21-76ef-4ac0-bc29-e36e736b93d0"> <img width="350" alt="보호소 페이지 2" src="https://github.com/user-attachments/assets/5d7a3003-d1b9-478d-a1cd-2677c30ef195">
+<img width="500" alt="보호소 페이지" src="https://github.com/user-attachments/assets/13828a21-76ef-4ac0-bc29-e36e736b93d0"> <img width="350" alt="보호소 페이지 2" src="https://github.com/user-attachments/assets/5d7a3003-d1b9-478d-a1cd-2677c30ef195"><br>
+전국의 보호소에 대한 정보를 제공합니다. 상세페이지에서는 동물보호소의 상세한 정보와 위치정보를 제공합니다.
+
+## 유기동물 조회
+<img width="400" alt="동물1" src="https://github.com/user-attachments/assets/1d3baff6-84f8-49fb-9382-8014c0617300"><img width="400" alt="동물2" src="https://github.com/user-attachments/assets/201c77e4-fd01-4db0-ac7c-33feef230ae6"><br>
+
+
+
 
 
 
