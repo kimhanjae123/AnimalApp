@@ -9,7 +9,7 @@
 
 # 주요기능
 ## 메인페이지
-<img width="400" alt="메인페이지" src="https://github.com/user-attachments/assets/7d9e6c58-c009-44c9-8438-3a8f1c745e0a">
+<img width="400" alt="메인페이지" src="https://github.com/user-attachments/assets/7d9e6c58-c009-44c9-8438-3a8f1c745e0a"><br>
 아나모네의 메인페이지입니다. 소개글과 유기동물의 간단한 소개가 있습니다.
 
 ## 동물보호소 조회
