@@ -32,6 +32,10 @@
 ### etc..
 ![stackticon](https://firebasestorage.googleapis.com/v0/b/stackticon-81399.appspot.com/o/images%2F1723769103494?alt=media&token=3f5acbe1-95ef-4334-ba0a-9dd449f6e3e1)
 
+## ERD
+<img width="656" alt="erd" src="https://github.com/user-attachments/assets/a6b25a6c-f8a1-473f-acfc-88b9173dec93">
+
+
 
 
 
